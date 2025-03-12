@@ -444,7 +444,7 @@
             
             // Manual validation example buttons
             document.getElementById('set-valid-btn')?.addEventListener('click', () => {
-                const input = document.getElementById('manual-valid-input');
+                const input = document.getElementById('manual-validation-input');
                 if (input) {
                     input.setValid();
                     console.log('Set input as valid');
@@ -452,10 +452,50 @@
             });
 
             document.getElementById('set-invalid-btn')?.addEventListener('click', () => {
-                const input = document.getElementById('manual-invalid-input');
+                const input = document.getElementById('manual-validation-input');
                 if (input) {
                     input.setInvalid('This field has been manually marked as invalid');
                     console.log('Set input as invalid');
+                }
+            });
+            
+            // Form validation example
+            document.getElementById('form-submit')?.addEventListener('click', (e) => {
+                e.preventDefault();
+                
+                // Get all inputs
+                const nameInput = document.getElementById('form-name');
+                const emailInput = document.getElementById('form-email');
+                const passwordInput = document.getElementById('form-password');
+                const resultDiv = document.getElementById('form-result');
+                
+                if (!nameInput || !emailInput || !passwordInput || !resultDiv) {
+                    console.log('Form elements not found');
+                    return;
+                }
+                
+                // Validate all inputs
+                const nameValid = nameInput.validate();
+                const emailValid = emailInput.validate();
+                const passwordValid = passwordInput.validate();
+                
+                // Check if all inputs are valid
+                if (nameValid && emailValid && passwordValid) {
+                    // Form is valid
+                    resultDiv.innerHTML = `
+                        <div class="alert alert-success">
+                            <i class="fa fa-check-circle"></i> Form is valid!
+                        </div>
+                    `;
+                    console.log('Form is valid!');
+                } else {
+                    // Form is invalid
+                    resultDiv.innerHTML = `
+                        <div class="alert alert-danger">
+                            <i class="fa fa-exclamation-circle"></i> Please fix the errors in the form.
+                        </div>
+                    `;
+                    console.log('Form is invalid!');
                 }
             });
         }

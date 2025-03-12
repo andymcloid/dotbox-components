@@ -16,22 +16,28 @@
     <dotbox-input label="Username" placeholder="Enter username"></dotbox-input>
     <dotbox-input label="Email" type="email" placeholder="Enter email"></dotbox-input>
     <dotbox-input label="Password" type="password" placeholder="Enter password"></dotbox-input>
+    <dotbox-input placeholder="Input without label"></dotbox-input>
 </div>
 
 <div class="code-example">
 &lt;dotbox-input label="Username" placeholder="Enter username"&gt;&lt;/dotbox-input&gt;
 &lt;dotbox-input label="Email" type="email" placeholder="Enter email"&gt;&lt;/dotbox-input&gt;
-&lt;dotbox-input label="Password" type="password" placeholder="Enter password"&gt;&lt;/dotbox-input&gt;</div>
+&lt;dotbox-input label="Password" type="password" placeholder="Enter password"&gt;&lt;/dotbox-input&gt;
+&lt;dotbox-input placeholder="Input without label"&gt;&lt;/dotbox-input&gt;</div>
 
 <h3>Label Positions</h3>
 <div class="component-group">
-    <dotbox-input label="Label Above" labelPosition="above" placeholder="Default position"></dotbox-input>
-    <dotbox-input label="Label Before" labelPosition="before" placeholder="Label on the left"></dotbox-input>
+    <dotbox-input label="Label Above" labelPosition="above" placeholder="Default position" style="width: 300px;"></dotbox-input>
+    <dotbox-input label="Label Before" labelPosition="before" placeholder="Label on the left" style="width: 300px;"></dotbox-input>
+    <div style="width: 100%; margin-top: 10px;">
+        <dotbox-input label="A longer label before the input" labelPosition="before" placeholder="Shows how the label aligns" style="width: 100%;"></dotbox-input>
+    </div>
 </div>
 
 <div class="code-example">
 &lt;dotbox-input label="Label Above" labelPosition="above" placeholder="Default position"&gt;&lt;/dotbox-input&gt;
-&lt;dotbox-input label="Label Before" labelPosition="before" placeholder="Label on the left"&gt;&lt;/dotbox-input&gt;</div>
+&lt;dotbox-input label="Label Before" labelPosition="before" placeholder="Label on the left"&gt;&lt;/dotbox-input&gt;
+&lt;dotbox-input label="A longer label before the input" labelPosition="before" placeholder="Shows how the label aligns"&gt;&lt;/dotbox-input&gt;</div>
 
 <h3>With Icons</h3>
 <div class="component-group">
@@ -54,7 +60,7 @@
     <dotbox-input label="Email" type="email" placeholder="Email input"></dotbox-input>
     <dotbox-input label="Password" type="password" placeholder="Password input"></dotbox-input>
     <dotbox-input label="Date" type="date"></dotbox-input>
-    <dotbox-input label="Search" type="search" placeholder="Search input"></dotbox-input>
+    <dotbox-input label="Search" type="search" icon="fa-search" placeholder="Search input"></dotbox-input>
 </div>
 
 <div class="code-example">
@@ -63,7 +69,7 @@
 &lt;dotbox-input label="Email" type="email" placeholder="Email input"&gt;&lt;/dotbox-input&gt;
 &lt;dotbox-input label="Password" type="password" placeholder="Password input"&gt;&lt;/dotbox-input&gt;
 &lt;dotbox-input label="Date" type="date"&gt;&lt;/dotbox-input&gt;
-&lt;dotbox-input label="Search" type="search" placeholder="Search input"&gt;&lt;/dotbox-input&gt;</div>
+&lt;dotbox-input label="Search" type="search" icon="fa-search" placeholder="Search input"&gt;&lt;/dotbox-input&gt;</div>
 
 <h3>Multiline Input</h3>
 <div class="component-group">
@@ -111,8 +117,7 @@
 
 <h3>Manual Validation</h3>
 <div class="component-group">
-    <dotbox-input id="manual-valid-input" label="Manually Valid" placeholder="This will be marked as valid"></dotbox-input>
-    <dotbox-input id="manual-invalid-input" label="Manually Invalid" placeholder="This will be marked as invalid"></dotbox-input>
+    <dotbox-input id="manual-validation-input" label="Manual Validation" placeholder="Click buttons below to toggle validation state"></dotbox-input>
     <div>
         <dotbox-button id="set-valid-btn" variant="success">Set Valid</dotbox-button>
         <dotbox-button id="set-invalid-btn" variant="danger">Set Invalid</dotbox-button>
@@ -128,6 +133,50 @@
   
   // Set as invalid with custom message
   document.getElementById('my-input').setInvalid('This username is already taken');
+&lt;/script&gt;</div>
+
+<h3>Form Validation Example</h3>
+<div class="component-group" style="max-width: 400px; margin: 0 auto;">
+    <form id="validation-form">
+        <dotbox-input id="form-name" label="Name" required="true" placeholder="Enter your name"></dotbox-input>
+        <dotbox-input id="form-email" label="Email" type="email" required="true" placeholder="Enter your email"></dotbox-input>
+        <dotbox-input id="form-password" label="Password" type="password" required="true" minLength="8" placeholder="Enter password (min 8 chars)"></dotbox-input>
+        <dotbox-button id="form-submit" variant="primary" style="width: 100%;">Submit</dotbox-button>
+    </form>
+    <div id="form-result" class="mt-3"></div>
+</div>
+
+<div class="code-example">
+&lt;form id="validation-form"&gt;
+    &lt;dotbox-input id="form-name" label="Name" required="true"&gt;&lt;/dotbox-input&gt;
+    &lt;dotbox-input id="form-email" label="Email" type="email" required="true"&gt;&lt;/dotbox-input&gt;
+    &lt;dotbox-input id="form-password" label="Password" type="password" required="true" minLength="8"&gt;&lt;/dotbox-input&gt;
+    &lt;dotbox-button id="form-submit" variant="primary"&gt;Submit&lt;/dotbox-button&gt;
+&lt;/form&gt;
+
+&lt;script&gt;
+    document.getElementById('form-submit').addEventListener('click', (e) => {
+        e.preventDefault();
+        
+        // Get all inputs
+        const nameInput = document.getElementById('form-name');
+        const emailInput = document.getElementById('form-email');
+        const passwordInput = document.getElementById('form-password');
+        
+        // Validate all inputs
+        const nameValid = nameInput.validate();
+        const emailValid = emailInput.validate();
+        const passwordValid = passwordInput.validate();
+        
+        // Check if all inputs are valid
+        if (nameValid && emailValid && passwordValid) {
+            // Form is valid, submit it
+            console.log('Form is valid!');
+        } else {
+            // Form is invalid
+            console.log('Form is invalid!');
+        }
+    });
 &lt;/script&gt;</div>
 
 <h2>API Reference</h2>
@@ -271,6 +320,11 @@
             <td>message (optional): String</td>
             <td>Manually sets the input as invalid with an optional custom error message</td>
         </tr>
+        <tr>
+            <td><code>validate()</code></td>
+            <td>None</td>
+            <td>Manually triggers validation and returns whether the input is valid</td>
+        </tr>
     </tbody>
 </table>
 
@@ -354,12 +408,12 @@
 
         // Manual validation example
         document.getElementById('set-valid-btn')?.addEventListener('click', () => {
-            const input = document.getElementById('manual-valid-input');
+            const input = document.getElementById('manual-validation-input');
             input.setValid();
         });
 
         document.getElementById('set-invalid-btn')?.addEventListener('click', () => {
-            const input = document.getElementById('manual-invalid-input');
+            const input = document.getElementById('manual-validation-input');
             input.setInvalid('This field has been manually marked as invalid');
         });
     });

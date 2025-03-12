@@ -113,6 +113,12 @@ textarea {
   margin-right: 1rem;
   margin-bottom: 0;
   min-width: 120px;
+  flex-shrink: 0;
+}
+
+.label-before .input-wrapper {
+  flex: 1;
+  min-width: 0;
 }
 
 .label-above label {

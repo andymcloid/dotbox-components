@@ -259,11 +259,13 @@ export class DotboxInput extends DotboxBaseComponent {
   }
 
   _handleBlur(e) {
-    // Only mark as touched if there are validation requirements
+    // Mark as touched for validation
+    this._touched = true;
+    
+    // Only validate if there are validation requirements
     if (this.required || this.pattern || this.minLength || this.maxLength || 
         this.type === 'email' || this.type === 'number' || 
         this.type === 'url' || this.type === 'tel') {
-      this._touched = true;
       this._validate();
     }
     
@@ -300,15 +302,41 @@ export class DotboxInput extends DotboxBaseComponent {
     const input = this.shadowRoot.querySelector('input, textarea');
     if (!input) return;
 
-    // Only validate if we have specific validation requirements
-    if (this.pattern || this.minLength || this.maxLength || 
-        this.type === 'email' || this.type === 'number' || 
-        this.type === 'url' || this.type === 'tel') {
-      this._hasError = !input.checkValidity();
-    } else {
-      // No specific validation requirements
-      this._hasError = false;
+    // Custom validation logic
+    let isValid = true;
+
+    // Check min length
+    if (this.minLength && this.value.length < this.minLength) {
+      isValid = false;
     }
+
+    // Check max length
+    if (this.maxLength && this.value.length > this.maxLength) {
+      isValid = false;
+    }
+
+    // Check pattern
+    if (this.pattern && !new RegExp(this.pattern).test(this.value)) {
+      isValid = false;
+    }
+
+    // Check email format
+    if (this.type === 'email' && this.value) {
+      // Simple email regex that matches most valid emails
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(this.value)) {
+        isValid = false;
+      }
+    }
+
+    // Check number format
+    if (this.type === 'number' && this.value) {
+      if (isNaN(Number(this.value))) {
+        isValid = false;
+      }
+    }
+
+    this._hasError = !isValid;
   }
 
   _getDefaultErrorMessage() {
@@ -320,15 +348,19 @@ export class DotboxInput extends DotboxBaseComponent {
       return `Minimum length is ${this.minLength} characters`;
     }
     
-    if (this.pattern) {
+    if (this.maxLength && this.value.length > this.maxLength) {
+      return `Maximum length is ${this.maxLength} characters`;
+    }
+    
+    if (this.pattern && !new RegExp(this.pattern).test(this.value)) {
       return 'Please match the requested format';
     }
     
-    if (this.type === 'email') {
+    if (this.type === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.value)) {
       return 'Please enter a valid email address';
     }
     
-    if (this.type === 'number') {
+    if (this.type === 'number' && isNaN(Number(this.value))) {
       return 'Please enter a valid number';
     }
     
@@ -381,6 +413,16 @@ export class DotboxInput extends DotboxBaseComponent {
     if (message) {
       this.errorMessage = message;
     }
+  }
+
+  /**
+   * Manually trigger validation
+   * @returns {Boolean} Whether the input is valid
+   */
+  validate() {
+    this._touched = true;
+    this._validate();
+    return !this._hasError;
   }
 }
 
