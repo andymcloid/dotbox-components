@@ -7,6 +7,7 @@ A reusable web component library with stylish buttons, cards, and more.
 - Modern web components built with Lit
 - Stylish buttons with various options (variants, sizes, icons)
 - Flexible card components with optional hover effects
+- Modal and non-modal dialog components
 - FontAwesome icon integration
 - Fully customizable via CSS parts and properties
 
@@ -27,6 +28,7 @@ import 'dotbox-components';
 // Or import specific components
 import 'dotbox-components/button';
 import 'dotbox-components/card';
+import 'dotbox-components/dialog';
 ```
 
 ### HTML
@@ -49,6 +51,26 @@ import 'dotbox-components/card';
     <dotbox-button variant="danger" size="small">Cancel</dotbox-button>
   </div>
 </dotbox-card>
+
+<!-- Dialog examples -->
+<dotbox-button id="open-dialog">Open Dialog</dotbox-button>
+
+<dotbox-dialog id="my-dialog" title="Dialog Title" modal="true">
+  Dialog content goes here.
+  <div slot="footer">
+    <dotbox-button variant="primary" size="small" id="close-dialog">Close</dotbox-button>
+  </div>
+</dotbox-dialog>
+
+<script>
+  document.getElementById('open-dialog').addEventListener('click', () => {
+    document.getElementById('my-dialog').show();
+  });
+  
+  document.getElementById('close-dialog').addEventListener('click', () => {
+    document.getElementById('my-dialog').close();
+  });
+</script>
 ```
 
 ## CSS Styling
@@ -69,6 +91,7 @@ For more granular control, you can include CSS for specific components:
 <link rel="stylesheet" href="node_modules/dotbox-components/dist/css/base/base-styles.css">
 <link rel="stylesheet" href="node_modules/dotbox-components/dist/css/button/button.css">
 <link rel="stylesheet" href="node_modules/dotbox-components/dist/css/card/card.css">
+<link rel="stylesheet" href="node_modules/dotbox-components/dist/css/dialog/dialog.css">
 ```
 
 ## Development
@@ -105,6 +128,7 @@ dotbox-components/
 │   ├── base/             # Base component and styles
 │   ├── button/           # Button component
 │   ├── card/             # Card component
+│   ├── dialog/           # Dialog component
 │   └── index.js          # Main entry point
 ├── dist/                 # Built files
 │   ├── css/              # Individual CSS files
@@ -114,7 +138,8 @@ dotbox-components/
 │   ├── partials/         # Component partial HTML files
 │   │   ├── home.html     # Home page content
 │   │   ├── button.html   # Button component content
-│   │   └── card.html     # Card component content
+│   │   ├── card.html     # Card component content
+│   │   └── dialog.html   # Dialog component content
 │   └── index.html        # Main kitchensink page with dynamic loading
 ├── examples/             # Usage examples
 ├── server.js             # Development server

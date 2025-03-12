@@ -71,6 +71,8 @@ loadDependencies();
 // Export all components
 export { DotboxButton } from './button/button.js';
 export { DotboxCard } from './card/card.js';
+export { DotboxDialog } from './dialog/dialog.js';
+console.log('Components exported: DotboxButton, DotboxCard, DotboxDialog');
 
 // Export base components for extension
 export { DotboxBaseComponent } from './base/base-component.js';

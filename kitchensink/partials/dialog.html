@@ -1,0 +1,325 @@
+<div class="component-header">
+    <h1>Dialog Component</h1>
+    <div>
+        <a href="https://github.com/yourusername/dotbox-components/blob/main/components/dialog/dialog.js" class="btn btn-outline-secondary" target="_blank">
+            <i class="fa fa-code"></i> View Source
+        </a>
+    </div>
+</div>
+
+<p class="lead">The <code>dotbox-dialog</code> component provides stylish popup dialogs with various options.</p>
+
+<h2>Examples</h2>
+
+<h3>Basic Usage</h3>
+<div class="component-group">
+    <dotbox-button variant="primary" id="open-basic-dialog">Open Basic Dialog</dotbox-button>
+    <dotbox-button variant="success" id="open-success-dialog">Open Success Dialog</dotbox-button>
+    <dotbox-button variant="danger" id="open-danger-dialog">Open Danger Dialog</dotbox-button>
+    <dotbox-button variant="info" id="open-info-dialog">Open Info Dialog</dotbox-button>
+</div>
+
+<dotbox-dialog id="basic-dialog" title="Basic Dialog">
+    This is a basic dialog with just a title.
+    <div slot="footer">
+        <dotbox-button variant="primary" size="small" id="close-basic-dialog">Close</dotbox-button>
+    </div>
+</dotbox-dialog>
+
+<dotbox-dialog id="success-dialog" variant="success" title="Success Dialog" icon="fa-check">
+    This is a success dialog with a title and icon.
+    <div slot="footer">
+        <dotbox-button variant="success" size="small" id="close-success-dialog">Close</dotbox-button>
+    </div>
+</dotbox-dialog>
+
+<dotbox-dialog id="danger-dialog" variant="danger" title="Danger Dialog" icon="fa-warning">
+    This is a danger dialog with a title and icon.
+    <div slot="footer">
+        <dotbox-button variant="danger" size="small" id="close-danger-dialog">Close</dotbox-button>
+    </div>
+</dotbox-dialog>
+
+<dotbox-dialog id="info-dialog" variant="info" title="Info Dialog" icon="fa-info-circle">
+    This is an info dialog with a title and icon.
+    <div slot="footer">
+        <dotbox-button variant="info" size="small" id="close-info-dialog">Close</dotbox-button>
+    </div>
+</dotbox-dialog>
+
+<div class="code-example">
+&lt;dotbox-button variant="primary" id="open-dialog"&gt;Open Dialog&lt;/dotbox-button&gt;
+
+&lt;dotbox-dialog id="my-dialog" title="Dialog Title"&gt;
+    Dialog content goes here.
+    &lt;div slot="footer"&gt;
+        &lt;dotbox-button variant="primary" size="small" id="close-dialog"&gt;Close&lt;/dotbox-button&gt;
+    &lt;/div&gt;
+&lt;/dotbox-dialog&gt;
+
+&lt;script&gt;
+    document.getElementById('open-dialog').addEventListener('click', () => {
+        document.getElementById('my-dialog').show();
+    });
+    
+    document.getElementById('close-dialog').addEventListener('click', () => {
+        document.getElementById('my-dialog').close();
+    });
+&lt;/script&gt;</div>
+
+<h3>Dialog Sizes</h3>
+<div class="component-group">
+    <dotbox-button variant="primary" id="open-small-dialog">Small Dialog</dotbox-button>
+    <dotbox-button variant="primary" id="open-medium-dialog">Medium Dialog</dotbox-button>
+    <dotbox-button variant="primary" id="open-large-dialog">Large Dialog</dotbox-button>
+</div>
+
+<dotbox-dialog id="small-dialog" title="Small Dialog" size="small">
+    This is a small dialog.
+    <div slot="footer">
+        <dotbox-button variant="primary" size="small" id="close-small-dialog">Close</dotbox-button>
+    </div>
+</dotbox-dialog>
+
+<dotbox-dialog id="medium-dialog" title="Medium Dialog" size="medium">
+    This is a medium dialog (default size).
+    <div slot="footer">
+        <dotbox-button variant="primary" size="small" id="close-medium-dialog">Close</dotbox-button>
+    </div>
+</dotbox-dialog>
+
+<dotbox-dialog id="large-dialog" title="Large Dialog" size="large">
+    This is a large dialog.
+    <div slot="footer">
+        <dotbox-button variant="primary" size="small" id="close-large-dialog">Close</dotbox-button>
+    </div>
+</dotbox-dialog>
+
+<div class="code-example">
+&lt;dotbox-dialog id="small-dialog" title="Small Dialog" size="small"&gt;
+    This is a small dialog.
+&lt;/dotbox-dialog&gt;
+
+&lt;dotbox-dialog id="medium-dialog" title="Medium Dialog" size="medium"&gt;
+    This is a medium dialog (default size).
+&lt;/dotbox-dialog&gt;
+
+&lt;dotbox-dialog id="large-dialog" title="Large Dialog" size="large"&gt;
+    This is a large dialog.
+&lt;/dotbox-dialog&gt;</div>
+
+<h3>Modal vs Non-Modal</h3>
+<div class="component-group">
+    <dotbox-button variant="primary" id="open-modal-dialog">Modal Dialog</dotbox-button>
+    <dotbox-button variant="primary" id="open-non-modal-dialog">Non-Modal Dialog</dotbox-button>
+</div>
+
+<dotbox-dialog id="modal-dialog" title="Modal Dialog" modal="true">
+    This is a modal dialog. It has an overlay that prevents interaction with the background.
+    <div slot="footer">
+        <dotbox-button variant="primary" size="small" id="close-modal-dialog">Close</dotbox-button>
+    </div>
+</dotbox-dialog>
+
+<dotbox-dialog id="non-modal-dialog" title="Non-Modal Dialog" modal="false">
+    This is a non-modal dialog. It doesn't have an overlay, allowing interaction with the background.
+    <div slot="footer">
+        <dotbox-button variant="primary" size="small" id="close-non-modal-dialog">Close</dotbox-button>
+    </div>
+</dotbox-dialog>
+
+<div class="code-example">
+&lt;dotbox-dialog id="modal-dialog" title="Modal Dialog" modal="true"&gt;
+    This is a modal dialog. It has an overlay that prevents interaction with the background.
+&lt;/dotbox-dialog&gt;
+
+&lt;dotbox-dialog id="non-modal-dialog" title="Non-Modal Dialog" modal="false"&gt;
+    This is a non-modal dialog. It doesn't have an overlay, allowing interaction with the background.
+&lt;/dotbox-dialog&gt;</div>
+
+<h3>Custom Header</h3>
+<div class="component-group">
+    <dotbox-button variant="primary" id="open-custom-header-dialog">Custom Header Dialog</dotbox-button>
+</div>
+
+<dotbox-dialog id="custom-header-dialog">
+    <div slot="header" style="display: flex; align-items: center; width: 100%;">
+        <i class="fa fa-cog" style="margin-right: 10px;"></i>
+        <span style="flex-grow: 1;">Custom Header</span>
+        <dotbox-button variant="primary" size="small">Action</dotbox-button>
+    </div>
+    This dialog has a custom header with a button.
+    <div slot="footer">
+        <dotbox-button variant="primary" size="small" id="close-custom-header-dialog">Close</dotbox-button>
+    </div>
+</dotbox-dialog>
+
+<div class="code-example">
+&lt;dotbox-dialog id="custom-header-dialog"&gt;
+    &lt;div slot="header" style="display: flex; align-items: center; width: 100%;"&gt;
+        &lt;i class="fa fa-cog" style="margin-right: 10px;"&gt;&lt;/i&gt;
+        &lt;span style="flex-grow: 1;"&gt;Custom Header&lt;/span&gt;
+        &lt;dotbox-button variant="primary" size="small"&gt;Action&lt;/dotbox-button&gt;
+    &lt;/div&gt;
+    This dialog has a custom header with a button.
+&lt;/dotbox-dialog&gt;</div>
+
+<h2>API Reference</h2>
+
+<h3>Properties</h3>
+<table class="api-table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Default</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>variant</code></td>
+            <td>String</td>
+            <td>"default"</td>
+            <td>Dialog variant (primary, success, danger, info, default)</td>
+        </tr>
+        <tr>
+            <td><code>title</code></td>
+            <td>String</td>
+            <td>""</td>
+            <td>Dialog title</td>
+        </tr>
+        <tr>
+            <td><code>icon</code></td>
+            <td>String</td>
+            <td>""</td>
+            <td>FontAwesome icon name for the dialog header (e.g., 'fa-info-circle')</td>
+        </tr>
+        <tr>
+            <td><code>open</code></td>
+            <td>Boolean</td>
+            <td>false</td>
+            <td>Whether the dialog is open</td>
+        </tr>
+        <tr>
+            <td><code>modal</code></td>
+            <td>Boolean</td>
+            <td>true</td>
+            <td>Whether the dialog is modal (shows overlay and prevents background interaction)</td>
+        </tr>
+        <tr>
+            <td><code>size</code></td>
+            <td>String</td>
+            <td>"medium"</td>
+            <td>Dialog size (small, medium, large)</td>
+        </tr>
+    </tbody>
+</table>
+
+<h3>Methods</h3>
+<table class="api-table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Parameters</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>show()</code></td>
+            <td>None</td>
+            <td>Opens the dialog</td>
+        </tr>
+        <tr>
+            <td><code>close()</code></td>
+            <td>None</td>
+            <td>Closes the dialog</td>
+        </tr>
+        <tr>
+            <td><code>toggle()</code></td>
+            <td>None</td>
+            <td>Toggles the dialog between open and closed states</td>
+        </tr>
+    </tbody>
+</table>
+
+<h3>Events</h3>
+<table class="api-table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>open</code></td>
+            <td>Fired when the dialog is opened</td>
+        </tr>
+        <tr>
+            <td><code>close</code></td>
+            <td>Fired when the dialog is closed</td>
+        </tr>
+    </tbody>
+</table>
+
+<h3>CSS Parts</h3>
+<table class="api-table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>dialog</code></td>
+            <td>The dialog element</td>
+        </tr>
+        <tr>
+            <td><code>overlay</code></td>
+            <td>The overlay element (when modal)</td>
+        </tr>
+        <tr>
+            <td><code>header</code></td>
+            <td>The dialog header</td>
+        </tr>
+        <tr>
+            <td><code>body</code></td>
+            <td>The dialog body</td>
+        </tr>
+        <tr>
+            <td><code>footer</code></td>
+            <td>The dialog footer</td>
+        </tr>
+        <tr>
+            <td><code>close-button</code></td>
+            <td>The close button</td>
+        </tr>
+    </tbody>
+</table>
+
+<h3>Slots</h3>
+<table class="api-table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>default</code></td>
+            <td>Default slot for dialog content</td>
+        </tr>
+        <tr>
+            <td><code>header</code></td>
+            <td>Slot for custom header content</td>
+        </tr>
+        <tr>
+            <td><code>footer</code></td>
+            <td>Slot for footer content</td>
+        </tr>
+    </tbody>
+</table> 

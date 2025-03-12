@@ -1,0 +1,157 @@
+/* Import card styles */
+@import url('../card/card.css');
+
+/* Dialog styles */
+.dialog {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: #fff;
+  background-clip: border-box;
+  border: 3px solid rgba(0, 0, 0, 0.5); /* Make the border thicker and more visible */
+  border-radius: 0.25rem;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+  max-width: 90vw;
+  max-height: 90vh;
+  overflow: hidden;
+  z-index: 1001;
+  transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+  transform: translate(0, 0) scale(1);
+  opacity: 1;
+}
+
+/* Dialog sizes */
+.dialog-small {
+  width: 300px;
+}
+
+.dialog-medium {
+  width: 500px;
+}
+
+.dialog-large {
+  width: 800px;
+}
+
+/* Dialog header */
+.dialog-header {
+  padding: 1rem 2rem 1rem 1rem; /* Extra padding on right for close button */
+  margin-bottom: 0;
+  background-color: rgba(0, 0, 0, 0.03);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+  display: flex;
+  align-items: center;
+}
+
+.dialog-header i.fa {
+  margin-right: 0.5rem;
+  font-size: 1.1em;
+}
+
+.dialog-title {
+  margin-bottom: 0;
+  font-size: 1.25rem;
+  font-weight: 500;
+}
+
+/* Dialog body */
+.dialog-body {
+  flex: 1 1 auto;
+  padding: 1.25rem;
+  overflow-y: auto;
+  max-height: calc(90vh - 130px); /* Adjust for header and footer */
+}
+
+/* Dialog footer */
+.dialog-footer {
+  padding: 0.75rem 1.25rem;
+  background-color: rgba(0, 0, 0, 0.03);
+  border-top: 1px solid rgba(0, 0, 0, 0.125);
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+
+/* Dialog overlay animation */
+.dialog-overlay {
+  opacity: 0;
+  animation: fadeIn 0.2s ease-out forwards;
+  background-color: rgba(0, 0, 0, 0.7); /* Make the overlay darker and more visible */
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Dialog animation */
+.dialog-container .dialog {
+  transform: translate(0, -20px) scale(0.95);
+  opacity: 0;
+  animation: slideIn 0.3s ease-out forwards;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translate(0, -20px) scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: translate(0, 0) scale(1);
+    opacity: 1;
+  }
+}
+
+/* Close button hover effect */
+.close-button:hover {
+  opacity: 0.7;
+}
+
+/* Dialog variants */
+.dialog-primary {
+  border-color: #0275d8;
+}
+
+.dialog-primary .dialog-header {
+  color: #fff;
+  background-color: #0275d8;
+  border-color: #0275d8;
+}
+
+.dialog-success {
+  border-color: #5cb85c;
+}
+
+.dialog-success .dialog-header {
+  color: #fff;
+  background-color: #5cb85c;
+  border-color: #5cb85c;
+}
+
+.dialog-danger {
+  border-color: #d9534f;
+}
+
+.dialog-danger .dialog-header {
+  color: #fff;
+  background-color: #d9534f;
+  border-color: #d9534f;
+}
+
+.dialog-info {
+  border-color: #5bc0de;
+}
+
+.dialog-info .dialog-header {
+  color: #fff;
+  background-color: #5bc0de;
+  border-color: #5bc0de;
+}
+
+/* Prevent initial animations */
+.no-transitions, .no-transitions * {
+  transition: none !important;
+  animation: none !important;
+} 

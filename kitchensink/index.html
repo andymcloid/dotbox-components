@@ -179,6 +179,36 @@
             setTimeout(() => {
                 document.body.classList.remove('no-transitions');
                 console.log('Transitions enabled');
+                
+                // Test dialog component
+                console.log('Testing dialog component...');
+                console.log('Dialog component defined:', !!customElements.get('dotbox-dialog'));
+                
+                // Create a test dialog
+                const testDialog = document.createElement('dotbox-dialog');
+                testDialog.id = 'test-dialog';
+                testDialog.title = 'Test Dialog';
+                testDialog.textContent = 'This is a test dialog';
+                document.body.appendChild(testDialog);
+                console.log('Test dialog created:', testDialog);
+                
+                // Create a test button
+                const testButton = document.createElement('dotbox-button');
+                testButton.id = 'test-dialog-button';
+                testButton.textContent = 'Open Test Dialog';
+                testButton.variant = 'primary';
+                testButton.style.position = 'fixed';
+                testButton.style.bottom = '20px';
+                testButton.style.right = '20px';
+                testButton.style.zIndex = '9999';
+                document.body.appendChild(testButton);
+                
+                // Add event listener
+                testButton.addEventListener('click', () => {
+                    console.log('Test button clicked');
+                    testDialog.show();
+                });
+                console.log('Test button created and event listener added');
             }, 500);
             
             // Setup navigation
@@ -281,6 +311,9 @@
                     // Re-initialize any component-specific functionality
                     if (componentId === 'home') {
                         // Initialize home-specific functionality if needed
+                    } else if (componentId === 'dialog') {
+                        // Initialize dialog event listeners
+                        initializeDialogListeners();
                     }
                 })
                 .catch(error => {
@@ -291,6 +324,93 @@
                         </div>
                     `;
                 });
+        }
+
+        // Function to initialize dialog event listeners
+        function initializeDialogListeners() {
+            console.log('Initializing dialog event listeners');
+            
+            // Check if elements exist
+            const basicDialogBtn = document.getElementById('open-basic-dialog');
+            console.log('Found open-basic-dialog button:', !!basicDialogBtn);
+            
+            const basicDialog = document.getElementById('basic-dialog');
+            console.log('Found basic-dialog element:', !!basicDialog);
+            
+            // Basic dialogs
+            document.getElementById('open-basic-dialog')?.addEventListener('click', () => {
+                console.log('Open basic dialog button clicked');
+                document.getElementById('basic-dialog').show();
+            });
+            document.getElementById('close-basic-dialog')?.addEventListener('click', () => {
+                document.getElementById('basic-dialog').close();
+            });
+            
+            document.getElementById('open-success-dialog')?.addEventListener('click', () => {
+                document.getElementById('success-dialog').show();
+            });
+            document.getElementById('close-success-dialog')?.addEventListener('click', () => {
+                document.getElementById('success-dialog').close();
+            });
+            
+            document.getElementById('open-danger-dialog')?.addEventListener('click', () => {
+                document.getElementById('danger-dialog').show();
+            });
+            document.getElementById('close-danger-dialog')?.addEventListener('click', () => {
+                document.getElementById('danger-dialog').close();
+            });
+            
+            document.getElementById('open-info-dialog')?.addEventListener('click', () => {
+                document.getElementById('info-dialog').show();
+            });
+            document.getElementById('close-info-dialog')?.addEventListener('click', () => {
+                document.getElementById('info-dialog').close();
+            });
+            
+            // Size dialogs
+            document.getElementById('open-small-dialog')?.addEventListener('click', () => {
+                document.getElementById('small-dialog').show();
+            });
+            document.getElementById('close-small-dialog')?.addEventListener('click', () => {
+                document.getElementById('small-dialog').close();
+            });
+            
+            document.getElementById('open-medium-dialog')?.addEventListener('click', () => {
+                document.getElementById('medium-dialog').show();
+            });
+            document.getElementById('close-medium-dialog')?.addEventListener('click', () => {
+                document.getElementById('medium-dialog').close();
+            });
+            
+            document.getElementById('open-large-dialog')?.addEventListener('click', () => {
+                document.getElementById('large-dialog').show();
+            });
+            document.getElementById('close-large-dialog')?.addEventListener('click', () => {
+                document.getElementById('large-dialog').close();
+            });
+            
+            // Modal dialogs
+            document.getElementById('open-modal-dialog')?.addEventListener('click', () => {
+                document.getElementById('modal-dialog').show();
+            });
+            document.getElementById('close-modal-dialog')?.addEventListener('click', () => {
+                document.getElementById('modal-dialog').close();
+            });
+            
+            document.getElementById('open-non-modal-dialog')?.addEventListener('click', () => {
+                document.getElementById('non-modal-dialog').show();
+            });
+            document.getElementById('close-non-modal-dialog')?.addEventListener('click', () => {
+                document.getElementById('non-modal-dialog').close();
+            });
+            
+            // Custom header dialog
+            document.getElementById('open-custom-header-dialog')?.addEventListener('click', () => {
+                document.getElementById('custom-header-dialog').show();
+            });
+            document.getElementById('close-custom-header-dialog')?.addEventListener('click', () => {
+                document.getElementById('custom-header-dialog').close();
+            });
         }
     </script>
 </head>
@@ -334,6 +454,11 @@
                                 <i class="fa fa-credit-card"></i> Cards
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#dialog">
+                                <i class="fa fa-window-maximize"></i> Dialogs
+                            </a>
+                        </li>
                         <!-- Add more components here as they are developed -->
                     </ul>
                 </div>
@@ -353,6 +478,11 @@
 
                 <!-- Card Section -->
                 <section id="card" class="component-section">
+                    <!-- Content will be loaded dynamically -->
+                </section>
+
+                <!-- Dialog Section -->
+                <section id="dialog" class="component-section">
                     <!-- Content will be loaded dynamically -->
                 </section>
             </main>
