@@ -314,6 +314,9 @@
                     } else if (componentId === 'dialog') {
                         // Initialize dialog event listeners
                         initializeDialogListeners();
+                    } else if (componentId === 'input') {
+                        // Initialize input event listeners
+                        initializeInputListeners();
                     }
                 })
                 .catch(error => {
@@ -412,6 +415,50 @@
                 document.getElementById('custom-header-dialog').close();
             });
         }
+
+        // Function to initialize input event listeners
+        function initializeInputListeners() {
+            console.log('Initializing input event listeners');
+            
+            const inputs = document.querySelectorAll('dotbox-input');
+            console.log('Found input elements:', inputs.length);
+            
+            inputs.forEach(input => {
+                // Add event listeners
+                input.addEventListener('input', (e) => {
+                    console.log('Input event:', e.detail);
+                });
+                
+                input.addEventListener('change', (e) => {
+                    console.log('Change event:', e.detail);
+                });
+                
+                input.addEventListener('focus', (e) => {
+                    console.log('Focus event on:', e.target.label || 'unlabeled input');
+                });
+                
+                input.addEventListener('blur', (e) => {
+                    console.log('Blur event on:', e.target.label || 'unlabeled input');
+                });
+            });
+            
+            // Manual validation example buttons
+            document.getElementById('set-valid-btn')?.addEventListener('click', () => {
+                const input = document.getElementById('manual-valid-input');
+                if (input) {
+                    input.setValid();
+                    console.log('Set input as valid');
+                }
+            });
+
+            document.getElementById('set-invalid-btn')?.addEventListener('click', () => {
+                const input = document.getElementById('manual-invalid-input');
+                if (input) {
+                    input.setInvalid('This field has been manually marked as invalid');
+                    console.log('Set input as invalid');
+                }
+            });
+        }
     </script>
 </head>
 <body>
@@ -459,6 +506,11 @@
                                 <i class="fa fa-window-maximize"></i> Dialogs
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#input">
+                                <i class="fa fa-keyboard-o"></i> Inputs
+                            </a>
+                        </li>
                         <!-- Add more components here as they are developed -->
                     </ul>
                 </div>
@@ -483,6 +535,11 @@
 
                 <!-- Dialog Section -->
                 <section id="dialog" class="component-section">
+                    <!-- Content will be loaded dynamically -->
+                </section>
+
+                <!-- Input Section -->
+                <section id="input" class="component-section">
                     <!-- Content will be loaded dynamically -->
                 </section>
             </main>

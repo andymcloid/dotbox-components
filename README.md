@@ -8,6 +8,7 @@ A reusable web component library with stylish buttons, cards, and more.
 - Stylish buttons with various options (variants, sizes, icons)
 - Flexible card components with optional hover effects
 - Modal and non-modal dialog components
+- Versatile input components with label positioning, icons, and validation
 - FontAwesome icon integration
 - Fully customizable via CSS parts and properties
 
@@ -29,6 +30,7 @@ import 'dotbox-components';
 import 'dotbox-components/button';
 import 'dotbox-components/card';
 import 'dotbox-components/dialog';
+import 'dotbox-components/input';
 ```
 
 ### HTML
@@ -62,6 +64,11 @@ import 'dotbox-components/dialog';
   </div>
 </dotbox-dialog>
 
+<!-- Input examples -->
+<dotbox-input label="Username" icon="fa-user" placeholder="Enter username"></dotbox-input>
+<dotbox-input label="Password" type="password" icon="fa-lock" placeholder="Enter password"></dotbox-input>
+<dotbox-input label="Description" multiline="true" rows="4" placeholder="Enter description"></dotbox-input>
+
 <script>
   document.getElementById('open-dialog').addEventListener('click', () => {
     document.getElementById('my-dialog').show();
@@ -92,6 +99,7 @@ For more granular control, you can include CSS for specific components:
 <link rel="stylesheet" href="node_modules/dotbox-components/dist/css/button/button.css">
 <link rel="stylesheet" href="node_modules/dotbox-components/dist/css/card/card.css">
 <link rel="stylesheet" href="node_modules/dotbox-components/dist/css/dialog/dialog.css">
+<link rel="stylesheet" href="node_modules/dotbox-components/dist/css/input/input.css">
 ```
 
 ## Development
@@ -129,6 +137,7 @@ dotbox-components/
 │   ├── button/           # Button component
 │   ├── card/             # Card component
 │   ├── dialog/           # Dialog component
+│   ├── input/            # Input component
 │   └── index.js          # Main entry point
 ├── dist/                 # Built files
 │   ├── css/              # Individual CSS files
@@ -139,7 +148,8 @@ dotbox-components/
 │   │   ├── home.html     # Home page content
 │   │   ├── button.html   # Button component content
 │   │   ├── card.html     # Card component content
-│   │   └── dialog.html   # Dialog component content
+│   │   ├── dialog.html   # Dialog component content
+│   │   └── input.html    # Input component content
 │   └── index.html        # Main kitchensink page with dynamic loading
 ├── examples/             # Usage examples
 ├── server.js             # Development server

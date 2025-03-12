@@ -1,0 +1,366 @@
+<div class="component-header">
+    <h1>Input Component</h1>
+    <div>
+        <a href="https://github.com/yourusername/dotbox-components/blob/main/components/input/input.js" class="btn btn-outline-secondary" target="_blank">
+            <i class="fa fa-code"></i> View Source
+        </a>
+    </div>
+</div>
+
+<p class="lead">The <code>dotbox-input</code> component provides flexible input fields with various options for labels, icons, and validation.</p>
+
+<h2>Examples</h2>
+
+<h3>Basic Usage</h3>
+<div class="component-group">
+    <dotbox-input label="Username" placeholder="Enter username"></dotbox-input>
+    <dotbox-input label="Email" type="email" placeholder="Enter email"></dotbox-input>
+    <dotbox-input label="Password" type="password" placeholder="Enter password"></dotbox-input>
+</div>
+
+<div class="code-example">
+&lt;dotbox-input label="Username" placeholder="Enter username"&gt;&lt;/dotbox-input&gt;
+&lt;dotbox-input label="Email" type="email" placeholder="Enter email"&gt;&lt;/dotbox-input&gt;
+&lt;dotbox-input label="Password" type="password" placeholder="Enter password"&gt;&lt;/dotbox-input&gt;</div>
+
+<h3>Label Positions</h3>
+<div class="component-group">
+    <dotbox-input label="Label Above" labelPosition="above" placeholder="Default position"></dotbox-input>
+    <dotbox-input label="Label Before" labelPosition="before" placeholder="Label on the left"></dotbox-input>
+</div>
+
+<div class="code-example">
+&lt;dotbox-input label="Label Above" labelPosition="above" placeholder="Default position"&gt;&lt;/dotbox-input&gt;
+&lt;dotbox-input label="Label Before" labelPosition="before" placeholder="Label on the left"&gt;&lt;/dotbox-input&gt;</div>
+
+<h3>With Icons</h3>
+<div class="component-group">
+    <dotbox-input label="Username" icon="fa-user" placeholder="With user icon"></dotbox-input>
+    <dotbox-input label="Email" icon="fa-envelope" placeholder="With email icon"></dotbox-input>
+    <dotbox-input label="Password" type="password" icon="fa-lock" placeholder="With lock icon"></dotbox-input>
+    <dotbox-input label="Search" icon="fa-search" iconPosition="after" placeholder="Icon on the right"></dotbox-input>
+</div>
+
+<div class="code-example">
+&lt;dotbox-input label="Username" icon="fa-user" placeholder="With user icon"&gt;&lt;/dotbox-input&gt;
+&lt;dotbox-input label="Email" icon="fa-envelope" placeholder="With email icon"&gt;&lt;/dotbox-input&gt;
+&lt;dotbox-input label="Password" type="password" icon="fa-lock" placeholder="With lock icon"&gt;&lt;/dotbox-input&gt;
+&lt;dotbox-input label="Search" icon="fa-search" iconPosition="after" placeholder="Icon on the right"&gt;&lt;/dotbox-input&gt;</div>
+
+<h3>Input Types</h3>
+<div class="component-group">
+    <dotbox-input label="Text" type="text" placeholder="Text input"></dotbox-input>
+    <dotbox-input label="Number" type="number" placeholder="Number input"></dotbox-input>
+    <dotbox-input label="Email" type="email" placeholder="Email input"></dotbox-input>
+    <dotbox-input label="Password" type="password" placeholder="Password input"></dotbox-input>
+    <dotbox-input label="Date" type="date"></dotbox-input>
+    <dotbox-input label="Search" type="search" placeholder="Search input"></dotbox-input>
+</div>
+
+<div class="code-example">
+&lt;dotbox-input label="Text" type="text" placeholder="Text input"&gt;&lt;/dotbox-input&gt;
+&lt;dotbox-input label="Number" type="number" placeholder="Number input"&gt;&lt;/dotbox-input&gt;
+&lt;dotbox-input label="Email" type="email" placeholder="Email input"&gt;&lt;/dotbox-input&gt;
+&lt;dotbox-input label="Password" type="password" placeholder="Password input"&gt;&lt;/dotbox-input&gt;
+&lt;dotbox-input label="Date" type="date"&gt;&lt;/dotbox-input&gt;
+&lt;dotbox-input label="Search" type="search" placeholder="Search input"&gt;&lt;/dotbox-input&gt;</div>
+
+<h3>Multiline Input</h3>
+<div class="component-group">
+    <dotbox-input label="Description" multiline="true" placeholder="Enter description" rows="4"></dotbox-input>
+</div>
+
+<div class="code-example">
+&lt;dotbox-input label="Description" multiline="true" placeholder="Enter description" rows="4"&gt;&lt;/dotbox-input&gt;</div>
+
+<h3>Disabled State</h3>
+<div class="component-group">
+    <dotbox-input label="Disabled Input" disabled="true" value="This input is disabled"></dotbox-input>
+    <dotbox-input label="Disabled Textarea" multiline="true" disabled="true" value="This textarea is disabled"></dotbox-input>
+</div>
+
+<div class="code-example">
+&lt;dotbox-input label="Disabled Input" disabled="true" value="This input is disabled"&gt;&lt;/dotbox-input&gt;
+&lt;dotbox-input label="Disabled Textarea" multiline="true" disabled="true" value="This textarea is disabled"&gt;&lt;/dotbox-input&gt;</div>
+
+<h3>Validation</h3>
+<div class="component-group">
+    <dotbox-input label="Required Field" required="true" placeholder="This field is required"></dotbox-input>
+    <dotbox-input label="Email Validation" type="email" required="true" placeholder="Enter a valid email"></dotbox-input>
+    <dotbox-input label="Min Length" minLength="8" placeholder="Minimum 8 characters" errorMessage="Please enter at least 8 characters"></dotbox-input>
+    <dotbox-input label="Pattern" pattern="[A-Za-z]{3}" placeholder="Exactly 3 letters" errorMessage="Please enter exactly 3 letters"></dotbox-input>
+</div>
+
+<div class="code-example">
+&lt;dotbox-input label="Required Field" required="true" placeholder="This field is required"&gt;&lt;/dotbox-input&gt;
+&lt;dotbox-input label="Email Validation" type="email" required="true" placeholder="Enter a valid email"&gt;&lt;/dotbox-input&gt;
+&lt;dotbox-input label="Min Length" minLength="8" placeholder="Minimum 8 characters" errorMessage="Please enter at least 8 characters"&gt;&lt;/dotbox-input&gt;
+&lt;dotbox-input label="Pattern" pattern="[A-Za-z]{3}" placeholder="Exactly 3 letters" errorMessage="Please enter exactly 3 letters"&gt;&lt;/dotbox-input&gt;</div>
+
+<h3>Login Form Example</h3>
+<div class="component-group" style="max-width: 400px; margin: 0 auto;">
+    <dotbox-input label="Username" icon="fa-user" required="true" placeholder="Enter your username"></dotbox-input>
+    <dotbox-input label="Password" type="password" icon="fa-lock" required="true" placeholder="Enter your password"></dotbox-input>
+    <dotbox-button variant="primary" style="width: 100%;">Login</dotbox-button>
+</div>
+
+<div class="code-example">
+&lt;dotbox-input label="Username" icon="fa-user" required="true" placeholder="Enter your username"&gt;&lt;/dotbox-input&gt;
+&lt;dotbox-input label="Password" type="password" icon="fa-lock" required="true" placeholder="Enter your password"&gt;&lt;/dotbox-input&gt;
+&lt;dotbox-button variant="primary" style="width: 100%;"&gt;Login&lt;/dotbox-button&gt;</div>
+
+<h3>Manual Validation</h3>
+<div class="component-group">
+    <dotbox-input id="manual-valid-input" label="Manually Valid" placeholder="This will be marked as valid"></dotbox-input>
+    <dotbox-input id="manual-invalid-input" label="Manually Invalid" placeholder="This will be marked as invalid"></dotbox-input>
+    <div>
+        <dotbox-button id="set-valid-btn" variant="success">Set Valid</dotbox-button>
+        <dotbox-button id="set-invalid-btn" variant="danger">Set Invalid</dotbox-button>
+    </div>
+</div>
+
+<div class="code-example">
+&lt;dotbox-input id="my-input" label="Username" placeholder="Enter username"&gt;&lt;/dotbox-input&gt;
+
+&lt;script&gt;
+  // Set as valid
+  document.getElementById('my-input').setValid();
+  
+  // Set as invalid with custom message
+  document.getElementById('my-input').setInvalid('This username is already taken');
+&lt;/script&gt;</div>
+
+<h2>API Reference</h2>
+
+<h3>Properties</h3>
+<table class="api-table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Default</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>label</code></td>
+            <td>String</td>
+            <td>""</td>
+            <td>Input label text</td>
+        </tr>
+        <tr>
+            <td><code>labelPosition</code></td>
+            <td>String</td>
+            <td>"above"</td>
+            <td>Position of the label (before, above)</td>
+        </tr>
+        <tr>
+            <td><code>disabled</code></td>
+            <td>Boolean</td>
+            <td>false</td>
+            <td>Whether the input is disabled</td>
+        </tr>
+        <tr>
+            <td><code>multiline</code></td>
+            <td>Boolean</td>
+            <td>false</td>
+            <td>Whether the input should be a textarea</td>
+        </tr>
+        <tr>
+            <td><code>type</code></td>
+            <td>String</td>
+            <td>"text"</td>
+            <td>Input type (text, number, password, email, tel, url, search, date)</td>
+        </tr>
+        <tr>
+            <td><code>icon</code></td>
+            <td>String</td>
+            <td>""</td>
+            <td>FontAwesome icon name (e.g., 'fa-user', 'fa-key')</td>
+        </tr>
+        <tr>
+            <td><code>iconPosition</code></td>
+            <td>String</td>
+            <td>"before"</td>
+            <td>Position of the icon (before, after)</td>
+        </tr>
+        <tr>
+            <td><code>placeholder</code></td>
+            <td>String</td>
+            <td>""</td>
+            <td>Placeholder text</td>
+        </tr>
+        <tr>
+            <td><code>value</code></td>
+            <td>String</td>
+            <td>""</td>
+            <td>Input value</td>
+        </tr>
+        <tr>
+            <td><code>required</code></td>
+            <td>Boolean</td>
+            <td>false</td>
+            <td>Whether the input is required</td>
+        </tr>
+        <tr>
+            <td><code>pattern</code></td>
+            <td>String</td>
+            <td>""</td>
+            <td>Validation pattern (regex)</td>
+        </tr>
+        <tr>
+            <td><code>errorMessage</code></td>
+            <td>String</td>
+            <td>""</td>
+            <td>Custom error message for validation</td>
+        </tr>
+        <tr>
+            <td><code>rows</code></td>
+            <td>Number</td>
+            <td>3</td>
+            <td>Number of rows for textarea (only applies when multiline is true)</td>
+        </tr>
+        <tr>
+            <td><code>minLength</code></td>
+            <td>Number</td>
+            <td>null</td>
+            <td>Minimum length of input</td>
+        </tr>
+        <tr>
+            <td><code>maxLength</code></td>
+            <td>Number</td>
+            <td>null</td>
+            <td>Maximum length of input</td>
+        </tr>
+    </tbody>
+</table>
+
+<h3>Methods</h3>
+<table class="api-table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Parameters</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>checkValidity()</code></td>
+            <td>None</td>
+            <td>Checks if the input is valid</td>
+        </tr>
+        <tr>
+            <td><code>focus()</code></td>
+            <td>None</td>
+            <td>Focuses the input element</td>
+        </tr>
+        <tr>
+            <td><code>reset()</code></td>
+            <td>None</td>
+            <td>Resets the input to its initial value</td>
+        </tr>
+        <tr>
+            <td><code>setValid()</code></td>
+            <td>None</td>
+            <td>Manually sets the input as valid</td>
+        </tr>
+        <tr>
+            <td><code>setInvalid(message)</code></td>
+            <td>message (optional): String</td>
+            <td>Manually sets the input as invalid with an optional custom error message</td>
+        </tr>
+    </tbody>
+</table>
+
+<h3>Events</h3>
+<table class="api-table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>input</code></td>
+            <td>Fired when the input value changes</td>
+        </tr>
+        <tr>
+            <td><code>change</code></td>
+            <td>Fired when the input loses focus and the value has changed</td>
+        </tr>
+        <tr>
+            <td><code>focus</code></td>
+            <td>Fired when the input gains focus</td>
+        </tr>
+        <tr>
+            <td><code>blur</code></td>
+            <td>Fired when the input loses focus</td>
+        </tr>
+    </tbody>
+</table>
+
+<h3>CSS Parts</h3>
+<table class="api-table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>container</code></td>
+            <td>The container element</td>
+        </tr>
+        <tr>
+            <td><code>label</code></td>
+            <td>The label element</td>
+        </tr>
+        <tr>
+            <td><code>input-wrapper</code></td>
+            <td>The wrapper around the input</td>
+        </tr>
+        <tr>
+            <td><code>input</code></td>
+            <td>The input element</td>
+        </tr>
+        <tr>
+            <td><code>icon</code></td>
+            <td>The icon element</td>
+        </tr>
+        <tr>
+            <td><code>error</code></td>
+            <td>The error message element</td>
+        </tr>
+    </tbody>
+</table>
+
+<script>
+    // Initialize input event listeners for demo purposes
+    document.addEventListener('DOMContentLoaded', () => {
+        const inputs = document.querySelectorAll('dotbox-input');
+        inputs.forEach(input => {
+            input.addEventListener('input', (e) => {
+                console.log('Input event:', e.detail);
+            });
+            
+            input.addEventListener('change', (e) => {
+                console.log('Change event:', e.detail);
+            });
+        });
+
+        // Manual validation example
+        document.getElementById('set-valid-btn')?.addEventListener('click', () => {
+            const input = document.getElementById('manual-valid-input');
+            input.setValid();
+        });
+
+        document.getElementById('set-invalid-btn')?.addEventListener('click', () => {
+            const input = document.getElementById('manual-invalid-input');
+            input.setInvalid('This field has been manually marked as invalid');
+        });
+    });
+</script> 
