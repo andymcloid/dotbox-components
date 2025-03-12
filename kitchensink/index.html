@@ -4,8 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dotbox Components - Kitchen Sink</title>
+    <!-- Import map for Lit dependencies -->
+    <script type="importmap">
+    {
+        "imports": {
+            "lit": "https://cdn.jsdelivr.net/npm/lit@2.7.5/index.js",
+            "lit/": "https://cdn.jsdelivr.net/npm/lit@2.7.5/",
+            "@lit/reactive-element": "https://cdn.jsdelivr.net/npm/@lit/reactive-element@1.6.1/reactive-element.js",
+            "@lit/reactive-element/": "https://cdn.jsdelivr.net/npm/@lit/reactive-element@1.6.1/",
+            "lit-html": "https://cdn.jsdelivr.net/npm/lit-html@2.7.5/lit-html.js",
+            "lit-html/": "https://cdn.jsdelivr.net/npm/lit-html@2.7.5/",
+            "lit-element/lit-element.js": "https://cdn.jsdelivr.net/npm/lit-element@3.3.2/lit-element.js"
+        }
+    }
+    </script>
+    <!-- Directly include FontAwesome and Bootstrap -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Add a test icon to verify FontAwesome is working -->
     <style>
         body {
             padding: 20px;
@@ -64,10 +80,11 @@
 
     <div class="container">
         <div class="jumbotron">
-            <h1 class="display-4">Dotbox Components</h1>
+            <h1 class="display-4">Dotbox Components <i class="fa fa-check-circle" style="color: green;"></i></h1>
             <p class="lead">A reusable web component library with stylish buttons and more.</p>
             <hr class="my-4">
             <p>This kitchen sink demonstrates all available components and their variations.</p>
+            <p><strong>FontAwesome Test:</strong> <i class="fa fa-star"></i> <i class="fa fa-heart"></i> <i class="fa fa-user"></i> <i class="fa fa-cog"></i></p>
         </div>
 
         <h2>Button Component</h2>

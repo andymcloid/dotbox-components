@@ -57,7 +57,41 @@ export class DotboxButton extends DotboxBaseComponent {
 
   connectedCallback() {
     super.connectedCallback();
-    this.loadComponentStyles('./button.css');
+    
+    // Load component CSS
+    const cssPath = new URL('./button.css', import.meta.url).href;
+    console.log('Loading button CSS from:', cssPath);
+    this.loadComponentStyles(cssPath);
+    
+    // Debug FontAwesome availability
+    this._checkFontAwesome();
+  }
+
+  _checkFontAwesome() {
+    // Check if FontAwesome is loaded
+    const fontAwesomeLink = document.querySelector('link[href*="font-awesome"]');
+    console.log('FontAwesome link found in document:', fontAwesomeLink);
+    
+    const shadowFontAwesomeLink = this.shadowRoot.querySelector('link[href*="font-awesome"]');
+    console.log('FontAwesome link found in shadow DOM:', shadowFontAwesomeLink);
+    
+    // Create a test element to check if FontAwesome is working
+    const testElement = document.createElement('i');
+    testElement.className = 'fa fa-check';
+    testElement.style.visibility = 'hidden';
+    document.body.appendChild(testElement);
+    
+    // Get computed style
+    const computedStyle = window.getComputedStyle(testElement);
+    const fontFamily = computedStyle.getPropertyValue('font-family');
+    console.log('FontAwesome test element font-family:', fontFamily);
+    
+    // Check if FontAwesome is in the font family
+    const hasFontAwesome = fontFamily.includes('FontAwesome');
+    console.log('FontAwesome is available:', hasFontAwesome);
+    
+    // Clean up
+    document.body.removeChild(testElement);
   }
 
   render() {
@@ -98,6 +132,7 @@ export class DotboxButton extends DotboxBaseComponent {
     
     // Add icon position
     if (this.icon) {
+      console.log(`Adding icon: ${this.icon} at position: ${this.iconPosition}`);
       classes.push(this.iconPosition === 'before' ? 'ffab-before' : 'ffab-after');
       classes.push(this.icon);
       
@@ -107,6 +142,7 @@ export class DotboxButton extends DotboxBaseComponent {
       }
     }
     
+    console.log('Button classes:', classes.join(' '));
     return classes.join(' ');
   }
 }

@@ -1,31 +1,27 @@
 import { terser } from 'rollup-plugin-terser';
 import copy from 'rollup-plugin-copy';
 import resolve from '@rollup/plugin-node-resolve';
+import commonjs from '@rollup/plugin-commonjs';
 
 export default {
   input: 'components/index.js',
   output: {
-    file: 'dist/index.js',
+    file: 'dist/dotbox-components.bundled.js',
     format: 'es',
     sourcemap: true
   },
-  external: [
-    'lit', 
-    'lit/html.js', 
-    'lit/directives/',
-    '@lit/reactive-element',
-    '@lit/reactive-element/',
-    'lit-html',
-    'lit-html/',
-    'lit-element/lit-element.js'
-  ],
   plugins: [
+    // Resolve node modules
     resolve(),
+    // Convert CommonJS modules to ES6
+    commonjs(),
+    // Minify the output
     terser({
       format: {
         comments: false
       }
     }),
+    // Copy CSS files
     copy({
       targets: [
         { src: 'components/**/*.css', dest: 'dist' }
