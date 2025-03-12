@@ -105,6 +105,9 @@ export class DotboxDialog extends DotboxCard {
     console.log('Loading dialog CSS from:', cssPath);
     this.loadComponentStyles(cssPath);
     
+    // Inject FontAwesome styles directly into shadow DOM
+    this._injectFontAwesomeStyles();
+    
     // Add event listeners
     document.addEventListener('keydown', this._handleKeyDown);
   }
@@ -225,6 +228,30 @@ export class DotboxDialog extends DotboxCard {
     if (this.open && this.modal) {
       this.close();
     }
+  }
+
+  /**
+   * Inject FontAwesome styles directly into shadow DOM
+   * This ensures icons are properly displayed
+   */
+  _injectFontAwesomeStyles() {
+    const style = document.createElement('style');
+    style.textContent = `
+      .fa {
+        display: inline-block;
+        font: normal normal normal 14px/1 FontAwesome;
+        font-size: inherit;
+        text-rendering: auto;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+      .fa-times:before { content: "\\f00d"; }
+      .fa-info-circle:before { content: "\\f05a"; }
+      .fa-check-circle:before { content: "\\f058"; }
+      .fa-exclamation-triangle:before { content: "\\f071"; }
+      .fa-exclamation-circle:before { content: "\\f06a"; }
+    `;
+    this.shadowRoot.appendChild(style);
   }
 }
 

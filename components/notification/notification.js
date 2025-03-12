@@ -222,8 +222,11 @@ export class DotboxNotification extends DotboxBaseComponent {
   firstUpdated() {
     super.firstUpdated();
     
-    // Force a reflow to ensure styles are applied
-    this.shadowRoot.querySelector('.notification-container').offsetHeight;
+    // Ensure FontAwesome is loaded
+    this.loadFontAwesome();
+    
+    // Inject FontAwesome styles directly into shadow DOM
+    this._injectFontAwesomeStyles();
     
     // Show the notification with a slight delay to ensure styles are applied
     setTimeout(() => {
@@ -267,16 +270,14 @@ export class DotboxNotification extends DotboxBaseComponent {
     
     return html`
       <div class="notification-container ${this.variant} ${this._visible ? 'visible' : ''}" part="container">
-        ${this.title || this.closable ? html`
-          <div class="notification-header" part="header">
-            <h5 class="notification-title" part="title">${this.title}</h5>
-            ${this.closable ? html`
-              <button class="notification-close" part="close-button" @click="${this.close}">
-                <i class="fa fa-times"></i>
-              </button>
-            ` : ''}
-          </div>
-        ` : ''}
+        <div class="notification-header" part="header">
+          <h5 class="notification-title" part="title">${this.title || ''}</h5>
+          ${this.closable ? html`
+            <button class="notification-close" part="close-button" @click="${this.close}">
+              <i class="fa fa-times"></i>
+            </button>
+          ` : ''}
+        </div>
         
         <div class="notification-content" part="content">
           ${iconClass ? html`
@@ -453,7 +454,7 @@ export class DotboxNotification extends DotboxBaseComponent {
     }
     
     // If duration is 0 (no auto-close), ensure closable is true
-    if (options.duration === 0 && options.closable !== false) {
+    if (options.duration === 0) {
       options.closable = true;
     }
     
@@ -467,6 +468,32 @@ export class DotboxNotification extends DotboxBaseComponent {
     console.log('Notification added to DOM');
     
     return Promise.resolve(notification);
+  }
+
+  /**
+   * Inject FontAwesome styles directly into shadow DOM
+   * This ensures icons are properly displayed
+   */
+  _injectFontAwesomeStyles() {
+    const style = document.createElement('style');
+    style.textContent = `
+      .fa {
+        display: inline-block;
+        font: normal normal normal 14px/1 FontAwesome;
+        font-size: inherit;
+        text-rendering: auto;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+      .fa-times:before { content: "\\f00d"; }
+      .fa-check-circle:before { content: "\\f058"; }
+      .fa-exclamation-triangle:before { content: "\\f071"; }
+      .fa-exclamation-circle:before { content: "\\f06a"; }
+      .fa-info-circle:before { content: "\\f05a"; }
+      .fa-bell:before { content: "\\f0f3"; }
+      .fa-star:before { content: "\\f005"; }
+    `;
+    this.shadowRoot.appendChild(style);
   }
 }
 

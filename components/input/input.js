@@ -164,6 +164,37 @@ export class DotboxInput extends DotboxBaseComponent {
     const cssPath = new URL('./input.css', import.meta.url).href;
     console.log('Loading input CSS from:', cssPath);
     this.loadComponentStyles(cssPath);
+    
+    // Inject FontAwesome styles directly into shadow DOM
+    this._injectFontAwesomeStyles();
+  }
+
+  /**
+   * Inject FontAwesome styles directly into shadow DOM
+   * This ensures icons are properly displayed
+   */
+  _injectFontAwesomeStyles() {
+    const style = document.createElement('style');
+    style.textContent = `
+      .fa {
+        display: inline-block;
+        font: normal normal normal 14px/1 FontAwesome;
+        font-size: inherit;
+        text-rendering: auto;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+      .fa-user:before { content: "\\f007"; }
+      .fa-lock:before { content: "\\f023"; }
+      .fa-eye:before { content: "\\f06e"; }
+      .fa-eye-slash:before { content: "\\f070"; }
+      .fa-envelope:before { content: "\\f0e0"; }
+      .fa-phone:before { content: "\\f095"; }
+      .fa-search:before { content: "\\f002"; }
+      .fa-calendar:before { content: "\\f073"; }
+      .fa-link:before { content: "\\f0c1"; }
+    `;
+    this.shadowRoot.appendChild(style);
   }
 
   render() {
