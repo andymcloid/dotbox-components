@@ -213,7 +213,7 @@ export class DotboxNotification extends DotboxBaseComponent {
     this.stacking = true;
     this.duration = 5000; // 5 seconds by default
     this.position = 'bottom-right';
-    this.closable = true;
+    this.closable = true; // Default to true
     this.icon = '';
     this._visible = false;
     this._timerId = null;
@@ -229,6 +229,9 @@ export class DotboxNotification extends DotboxBaseComponent {
     setTimeout(() => {
       this._visible = true;
       this.requestUpdate();
+      
+      // Force update positions after becoming visible
+      DotboxNotification.updatePositions(this.position);
     }, 10);
   }
 
@@ -335,21 +338,25 @@ export class DotboxNotification extends DotboxBaseComponent {
   static registerNotification(notification) {
     const position = notification.position;
     
-    // Add to active notifications
-    DotboxNotification.activeNotifications[position].push(notification);
-    
-    // Update positions if stacking is enabled
-    if (notification.stacking) {
-      DotboxNotification.updatePositions(position);
-    } else {
-      // If not stacking, remove previous notifications in this position
+    // If not stacking, remove previous notifications in this position
+    if (!notification.stacking) {
+      // Close existing notifications in this position
       const previousNotifications = [...DotboxNotification.activeNotifications[position]];
       previousNotifications.forEach(prevNotification => {
         if (prevNotification !== notification) {
           prevNotification.close();
         }
       });
+      
+      // Clear the active notifications array for this position
+      DotboxNotification.activeNotifications[position] = [];
     }
+    
+    // Add to active notifications
+    DotboxNotification.activeNotifications[position].push(notification);
+    
+    // Update positions
+    DotboxNotification.updatePositions(position);
   }
 
   /**
@@ -373,23 +380,62 @@ export class DotboxNotification extends DotboxBaseComponent {
    * Update positions of notifications for stacking effect
    */
   static updatePositions(position) {
+    console.log(`Updating positions for ${position}`);
     const notifications = DotboxNotification.activeNotifications[position];
-    let offset = 0;
+    
+    if (notifications.length === 0) {
+      return;
+    }
+    
+    // Log the notifications we're positioning
+    console.log(`Positioning ${notifications.length} notifications`);
+    
+    // Calculate total height first to position from bottom or top correctly
+    const heights = [];
+    let totalHeight = 0;
     
     notifications.forEach(notification => {
       const container = notification.shadowRoot?.querySelector('.notification-container');
       if (container) {
-        const height = container.offsetHeight;
+        // Force a reflow to get accurate height
+        container.style.visibility = 'hidden';
+        container.style.display = 'block';
+        const height = container.offsetHeight || 100;
+        container.style.visibility = '';
+        container.style.display = '';
         
-        if (position.startsWith('top')) {
-          container.style.top = `${offset}px`;
-        } else if (position.startsWith('bottom')) {
-          container.style.bottom = `${offset}px`;
-        }
-        
-        offset += height + 10; // 10px margin
+        heights.push(height);
+        totalHeight += height + 10; // 10px margin
+      } else {
+        heights.push(100); // Default height if container not found
+        totalHeight += 110; // Default height + margin
       }
     });
+    
+    // Now position each notification
+    let currentOffset = 0;
+    
+    if (position.startsWith('bottom')) {
+      // For bottom positions, start with the most recent notification at the bottom
+      for (let i = notifications.length - 1; i >= 0; i--) {
+        const notification = notifications[i];
+        const container = notification.shadowRoot?.querySelector('.notification-container');
+        if (container) {
+          container.style.bottom = `${currentOffset}px`;
+          currentOffset += heights[i] + 10;
+        }
+      }
+    } else {
+      // For top positions, start with the oldest notification at the top
+      for (let i = 0; i < notifications.length; i++) {
+        const notification = notifications[i];
+        const container = notification.shadowRoot?.querySelector('.notification-container');
+        if (container) {
+          container.style.top = `${currentOffset}px`;
+          currentOffset += heights[i] + 10;
+        }
+      }
+    }
   }
 
   /**
@@ -406,28 +452,15 @@ export class DotboxNotification extends DotboxBaseComponent {
       options.position = 'bottom-right';
     }
     
+    // If duration is 0 (no auto-close), ensure closable is true
+    if (options.duration === 0 && options.closable !== false) {
+      options.closable = true;
+    }
+    
     // Set properties from options
     Object.keys(options).forEach(key => {
       notification[key] = options[key];
     });
-    
-    // Handle non-stacking notifications
-    if (options.stacking === false) {
-      const position = options.position;
-      
-      // Close existing notifications in this position
-      const existingNotifications = [...DotboxNotification.activeNotifications[position]];
-      existingNotifications.forEach(prevNotification => {
-        if (prevNotification !== notification) {
-          if (prevNotification.parentNode) {
-            prevNotification.parentNode.removeChild(prevNotification);
-          }
-        }
-      });
-      
-      // Clear the active notifications array for this position
-      DotboxNotification.activeNotifications[position] = [];
-    }
     
     // Append to body
     document.body.appendChild(notification);
