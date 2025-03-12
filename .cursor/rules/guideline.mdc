@@ -1,0 +1,206 @@
+---
+description: Project Rules and Coding Guidelines
+globs: *
+alwaysApply: false
+---
+Project Structure
+
+dotbox-components/
+├── components/           # Source components
+│   ├── base/             # Base component and styles
+│   │   ├── base-component.js  # Base component class
+│   │   └── base-styles.css    # Base styles
+│   ├── button/           # Button component
+│   │   ├── button.js     # Button component class
+│   │   └── button.css    # Button-specific styles
+│   ├── card/             # Card component
+│   │   ├── card.js       # Card component class
+│   │   └── card.css      # Card-specific styles
+│   ├── dialog/           # Dialog component
+│   │   ├── dialog.js     # Dialog component class
+│   │   └── dialog.css    # Dialog-specific styles
+│   ├── input/            # Input component
+│   │   ├── input.js      # Input component class
+│   │   └── input.css     # Input-specific styles
+│   ├── notification/     # Notification component
+│   │   ├── notification.js  # Notification component class
+│   │   └── notification.css # Notification-specific styles
+│   └── index.js          # Main entry point
+├── kitchensink/          # Component showcase
+│   ├── partials/         # Component partial HTML files
+│   │   ├── home.html     # Home page content
+│   │   ├── button.html   # Button component content
+│   │   ├── card.html     # Card component content
+│   │   ├── dialog.html   # Dialog component content
+│   │   ├── input.html    # Input component content
+│   │   └── notification.html # Notification component content
+│   └── index.html        # Main kitchensink page with dynamic loading
+├── README.md             # Project documentation
+└── server.js             # Development server
+
+
+Core Development Rules
+
+1. Component Structure
+Every component must extend DotboxBaseComponent
+Each component must be in its own directory with matching JS and CSS files
+Component naming convention: Dotbox[ComponentName] for class, dotbox-[component-name] for HTML tag
+Component files must be named after the component: button.js, button.css, etc.
+
+2. CSS Loading
+Global CSS dependencies (Bootstrap, FontAwesome) are loaded in components/index.js
+Component-specific CSS is loaded via the loadComponentStyles() method in each component's connectedCallback()
+Never use inline styles for core component styling, always use CSS files
+Always call super.connectedCallback() first in component's connectedCallback()
+
+3. FontAwesome Integration
+FontAwesome is loaded globally in components/index.js
+FontAwesome icons in shadow DOM are handled by injectFontAwesomeStyles() in the base component
+Always use <i class="fa [icon-name]"></i> for FontAwesome icons in components
+Never load FontAwesome separately in individual components
+
+4. Component Development
+All components must have proper JSDoc comments with @element, @prop, @csspart, @slot, and @fires tags
+All components must define static get properties() for their properties
+All components must define static get styles() that includes super.styles
+All components must have a proper constructor that sets default values
+All components must be registered with customElements.define()
+
+5. Kitchensink Development
+Each component must have a corresponding partial in kitchensink/partials/
+Partials must include: description, examples, API reference, and code samples
+When adding a new component:
+Add it to the sidebar in kitchensink/index.html
+Create a new partial in kitchensink/partials/
+Export it in components/index.js
+
+6. Documentation
+README.md must be kept up-to-date with all components
+Each component must be documented in the README with basic usage examples
+API changes must be reflected in both the JSDoc comments and README
+
+# Component-Specific Guidelines
+Base Component
+Base component handles:
+- Common styles
+- FontAwesome icon injection
+- Component-specific CSS loading
+- Transition handling
+// In component's connectedCallback
+super.connectedCallback();
+this.loadComponentStyles('component-name');
+
+Button Component
+Supports variants, sizes, icons, and animations
+Icon position can be 'before' or 'after'
+Can render as <button> or <a> based on href property
+
+Card Component
+Supports variants, titles, icons, and hover effects
+Has slots for header, body, and footer content
+Header and footer are conditionally rendered
+
+Dialog Component
+Extends Card component
+Supports modal and non-modal variants
+Has methods for show(), close(), and toggle()
+Handles keyboard (Escape) and overlay click events
+
+Input Component
+Supports various input types, validation, and error messages
+Can render as <input> or <textarea> based on multiline property
+Has methods for validate(), setValid(), and setInvalid()
+
+Notification Component
+Supports variants, positions, and stacking
+Has static show() method for creating notifications
+Manages notification positioning and auto-closing
+
+# Adding a New Component
+
+Create component directory and files:
+components/new-component/
+   ├── new-component.js
+   └── new-component.css
+   
+Implement component class:
+   import { html, css } from 'lit';
+   import { DotboxBaseComponent } from '../base/base-component.js';
+
+   /**
+    * @element dotbox-new-component
+    * @prop {String} prop1 - Description
+    * @csspart part1 - Description
+    * @slot - Default slot
+    * @fires event1 - Description
+    */
+   export class DotboxNewComponent extends DotboxBaseComponent {
+     static get properties() {
+       return {
+         prop1: { type: String }
+       };
+     }
+
+     static get styles() {
+       return [
+         super.styles,
+         css`
+           :host {
+             display: block;
+           }
+         `
+       ];
+     }
+
+     constructor() {
+       super();
+       this.prop1 = 'default';
+     }
+
+     connectedCallback() {
+       super.connectedCallback();
+       this.loadComponentStyles('new-component');
+     }
+
+     render() {
+       return html`
+         <div part="container">
+           <slot></slot>
+         </div>
+       `;
+     }
+   }
+
+   customElements.define('dotbox-new-component', DotboxNewComponent);
+   
+Export component in index.js:
+   export { DotboxNewComponent } from './new-component/new-component.js';
+   
+Add component CSS file:
+   /* new-component.css */
+   :host {
+     /* Component-specific styles */
+   }
+   
+Create kitchensink partial:
+   <!-- kitchensink/partials/new-component.html -->
+   <h1>New Component</h1>
+   <p class="lead">Description of the new component.</p>
+
+   <h2>Examples</h2>
+   <!-- Examples go here -->
+
+   <h2>API Reference</h2>
+   <!-- API reference goes here -->
+   
+Update kitchensink/index.html to include the new component in the sidebar
+Update README.md with documentation for the new component
+
+# Common Pitfalls to Avoid
+Don't load FontAwesome or other common dependencies/CSS files individually in components
+Don't modify the base component without updating all derived components
+Don't use direct DOM manipulation outside of Lit's rendering system
+Don't forget to call super.connectedCallback() in component's connectedCallback()
+Don't add inline styles for core component styling
+Don't forget to update documentation when adding or modifying components
+And most important of all, when designing new features or new components, try to reuse and inherit as much as possible from existing components. If a component needs some kind of notification then use the notification component inside the library. Always keep in line with our style that is basicly set by the buttons then propagated to all other components.

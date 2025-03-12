@@ -271,7 +271,7 @@ export class DotboxNotification extends DotboxBaseComponent {
           <h5 class="notification-title" part="title">${this.title || ''}</h5>
           ${this.closable ? html`
             <button class="notification-close" part="close-button" @click="${this.close}">
-              <i class="fa fa-times"></i>
+              <i class="fa fa-times" aria-hidden="true"></i>
             </button>
           ` : ''}
         </div>
@@ -279,7 +279,7 @@ export class DotboxNotification extends DotboxBaseComponent {
         <div class="notification-content" part="content">
           ${iconClass ? html`
             <div class="notification-icon ${this.variant}" part="icon">
-              <i class="fa ${iconClass}"></i>
+              <i class="fa ${iconClass}" aria-hidden="true"></i>
             </div>
           ` : ''}
           <div class="notification-message">${this.message}</div>
