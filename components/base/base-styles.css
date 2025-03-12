@@ -1,5 +1,11 @@
 /* Base styles for all Dotbox components */
 
+/* Prevent initial animations */
+.no-transitions, .no-transitions * {
+  transition: none !important;
+  animation: none !important;
+}
+
 /* Font Awesome animations - shared across components */
 .fa-spin, .ffab-spin::before {
   -webkit-animation: fa-spin 2s infinite linear;

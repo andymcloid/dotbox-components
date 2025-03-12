@@ -26,6 +26,11 @@
 .fa-user:before, .ffab-before.fa-user:before, .ffab-after.fa-user:before { content: "\f007"; }
 .fa-circle-o-notch:before, .ffab-before.fa-circle-o-notch:before, .ffab-after.fa-circle-o-notch:before { content: "\f1ce"; }
 
+/* Prevent initial animations */
+.no-transitions, .no-transitions * {
+  transition: none !important;
+}
+
 /* Base button styles */
 .btn {
   display: inline-block;

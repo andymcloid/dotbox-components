@@ -118,6 +118,11 @@ export class DotboxButton extends DotboxBaseComponent {
   _getButtonClasses() {
     const classes = ['btn', 'dotbox-interactive'];
     
+    // Add no-transitions class if needed
+    if (this._noTransitions) {
+      classes.push('no-transitions');
+    }
+    
     // Add variant
     if (this.variant) {
       classes.push(`btn-${this.variant}`);

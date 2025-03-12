@@ -7,6 +7,12 @@ import { LitElement, css } from 'lit';
  * @abstract
  */
 export class DotboxBaseComponent extends LitElement {
+  static get properties() {
+    return {
+      _noTransitions: { type: Boolean, state: true }
+    };
+  }
+  
   static get styles() {
     return css`
       :host {
@@ -14,6 +20,11 @@ export class DotboxBaseComponent extends LitElement {
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
       }
     `;
+  }
+
+  constructor() {
+    super();
+    this._noTransitions = true; // Start with transitions disabled
   }
 
   /**
@@ -93,5 +104,10 @@ export class DotboxBaseComponent extends LitElement {
     super.connectedCallback();
     // Load FontAwesome by default for all components
     this.loadFontAwesome();
+    
+    // Enable transitions after a short delay
+    setTimeout(() => {
+      this._noTransitions = false;
+    }, 100);
   }
 } 

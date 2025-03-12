@@ -53,7 +53,7 @@ export class DotboxCard extends DotboxBaseComponent {
   }
 
   render() {
-    const cardClasses = `card ${this.variant ? `card-${this.variant}` : ''}`;
+    const cardClasses = `card ${this.variant ? `card-${this.variant}` : ''} ${this._noTransitions ? 'no-transitions' : ''}`;
     
     return html`
       <div class="${cardClasses}" part="card">
