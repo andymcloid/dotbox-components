@@ -7,8 +7,8 @@ import { LitElement, css } from 'lit';
  * @abstract
  */
 export class DotboxBaseComponent extends LitElement {
-  // Static flag to track if FontAwesome has been loaded
-  static fontAwesomeLoaded = false;
+  // Static flag to track if FontAwesome styles are injected
+  static fontAwesomeStylesInjected = false;
   
   static get properties() {
     return {
@@ -31,83 +31,32 @@ export class DotboxBaseComponent extends LitElement {
   }
 
   /**
-   * Load external CSS file into the shadow DOM
-   * @param {string} cssPath - Path to the CSS file (should be absolute URL)
+   * Load component-specific CSS into the shadow DOM
+   * @param {string} componentName - The name of the component (e.g., 'button', 'card')
    */
-  loadComponentStyles(cssPath) {
-    try {
-      console.log(`Creating link element for CSS: ${cssPath}`);
-      const linkElem = document.createElement('link');
-      linkElem.rel = 'stylesheet';
-      linkElem.href = cssPath;
-      
-      // Add an event listener to check if the CSS loaded successfully
-      linkElem.addEventListener('load', () => {
-        console.log(`CSS loaded successfully: ${cssPath}`);
-      });
-      
-      linkElem.addEventListener('error', (error) => {
-        console.error(`Failed to load CSS: ${cssPath}`, error);
-      });
-      
-      console.log(`Appending link element to shadow root`);
-      this.shadowRoot.appendChild(linkElem);
-    } catch (error) {
-      console.error(`Error in loadComponentStyles: ${cssPath}`, error);
+  loadComponentStyles(componentName) {
+    // Check if styles are already loaded
+    if (this.shadowRoot.querySelector(`link[data-component="${componentName}"]`)) {
+      return;
     }
-  }
-
-  /**
-   * Load FontAwesome directly into the shadow DOM
-   * This ensures that FontAwesome icons are available within the component
-   */
-  loadFontAwesome() {
-    try {
-      // Check if FontAwesome is already loaded in this shadow DOM
-      if (this.shadowRoot.querySelector('link[href*="font-awesome"]')) {
-        console.log('FontAwesome already loaded in this shadow DOM');
-        return;
-      }
-      
-      // Check if we've already loaded FontAwesome in another component
-      if (DotboxBaseComponent.fontAwesomeLoaded) {
-        console.log('FontAwesome already loaded globally, skipping');
-        return;
-      }
-      
-      console.log('Loading FontAwesome directly into shadow DOM');
-      const linkElem = document.createElement('link');
-      linkElem.rel = 'stylesheet';
-      linkElem.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css';
-      
-      linkElem.addEventListener('load', () => {
-        console.log('FontAwesome loaded successfully in shadow DOM');
-        DotboxBaseComponent.fontAwesomeLoaded = true;
-        
-        // Add a test element to verify FontAwesome is working
-        const testElem = document.createElement('span');
-        testElem.style.visibility = 'hidden';
-        testElem.style.position = 'absolute';
-        testElem.className = 'fa fa-check';
-        this.shadowRoot.appendChild(testElem);
-        
-        // Check if FontAwesome is applied
-        const computedStyle = window.getComputedStyle(testElem);
-        const fontFamily = computedStyle.getPropertyValue('font-family');
-        console.log('FontAwesome test element font-family:', fontFamily);
-        
-        // Clean up
-        this.shadowRoot.removeChild(testElem);
-      });
-      
-      linkElem.addEventListener('error', (error) => {
-        console.error('Failed to load FontAwesome in shadow DOM', error);
-      });
-      
-      this.shadowRoot.appendChild(linkElem);
-    } catch (error) {
-      console.error('Error loading FontAwesome in shadow DOM:', error);
-    }
+    
+    // Create a link element for the component's CSS
+    const linkElem = document.createElement('link');
+    linkElem.rel = 'stylesheet';
+    linkElem.href = `/components/${componentName}/${componentName}.css`;
+    linkElem.setAttribute('data-component', componentName);
+    
+    // Add event listeners for load/error
+    linkElem.addEventListener('load', () => {
+      console.log(`Component CSS loaded: ${componentName}`);
+    });
+    
+    linkElem.addEventListener('error', (error) => {
+      console.error(`Failed to load component CSS: ${componentName}`, error);
+    });
+    
+    // Append to shadow root
+    this.shadowRoot.appendChild(linkElem);
   }
 
   /**
@@ -167,8 +116,6 @@ export class DotboxBaseComponent extends LitElement {
 
   connectedCallback() {
     super.connectedCallback();
-    // Load FontAwesome by default for all components
-    this.loadFontAwesome();
     
     // Inject FontAwesome styles directly into shadow DOM
     this.injectFontAwesomeStyles();

@@ -101,9 +101,9 @@ export class DotboxDialog extends DotboxCard {
 
   connectedCallback() {
     super.connectedCallback();
-    const cssPath = new URL('./dialog.css', import.meta.url).href;
-    console.log('Loading dialog CSS from:', cssPath);
-    this.loadComponentStyles(cssPath);
+    
+    // Load component-specific CSS
+    this.loadComponentStyles('dialog');
     
     // Add event listeners
     document.addEventListener('keydown', this._handleKeyDown);

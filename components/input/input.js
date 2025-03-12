@@ -161,9 +161,9 @@ export class DotboxInput extends DotboxBaseComponent {
 
   connectedCallback() {
     super.connectedCallback();
-    const cssPath = new URL('./input.css', import.meta.url).href;
-    console.log('Loading input CSS from:', cssPath);
-    this.loadComponentStyles(cssPath);
+    
+    // Load component-specific CSS
+    this.loadComponentStyles('input');
   }
 
   render() {

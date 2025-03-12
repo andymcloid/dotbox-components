@@ -222,9 +222,6 @@ export class DotboxNotification extends DotboxBaseComponent {
   firstUpdated() {
     super.firstUpdated();
     
-    // Ensure FontAwesome is loaded
-    this.loadFontAwesome();
-    
     // Show the notification with a slight delay to ensure styles are applied
     setTimeout(() => {
       this._visible = true;
@@ -237,6 +234,9 @@ export class DotboxNotification extends DotboxBaseComponent {
 
   connectedCallback() {
     super.connectedCallback();
+    
+    // Load component-specific CSS
+    this.loadComponentStyles('notification');
     
     // Register this notification with the static manager
     DotboxNotification.registerNotification(this);

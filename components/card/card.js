@@ -50,9 +50,9 @@ export class DotboxCard extends DotboxBaseComponent {
 
   connectedCallback() {
     super.connectedCallback();
-    const cssPath = new URL('./card.css', import.meta.url).href;
-    console.log('Loading card CSS from:', cssPath);
-    this.loadComponentStyles(cssPath);
+    
+    // Load component-specific CSS
+    this.loadComponentStyles('card');
   }
 
   render() {
