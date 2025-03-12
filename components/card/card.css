@@ -1,0 +1,93 @@
+/* Import base styles */
+@import url('../base/base-styles.css');
+
+/* Card styles */
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: #fff;
+  background-clip: border-box;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 0.25rem;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  transition: all 0.2s ease-in-out;
+}
+
+.card:hover {
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+  padding: 0.75rem 1.25rem;
+  margin-bottom: 0;
+  background-color: rgba(0, 0, 0, 0.03);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+  display: flex;
+  align-items: center;
+}
+
+.card-header i.fa {
+  margin-right: 0.5rem;
+  font-size: 1.1em;
+}
+
+.card-title {
+  margin-bottom: 0;
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.card-body {
+  flex: 1 1 auto;
+  padding: 1.25rem;
+}
+
+.card-footer {
+  padding: 0.75rem 1.25rem;
+  background-color: rgba(0, 0, 0, 0.03);
+  border-top: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+/* Card variants */
+.card-primary {
+  border-color: #0275d8;
+}
+
+.card-primary .card-header {
+  color: #fff;
+  background-color: #0275d8;
+  border-color: #0275d8;
+}
+
+.card-success {
+  border-color: #5cb85c;
+}
+
+.card-success .card-header {
+  color: #fff;
+  background-color: #5cb85c;
+  border-color: #5cb85c;
+}
+
+.card-danger {
+  border-color: #d9534f;
+}
+
+.card-danger .card-header {
+  color: #fff;
+  background-color: #d9534f;
+  border-color: #d9534f;
+}
+
+.card-info {
+  border-color: #5bc0de;
+}
+
+.card-info .card-header {
+  color: #fff;
+  background-color: #5bc0de;
+  border-color: #5bc0de;
+} 

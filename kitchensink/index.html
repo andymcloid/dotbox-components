@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dotbox Components - Kitchen Sink</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <style>
+        body {
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        h2 {
+            margin-top: 30px;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+        h3 {
+            margin-top: 25px;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+        .component-group {
+            margin-bottom: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .code-example {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            font-family: monospace;
+            white-space: pre-wrap;
+        }
+        .navbar {
+            margin-bottom: 30px;
+        }
+        .card-demo {
+            max-width: 350px;
+            margin-bottom: 20px;
+        }
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+    </style>
+    <!-- Import our components -->
+    <script type="module">
+        import '../components/index.js';
+    </script>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">Dotbox Components</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="jumbotron">
+            <h1 class="display-4">Dotbox Components</h1>
+            <p class="lead">A reusable web component library with stylish buttons and more.</p>
+            <hr class="my-4">
+            <p>This kitchen sink demonstrates all available components and their variations.</p>
+        </div>
+
+        <h2>Button Component</h2>
+        <p>The <code>dotbox-button</code> component provides stylish buttons with various options.</p>
+
+        <h3>Basic Usage</h3>
+        <div class="component-group">
+            <dotbox-button variant="primary">Primary Button</dotbox-button>
+            <dotbox-button variant="success">Success Button</dotbox-button>
+            <dotbox-button variant="danger">Danger Button</dotbox-button>
+            <dotbox-button variant="info">Info Button</dotbox-button>
+            <dotbox-button variant="default">Default Button</dotbox-button>
+        </div>
+        <div class="code-example">
+&lt;dotbox-button variant="primary"&gt;Primary Button&lt;/dotbox-button&gt;
+&lt;dotbox-button variant="success"&gt;Success Button&lt;/dotbox-button&gt;
+&lt;dotbox-button variant="danger"&gt;Danger Button&lt;/dotbox-button&gt;
+&lt;dotbox-button variant="info"&gt;Info Button&lt;/dotbox-button&gt;
+&lt;dotbox-button variant="default"&gt;Default Button&lt;/dotbox-button&gt;</div>
+
+        <h3>Button Sizes</h3>
+        <div class="component-group">
+            <dotbox-button variant="primary" size="small">Small Button</dotbox-button>
+            <dotbox-button variant="primary">Default Size</dotbox-button>
+            <dotbox-button variant="primary" size="large">Large Button</dotbox-button>
+        </div>
+        <div class="code-example">
+&lt;dotbox-button variant="primary" size="small"&gt;Small Button&lt;/dotbox-button&gt;
+&lt;dotbox-button variant="primary"&gt;Default Size&lt;/dotbox-button&gt;
+&lt;dotbox-button variant="primary" size="large"&gt;Large Button&lt;/dotbox-button&gt;</div>
+
+        <h3>Icons After Text</h3>
+        <div class="component-group">
+            <dotbox-button variant="primary" icon="fa-arrow-right" iconPosition="after">With Icon</dotbox-button>
+            <dotbox-button variant="success" icon="fa-check" iconPosition="after">Success</dotbox-button>
+            <dotbox-button variant="danger" icon="fa-warning" iconPosition="after">Warning</dotbox-button>
+            <dotbox-button variant="info" icon="fa-info-circle" iconPosition="after">Info</dotbox-button>
+        </div>
+        <div class="code-example">
+&lt;dotbox-button variant="primary" icon="fa-arrow-right" iconPosition="after"&gt;With Icon&lt;/dotbox-button&gt;
+&lt;dotbox-button variant="success" icon="fa-check" iconPosition="after"&gt;Success&lt;/dotbox-button&gt;
+&lt;dotbox-button variant="danger" icon="fa-warning" iconPosition="after"&gt;Warning&lt;/dotbox-button&gt;
+&lt;dotbox-button variant="info" icon="fa-info-circle" iconPosition="after"&gt;Info&lt;/dotbox-button&gt;</div>
+
+        <h3>Icons Before Text</h3>
+        <div class="component-group">
+            <dotbox-button variant="primary" icon="fa-arrow-right" iconPosition="before">With Icon</dotbox-button>
+            <dotbox-button variant="success" icon="fa-check" iconPosition="before">Success</dotbox-button>
+            <dotbox-button variant="danger" icon="fa-warning" iconPosition="before">Warning</dotbox-button>
+            <dotbox-button variant="info" icon="fa-info-circle" iconPosition="before">Info</dotbox-button>
+        </div>
+        <div class="code-example">
+&lt;dotbox-button variant="primary" icon="fa-arrow-right" iconPosition="before"&gt;With Icon&lt;/dotbox-button&gt;
+&lt;dotbox-button variant="success" icon="fa-check" iconPosition="before"&gt;Success&lt;/dotbox-button&gt;
+&lt;dotbox-button variant="danger" icon="fa-warning" iconPosition="before"&gt;Warning&lt;/dotbox-button&gt;
+&lt;dotbox-button variant="info" icon="fa-info-circle" iconPosition="before"&gt;Info&lt;/dotbox-button&gt;</div>
+
+        <h3>Animated Icons</h3>
+        <div class="component-group">
+            <dotbox-button variant="primary" icon="fa-spinner" animated="true" animationType="spin">Loading (Spin)</dotbox-button>
+            <dotbox-button variant="primary" icon="fa-spinner" animated="true" animationType="pulse">Loading (Pulse)</dotbox-button>
+            <dotbox-button variant="primary" icon="fa-refresh" animated="true" iconPosition="before">Refreshing</dotbox-button>
+            <dotbox-button variant="primary" icon="fa-cog" animated="true" iconPosition="before">Processing</dotbox-button>
+        </div>
+        <div class="code-example">
+&lt;dotbox-button variant="primary" icon="fa-spinner" animated="true" animationType="spin"&gt;Loading (Spin)&lt;/dotbox-button&gt;
+&lt;dotbox-button variant="primary" icon="fa-spinner" animated="true" animationType="pulse"&gt;Loading (Pulse)&lt;/dotbox-button&gt;
+&lt;dotbox-button variant="primary" icon="fa-refresh" animated="true" iconPosition="before"&gt;Refreshing&lt;/dotbox-button&gt;
+&lt;dotbox-button variant="primary" icon="fa-cog" animated="true" iconPosition="before"&gt;Processing&lt;/dotbox-button&gt;</div>
+
+        <h3>Disabled Buttons</h3>
+        <div class="component-group">
+            <dotbox-button variant="primary" disabled>Disabled Button</dotbox-button>
+            <dotbox-button variant="danger" disabled icon="fa-ban" iconPosition="before">Disabled with Icon</dotbox-button>
+            <dotbox-button variant="primary" disabled icon="fa-spinner" animated="true">Disabled but Animated</dotbox-button>
+        </div>
+        <div class="code-example">
+&lt;dotbox-button variant="primary" disabled&gt;Disabled Button&lt;/dotbox-button&gt;
+&lt;dotbox-button variant="danger" disabled icon="fa-ban" iconPosition="before"&gt;Disabled with Icon&lt;/dotbox-button&gt;
+&lt;dotbox-button variant="primary" disabled icon="fa-spinner" animated="true"&gt;Disabled but Animated&lt;/dotbox-button&gt;</div>
+
+        <h3>Link Buttons</h3>
+        <div class="component-group">
+            <dotbox-button variant="primary" href="#example">Link Button</dotbox-button>
+            <dotbox-button variant="info" href="#example" icon="fa-link" iconPosition="before">Link with Icon</dotbox-button>
+        </div>
+        <div class="code-example">
+&lt;dotbox-button variant="primary" href="#example"&gt;Link Button&lt;/dotbox-button&gt;
+&lt;dotbox-button variant="info" href="#example" icon="fa-link" iconPosition="before"&gt;Link with Icon&lt;/dotbox-button&gt;</div>
+
+        <h2>Card Component</h2>
+        <p>The <code>dotbox-card</code> component provides stylish cards with various options.</p>
+
+        <h3>Basic Usage</h3>
+        <div class="card-grid">
+            <dotbox-card title="Default Card">
+                This is a basic card with just a title.
+            </dotbox-card>
+            
+            <dotbox-card title="Card with Icon" icon="fa-info-circle">
+                This card has both a title and an icon in the header.
+            </dotbox-card>
+            
+            <dotbox-card>
+                <div slot="header">Custom Header Content</div>
+                This card has custom header content using the header slot.
+            </dotbox-card>
+        </div>
+        <div class="code-example">
+&lt;dotbox-card title="Default Card"&gt;
+    This is a basic card with just a title.
+&lt;/dotbox-card&gt;
+
+&lt;dotbox-card title="Card with Icon" icon="fa-info-circle"&gt;
+    This card has both a title and an icon in the header.
+&lt;/dotbox-card&gt;
+
+&lt;dotbox-card&gt;
+    &lt;div slot="header"&gt;Custom Header Content&lt;/div&gt;
+    This card has custom header content using the header slot.
+&lt;/dotbox-card&gt;</div>
+
+        <h3>Card Variants</h3>
+        <div class="card-grid">
+            <dotbox-card variant="primary" title="Primary Card" icon="fa-star">
+                This is a primary card with a title and icon.
+            </dotbox-card>
+            
+            <dotbox-card variant="success" title="Success Card" icon="fa-check">
+                This is a success card with a title and icon.
+            </dotbox-card>
+            
+            <dotbox-card variant="danger" title="Danger Card" icon="fa-warning">
+                This is a danger card with a title and icon.
+            </dotbox-card>
+            
+            <dotbox-card variant="info" title="Info Card" icon="fa-info-circle">
+                This is an info card with a title and icon.
+            </dotbox-card>
+        </div>
+        <div class="code-example">
+&lt;dotbox-card variant="primary" title="Primary Card" icon="fa-star"&gt;
+    This is a primary card with a title and icon.
+&lt;/dotbox-card&gt;
+
+&lt;dotbox-card variant="success" title="Success Card" icon="fa-check"&gt;
+    This is a success card with a title and icon.
+&lt;/dotbox-card&gt;
+
+&lt;dotbox-card variant="danger" title="Danger Card" icon="fa-warning"&gt;
+    This is a danger card with a title and icon.
+&lt;/dotbox-card&gt;
+
+&lt;dotbox-card variant="info" title="Info Card" icon="fa-info-circle"&gt;
+    This is an info card with a title and icon.
+&lt;/dotbox-card&gt;</div>
+
+        <h3>Card with Footer</h3>
+        <div class="card-grid">
+            <dotbox-card title="Card with Footer" icon="fa-credit-card">
+                This card has a footer with buttons.
+                <div slot="footer">
+                    <dotbox-button variant="primary" size="small">Save</dotbox-button>
+                    <dotbox-button variant="danger" size="small">Cancel</dotbox-button>
+                </div>
+            </dotbox-card>
+            
+            <dotbox-card variant="info" title="Info Card with Footer" icon="fa-info-circle">
+                This is an info card with a footer.
+                <div slot="footer">
+                    <dotbox-button variant="info" size="small" icon="fa-arrow-right" iconPosition="after">Learn More</dotbox-button>
+                </div>
+            </dotbox-card>
+        </div>
+        <div class="code-example">
+&lt;dotbox-card title="Card with Footer" icon="fa-credit-card"&gt;
+    This card has a footer with buttons.
+    &lt;div slot="footer"&gt;
+        &lt;dotbox-button variant="primary" size="small"&gt;Save&lt;/dotbox-button&gt;
+        &lt;dotbox-button variant="danger" size="small"&gt;Cancel&lt;/dotbox-button&gt;
+    &lt;/div&gt;
+&lt;/dotbox-card&gt;
+
+&lt;dotbox-card variant="info" title="Info Card with Footer" icon="fa-info-circle"&gt;
+    This is an info card with a footer.
+    &lt;div slot="footer"&gt;
+        &lt;dotbox-button variant="info" size="small" icon="fa-arrow-right" iconPosition="after"&gt;Learn More&lt;/dotbox-button&gt;
+    &lt;/div&gt;
+&lt;/dotbox-card&gt;</div>
+    </div>
+
+    <footer class="bg-dark text-white mt-5 p-4">
+        <div class="container">
+            <p class="mb-0">Dotbox Components - A reusable web component library</p>
+        </div>
+    </footer>
+</body>
+</html> 

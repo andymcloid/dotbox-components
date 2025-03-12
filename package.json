@@ -1,0 +1,29 @@
+{
+  "name": "dotbox-components",
+  "version": "0.1.0",
+  "description": "A reusable web component library with stylish buttons and more",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "type": "module",
+  "scripts": {
+    "build": "rollup -c",
+    "dev": "rollup -c -w",
+    "serve": "http-server -o kitchensink"
+  },
+  "keywords": [
+    "web-components",
+    "buttons",
+    "ui-components"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "rollup": "^2.79.1",
+    "rollup-plugin-terser": "^7.0.2",
+    "rollup-plugin-copy": "^3.4.0",
+    "http-server": "^14.1.1"
+  },
+  "dependencies": {
+    "lit": "^2.7.5"
+  }
+} 

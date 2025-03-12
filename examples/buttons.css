@@ -1,0 +1,249 @@
+button.ffab-before, button.ffab-after,
+.btn.ffab-before,
+.btn.ffab-after {
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 -0.09rem 0 rgba(0, 0, 0, 0.1) inset; }
+  button.ffab-before::before, button.ffab-after::before,
+  .btn.ffab-before::before,
+  .btn.ffab-after::before {
+    display: inline-block;
+    font: normal normal normal 14px / 1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    line-height: 1.5em;
+    position: absolute;
+    z-index: 2;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+            transform: translateY(-50%); }
+  button.ffab-before:after, button.ffab-after:after,
+  .btn.ffab-before:after,
+  .btn.ffab-after:after {
+    background: rgba(255, 255, 255, 0.1);
+    content: '';
+    height: 110%;
+    position: absolute;
+    top: -5%;
+    transition: all 0.3s;
+    width: 3.6375rem;
+    z-index: 1; }
+  button.ffab-before.tiny, button.ffab-after.tiny,
+  .btn.ffab-before.tiny,
+  .btn.ffab-after.tiny {
+    box-shadow: 0 -0.06rem 0 rgba(0, 0, 0, 0.1) inset; }
+  button.ffab-before.tiny::after, button.ffab-after.tiny::after,
+  .btn.ffab-before.tiny::after,
+  .btn.ffab-after.tiny::after {
+    width: 2.7375rem; }
+  button.ffab-before.small, button.ffab-after.small,
+  .btn.ffab-before.small,
+  .btn.ffab-after.small {
+    box-shadow: 0 -0.075rem 0 rgba(0, 0, 0, 0.1) inset; }
+  button.ffab-before.small::after, button.ffab-after.small::after,
+  .btn.ffab-before.small::after,
+  .btn.ffab-after.small::after {
+    width: 3.1875rem; }
+  button.ffab-before::after, button.ffab-after::after,
+  .btn.ffab-before::after,
+  .btn.ffab-after::after {
+    width: 3.6375rem; }
+  button.ffab-before.large, button.ffab-after.large,
+  .btn.ffab-before.large,
+  .btn.ffab-after.large {
+    box-shadow: 0 -0.125rem 0 rgba(0, 0, 0, 0.1) inset; }
+  button.ffab-before.large::after, button.ffab-after.large::after,
+  .btn.ffab-before.large::after,
+  .btn.ffab-after.large::after {
+    width: 4.6875rem; }
+  button.ffab-before:hover:not(.disabled):after, button.ffab-after:hover:not(.disabled):after,
+  .btn.ffab-before:hover:not(.disabled):after,
+  .btn.ffab-after:hover:not(.disabled):after {
+    -webkit-transform: skewX(0deg) !important;
+        -ms-transform: skewX(0deg) !important;
+            transform: skewX(0deg) !important;
+    width: 0% !important; }
+
+button.ffab-before,
+.btn.ffab-before {
+  padding-left: 3.6375rem; }
+  button.ffab-before.tiny,
+  .btn.ffab-before.tiny {
+    padding-left: 2.7375rem; }
+  button.ffab-before.small,
+  .btn.ffab-before.small {
+    padding-left: 3.1875rem; }
+  button.ffab-before.large,
+  .btn.ffab-before.large {
+    padding-left: 4.6875rem; }
+  button.ffab-before:before,
+  .btn.ffab-before:before {
+    left: 1em; }
+  button.ffab-before:after,
+  .btn.ffab-before:after {
+    left: -15px;
+    -webkit-transform: skewX(15deg);
+        -ms-transform: skewX(15deg);
+            transform: skewX(15deg);
+    -webkit-transform-origin: left;
+        -ms-transform-origin: left;
+            transform-origin: left; }
+
+button.ffab-after,
+.btn.ffab-after {
+  padding-right: 3.6375rem; }
+  button.ffab-after.tiny,
+  .btn.ffab-after.tiny {
+    padding-right: 2.7375rem; }
+  button.ffab-after.small,
+  .btn.ffab-after.small {
+    padding-right: 3.1875rem; }
+  button.ffab-after.large,
+  .btn.ffab-after.large {
+    padding-right: 4.6875rem; }
+  button.ffab-after:before,
+  .btn.ffab-after:before {
+    right: 0.5em; }
+  button.ffab-after:after,
+  .btn.ffab-after:after {
+    right: -15px;
+    -webkit-transform: skewX(-15deg);
+        -ms-transform: skewX(-15deg);
+            transform: skewX(-15deg);
+    -webkit-transform-origin: right;
+        -ms-transform-origin: right;
+            transform-origin: right; }
+
+.fa-spin, .ffab-spin::before {
+  -webkit-animation: fa-spin 2s infinite linear;
+  animation: fa-spin 2s infinite linear;
+  -webkit-transform-origin: center center;
+      -ms-transform-origin: center center;
+          transform-origin: center center; }
+
+.fa-pulse, .ffab-pulse::before {
+  -webkit-animation: fa-spin 1s infinite steps(8);
+  animation: fa-spin 1s infinite steps(8);
+  -webkit-transform-origin: center center;
+      -ms-transform-origin: center center;
+          transform-origin: center center; }
+
+/* Special handling for spinning icons */
+.ffab-after.ffab-spin::before, .ffab-before.ffab-spin::before,
+.ffab-after.ffab-pulse::before, .ffab-before.ffab-pulse::before {
+  /* Override the transform to use a 3D transform for better performance */
+  -webkit-transform: translateY(-50%) translateZ(0);
+      -ms-transform: translateY(-50%) translateZ(0);
+          transform: translateY(-50%) translateZ(0);
+}
+
+/* Ensure disabled buttons maintain their styling */
+.btn.disabled.ffab-before, .btn.disabled.ffab-after,
+button[disabled].ffab-before, button[disabled].ffab-after,
+.btn.disabled, button[disabled] {
+  pointer-events: none;
+  cursor: not-allowed;
+  filter: alpha(opacity=85);
+  box-shadow: none;
+  opacity: .85; /* Increased from .75 for better visibility */
+  background-image: none; /* Remove any gradient */
+  text-shadow: none; /* Remove any text shadow */
+}
+
+/* Make disabled icons more visible */
+.disabled.ffab-after::before, .disabled.ffab-before::before,
+button[disabled].ffab-after::before, button[disabled].ffab-before::before {
+  opacity: 0.9; /* Make icons more visible */
+}
+
+/* Make sure disabled buttons can still have spinning icons */
+.disabled.ffab-after.ffab-spin::before, .disabled.ffab-before.ffab-spin::before,
+.disabled.ffab-after.ffab-pulse::before, .disabled.ffab-before.ffab-pulse::before,
+button[disabled].ffab-after.ffab-spin::before, button[disabled].ffab-before.ffab-spin::before,
+button[disabled].ffab-after.ffab-pulse::before, button[disabled].ffab-before.ffab-pulse::before {
+  -webkit-animation-play-state: running !important;
+          animation-play-state: running !important;
+  opacity: 0.9; /* Make spinning icons more visible */
+}
+
+/* Fix for disabled buttons hover effect */
+button.ffab-before:hover:not(.disabled):after, button.ffab-after:hover:not(.disabled):after,
+.btn.ffab-before:hover:not(.disabled):after, .btn.ffab-after:hover:not(.disabled):after,
+button[disabled].ffab-before:hover:after, button[disabled].ffab-after:hover:after,
+.disabled.ffab-before:hover:after, .disabled.ffab-after:hover:after {
+  -webkit-transform: skewX(0deg) !important;
+      -ms-transform: skewX(0deg) !important;
+          transform: skewX(0deg) !important;
+  width: 0% !important;
+}
+
+/* Special styling for the "Disabled But Animated Buttons" section */
+.btn-primary.disabled, .btn-primary[disabled],
+.btn-primary.disabled:hover, .btn-primary[disabled]:hover,
+.btn-primary.disabled:focus, .btn-primary[disabled]:focus {
+  background-color: #6c7a8c; /* More grayish blue */
+  border-color: #5d6a7a;
+  opacity: 0.9; /* Increased opacity for better visibility */
+}
+
+.btn-danger.disabled, .btn-danger[disabled],
+.btn-danger.disabled:hover, .btn-danger[disabled]:hover,
+.btn-danger.disabled:focus, .btn-danger[disabled]:focus {
+  background-color: #a06060; /* More grayish red */
+  border-color: #8d5454;
+  opacity: 0.9; /* Increased opacity for better visibility */
+}
+
+.btn-success.disabled, .btn-success[disabled],
+.btn-success.disabled:hover, .btn-success[disabled]:hover,
+.btn-success.disabled:focus, .btn-success[disabled]:focus {
+  background-color: #6a8a6a; /* More grayish green */
+  border-color: #5d7a5d;
+  opacity: 0.9; /* Increased opacity for better visibility */
+}
+
+/* Default disabled button style */
+.btn-default.disabled, .btn-default[disabled],
+.btn-default.disabled:hover, .btn-default[disabled]:hover,
+.btn-default.disabled:focus, .btn-default[disabled]:focus,
+.btn-info.disabled, .btn-info[disabled],
+.btn-info.disabled:hover, .btn-info[disabled]:hover,
+.btn-info.disabled:focus, .btn-info[disabled]:focus {
+  background-color: #7a7a7a; /* Neutral gray */
+  border-color: #6a6a6a;
+  opacity: 0.9; /* Increased opacity for better visibility */
+  color: #fff; /* Ensure white text */
+}
+
+/* Adjust the keyframes to only handle rotation but with hardware acceleration */
+@-webkit-keyframes fa-spin {
+  0% {
+    -webkit-transform: translateY(-50%) rotate(0deg) translateZ(0);
+            transform: translateY(-50%) rotate(0deg) translateZ(0); }
+  100% {
+    -webkit-transform: translateY(-50%) rotate(359deg) translateZ(0);
+            transform: translateY(-50%) rotate(359deg) translateZ(0); }
+}
+
+@keyframes fa-spin {
+  0% {
+    -webkit-transform: translateY(-50%) rotate(0deg) translateZ(0);
+            transform: translateY(-50%) rotate(0deg) translateZ(0); }
+  100% {
+    -webkit-transform: translateY(-50%) rotate(359deg) translateZ(0);
+            transform: translateY(-50%) rotate(359deg) translateZ(0); }
+}
+
+/* Add size variations for better display */
+.btn-sm.ffab-before, .btn-sm.ffab-after {
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
+}
+
+.btn-lg.ffab-before, .btn-lg.ffab-after {
+  padding-left: 5rem;
+  padding-right: 5rem;
+}

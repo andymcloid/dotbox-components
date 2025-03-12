@@ -1,0 +1,60 @@
+/* Base styles for all Dotbox components */
+
+/* Font Awesome animations - shared across components */
+.fa-spin, .ffab-spin::before {
+  -webkit-animation: fa-spin 2s infinite linear;
+  animation: fa-spin 2s infinite linear;
+  -webkit-transform-origin: center center;
+      -ms-transform-origin: center center;
+          transform-origin: center center; 
+}
+
+.fa-pulse, .ffab-pulse::before {
+  -webkit-animation: fa-spin 1s infinite steps(8);
+  animation: fa-spin 1s infinite steps(8);
+  -webkit-transform-origin: center center;
+      -ms-transform-origin: center center;
+          transform-origin: center center; 
+}
+
+/* Keyframes for animations */
+@-webkit-keyframes fa-spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg); 
+  }
+  100% {
+    -webkit-transform: rotate(359deg);
+            transform: rotate(359deg); 
+  }
+}
+
+@keyframes fa-spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg); 
+  }
+  100% {
+    -webkit-transform: rotate(359deg);
+            transform: rotate(359deg); 
+  }
+}
+
+/* Common disabled state styling */
+[disabled] {
+  pointer-events: none;
+  cursor: not-allowed;
+  opacity: .85;
+  filter: alpha(opacity=85);
+}
+
+/* Common focus styles */
+:focus {
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(2, 117, 216, 0.25);
+}
+
+/* Common transition for interactive elements */
+.dotbox-interactive {
+  transition: all 0.2s ease-in-out;
+} 
