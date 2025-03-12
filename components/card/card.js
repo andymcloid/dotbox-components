@@ -53,33 +53,6 @@ export class DotboxCard extends DotboxBaseComponent {
     const cssPath = new URL('./card.css', import.meta.url).href;
     console.log('Loading card CSS from:', cssPath);
     this.loadComponentStyles(cssPath);
-    
-    // Inject FontAwesome styles directly into shadow DOM
-    this._injectFontAwesomeStyles();
-  }
-
-  /**
-   * Inject FontAwesome styles directly into shadow DOM
-   * This ensures icons are properly displayed
-   */
-  _injectFontAwesomeStyles() {
-    const style = document.createElement('style');
-    style.textContent = `
-      .fa {
-        display: inline-block;
-        font: normal normal normal 14px/1 FontAwesome;
-        font-size: inherit;
-        text-rendering: auto;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-      }
-      .fa-info-circle:before { content: "\\f05a"; }
-      .fa-check-circle:before { content: "\\f058"; }
-      .fa-exclamation-triangle:before { content: "\\f071"; }
-      .fa-exclamation-circle:before { content: "\\f06a"; }
-      .fa-star:before { content: "\\f005"; }
-    `;
-    this.shadowRoot.appendChild(style);
   }
 
   render() {

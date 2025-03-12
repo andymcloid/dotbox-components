@@ -225,9 +225,6 @@ export class DotboxNotification extends DotboxBaseComponent {
     // Ensure FontAwesome is loaded
     this.loadFontAwesome();
     
-    // Inject FontAwesome styles directly into shadow DOM
-    this._injectFontAwesomeStyles();
-    
     // Show the notification with a slight delay to ensure styles are applied
     setTimeout(() => {
       this._visible = true;
@@ -468,32 +465,6 @@ export class DotboxNotification extends DotboxBaseComponent {
     console.log('Notification added to DOM');
     
     return Promise.resolve(notification);
-  }
-
-  /**
-   * Inject FontAwesome styles directly into shadow DOM
-   * This ensures icons are properly displayed
-   */
-  _injectFontAwesomeStyles() {
-    const style = document.createElement('style');
-    style.textContent = `
-      .fa {
-        display: inline-block;
-        font: normal normal normal 14px/1 FontAwesome;
-        font-size: inherit;
-        text-rendering: auto;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-      }
-      .fa-times:before { content: "\\f00d"; }
-      .fa-check-circle:before { content: "\\f058"; }
-      .fa-exclamation-triangle:before { content: "\\f071"; }
-      .fa-exclamation-circle:before { content: "\\f06a"; }
-      .fa-info-circle:before { content: "\\f05a"; }
-      .fa-bell:before { content: "\\f0f3"; }
-      .fa-star:before { content: "\\f005"; }
-    `;
-    this.shadowRoot.appendChild(style);
   }
 }
 
