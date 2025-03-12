@@ -1,0 +1,220 @@
+<div class="component-header">
+    <h1>Card Component</h1>
+    <div>
+        <a href="https://github.com/yourusername/dotbox-components/blob/main/components/card/card.js" class="btn btn-outline-secondary" target="_blank">
+            <i class="fa fa-code"></i> View Source
+        </a>
+    </div>
+</div>
+
+<p class="lead">The <code>dotbox-card</code> component provides stylish cards with various options.</p>
+
+<h2>Examples</h2>
+
+<h3>Basic Usage</h3>
+<div class="card-grid">
+    <dotbox-card title="Default Card">
+        This is a basic card with just a title.
+    </dotbox-card>
+    
+    <dotbox-card title="Card with Icon" icon="fa-info-circle">
+        This card has both a title and an icon in the header.
+    </dotbox-card>
+    
+    <dotbox-card>
+        <div slot="header">Custom Header Content</div>
+        This card has custom header content using the header slot.
+    </dotbox-card>
+</div>
+<div class="code-example">
+&lt;dotbox-card title="Default Card"&gt;
+    This is a basic card with just a title.
+&lt;/dotbox-card&gt;
+
+&lt;dotbox-card title="Card with Icon" icon="fa-info-circle"&gt;
+    This card has both a title and an icon in the header.
+&lt;/dotbox-card&gt;
+
+&lt;dotbox-card&gt;
+    &lt;div slot="header"&gt;Custom Header Content&lt;/div&gt;
+    This card has custom header content using the header slot.
+&lt;/dotbox-card&gt;</div>
+
+<h3>Card Variants</h3>
+<div class="card-grid">
+    <dotbox-card variant="primary" title="Primary Card" icon="fa-star">
+        This is a primary card with a title and icon.
+    </dotbox-card>
+    
+    <dotbox-card variant="success" title="Success Card" icon="fa-check">
+        This is a success card with a title and icon.
+    </dotbox-card>
+    
+    <dotbox-card variant="danger" title="Danger Card" icon="fa-warning">
+        This is a danger card with a title and icon.
+    </dotbox-card>
+    
+    <dotbox-card variant="info" title="Info Card" icon="fa-info-circle">
+        This is an info card with a title and icon.
+    </dotbox-card>
+</div>
+<div class="code-example">
+&lt;dotbox-card variant="primary" title="Primary Card" icon="fa-star"&gt;
+    This is a primary card with a title and icon.
+&lt;/dotbox-card&gt;
+
+&lt;dotbox-card variant="success" title="Success Card" icon="fa-check"&gt;
+    This is a success card with a title and icon.
+&lt;/dotbox-card&gt;
+
+&lt;dotbox-card variant="danger" title="Danger Card" icon="fa-warning"&gt;
+    This is a danger card with a title and icon.
+&lt;/dotbox-card&gt;
+
+&lt;dotbox-card variant="info" title="Info Card" icon="fa-info-circle"&gt;
+    This is an info card with a title and icon.
+&lt;/dotbox-card&gt;</div>
+
+<h3>Card with Hover Effect</h3>
+<div class="card-grid">
+    <dotbox-card variant="primary" title="Hover Effect Card" icon="fa-star" hoverEffect>
+        This card has the hover effect enabled. Move your mouse over it to see the effect.
+    </dotbox-card>
+    
+    <dotbox-card variant="success" title="Hover Effect Card" icon="fa-check" hoverEffect>
+        This card has the hover effect enabled. Move your mouse over it to see the effect.
+    </dotbox-card>
+</div>
+<div class="code-example">
+&lt;dotbox-card variant="primary" title="Hover Effect Card" icon="fa-star" hoverEffect&gt;
+    This card has the hover effect enabled. Move your mouse over it to see the effect.
+&lt;/dotbox-card&gt;
+
+&lt;dotbox-card variant="success" title="Hover Effect Card" icon="fa-check" hoverEffect&gt;
+    This card has the hover effect enabled. Move your mouse over it to see the effect.
+&lt;/dotbox-card&gt;</div>
+
+<h3>Card with Footer</h3>
+<div class="card-grid">
+    <dotbox-card title="Card with Footer" icon="fa-credit-card">
+        This card has a footer with buttons.
+        <div slot="footer">
+            <dotbox-button variant="primary" size="small">Save</dotbox-button>
+            <dotbox-button variant="danger" size="small">Cancel</dotbox-button>
+        </div>
+    </dotbox-card>
+    
+    <dotbox-card variant="info" title="Info Card with Footer" icon="fa-info-circle">
+        This is an info card with a footer.
+        <div slot="footer">
+            <dotbox-button variant="info" size="small" icon="fa-arrow-right" iconPosition="after">Learn More</dotbox-button>
+        </div>
+    </dotbox-card>
+</div>
+<div class="code-example">
+&lt;dotbox-card title="Card with Footer" icon="fa-credit-card"&gt;
+    This card has a footer with buttons.
+    &lt;div slot="footer"&gt;
+        &lt;dotbox-button variant="primary" size="small"&gt;Save&lt;/dotbox-button&gt;
+        &lt;dotbox-button variant="danger" size="small"&gt;Cancel&lt;/dotbox-button&gt;
+    &lt;/div&gt;
+&lt;/dotbox-card&gt;
+
+&lt;dotbox-card variant="info" title="Info Card with Footer" icon="fa-info-circle"&gt;
+    This is an info card with a footer.
+    &lt;div slot="footer"&gt;
+        &lt;dotbox-button variant="info" size="small" icon="fa-arrow-right" iconPosition="after"&gt;Learn More&lt;/dotbox-button&gt;
+    &lt;/div&gt;
+&lt;/dotbox-card&gt;</div>
+
+<h2>API Reference</h2>
+
+<h3>Properties</h3>
+<table class="api-table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Default</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>variant</code></td>
+            <td>String</td>
+            <td>"default"</td>
+            <td>Card variant (primary, success, danger, info, default)</td>
+        </tr>
+        <tr>
+            <td><code>title</code></td>
+            <td>String</td>
+            <td>""</td>
+            <td>Card title</td>
+        </tr>
+        <tr>
+            <td><code>icon</code></td>
+            <td>String</td>
+            <td>""</td>
+            <td>FontAwesome icon name for the card header (e.g., 'fa-info-circle')</td>
+        </tr>
+        <tr>
+            <td><code>hoverEffect</code></td>
+            <td>Boolean</td>
+            <td>false</td>
+            <td>Whether to show a shadow effect on hover</td>
+        </tr>
+    </tbody>
+</table>
+
+<h3>CSS Parts</h3>
+<table class="api-table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>card</code></td>
+            <td>The card element</td>
+        </tr>
+        <tr>
+            <td><code>header</code></td>
+            <td>The card header</td>
+        </tr>
+        <tr>
+            <td><code>body</code></td>
+            <td>The card body</td>
+        </tr>
+        <tr>
+            <td><code>footer</code></td>
+            <td>The card footer</td>
+        </tr>
+    </tbody>
+</table>
+
+<h3>Slots</h3>
+<table class="api-table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>default</code></td>
+            <td>Default slot for card content</td>
+        </tr>
+        <tr>
+            <td><code>header</code></td>
+            <td>Slot for custom header content</td>
+        </tr>
+        <tr>
+            <td><code>footer</code></td>
+            <td>Slot for footer content</td>
+        </tr>
+    </tbody>
+</table> 

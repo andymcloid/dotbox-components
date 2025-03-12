@@ -4,6 +4,12 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="buttons.css">
         <style>
+            /* Prevent initial animations globally */
+            .no-transitions, .no-transitions * {
+                transition: none !important;
+                animation: none !important;
+            }
+            
             h2 {
                 margin-top: 30px;
                 margin-bottom: 15px;
@@ -22,9 +28,41 @@
                 margin-right: 10px;
                 margin-bottom: 10px;
             }
+            
+            /* Button press effect */
+            .btn:active:not(:disabled):not(.disabled) {
+                transform: translateY(1px);
+                box-shadow: 0 0 0 rgba(0, 0, 0, 0.1) !important;
+                filter: brightness(0.95);
+            }
         </style>
+        <script>
+            // Apply no-transitions class to body initially and remove it after components are loaded
+            document.addEventListener('DOMContentLoaded', () => {
+                console.log('DOM fully loaded');
+                
+                // Check if FontAwesome is loaded
+                const isFontAwesomeLoaded = () => {
+                    const span = document.createElement('span');
+                    span.className = 'fa';
+                    span.style.display = 'none';
+                    document.body.appendChild(span);
+                    const result = window.getComputedStyle(span).fontFamily.includes('FontAwesome');
+                    document.body.removeChild(span);
+                    return result;
+                };
+                
+                console.log('FontAwesome loaded:', isFontAwesomeLoaded());
+                
+                // Wait for components to be fully rendered
+                setTimeout(() => {
+                    document.body.classList.remove('no-transitions');
+                    console.log('Transitions enabled');
+                }, 500);
+            });
+        </script>
     </head>
-    <body style="padding: 20px; background-color: #f5f5f5">
+    <body class="no-transitions" style="padding: 20px; background-color: #f5f5f5">
         <h2>Link Buttons (A HREF)</h2>
         
         <h3>Icons After Text</h3>

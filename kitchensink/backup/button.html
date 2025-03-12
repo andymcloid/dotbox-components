@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dotbox Button Component</title>
+    <!-- Import map for Lit dependencies -->
+    <script type="importmap">
+    {
+        "imports": {
+            "lit": "https://cdn.jsdelivr.net/npm/lit@2.7.5/index.js",
+            "lit/": "https://cdn.jsdelivr.net/npm/lit@2.7.5/",
+            "@lit/reactive-element": "https://cdn.jsdelivr.net/npm/@lit/reactive-element@1.6.1/reactive-element.js",
+            "@lit/reactive-element/": "https://cdn.jsdelivr.net/npm/@lit/reactive-element@1.6.1/",
+            "lit-html": "https://cdn.jsdelivr.net/npm/lit-html@2.7.5/lit-html.js",
+            "lit-html/": "https://cdn.jsdelivr.net/npm/lit-html@2.7.5/",
+            "lit-element/lit-element.js": "https://cdn.jsdelivr.net/npm/lit-element@3.3.2/lit-element.js"
+        }
+    }
+    </script>
+    <!-- Directly include FontAwesome and Bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        /* Prevent initial animations globally */
+        .no-transitions, .no-transitions * {
+            transition: none !important;
+            animation: none !important;
+        }
+        
+        body {
+            padding-top: 56px;
+            background-color: #f5f5f5;
+        }
+        
+        h2 {
+            margin-top: 30px;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        h3 {
+            margin-top: 25px;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+        
+        .component-group {
+            margin-bottom: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .code-example {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            font-family: monospace;
+            white-space: pre-wrap;
+        }
+        
+        .navbar {
+            box-shadow: 0 2px 4px rgba(0,0,0,.1);
+        }
+        
+        .component-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        
+        .component-header h1 {
+            margin-bottom: 0;
+        }
+        
+        .component-header .btn {
+            margin-left: 10px;
+        }
+        
+        .footer {
+            margin-top: 50px;
+            padding: 20px 0;
+            background-color: #343a40;
+            color: white;
+        }
+        
+        .api-table {
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        
+        .api-table th {
+            background-color: #f8f9fa;
+        }
+        
+        .api-table td, .api-table th {
+            padding: 8px;
+            border: 1px solid #dee2e6;
+        }
+    </style>
+    <!-- Import our components -->
+    <script type="module">
+        import '../../components/index.js';
+        
+        // Apply no-transitions class to body initially and remove it after components are loaded
+        document.body.classList.add('no-transitions');
+        
+        window.addEventListener('DOMContentLoaded', () => {
+            // Wait for components to be fully rendered
+            setTimeout(() => {
+                document.body.classList.remove('no-transitions');
+                console.log('Transitions enabled');
+            }, 500);
+        });
+    </script>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="../index.html">Dotbox Components</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../index.html">
+                            <i class="fa fa-home"></i> Kitchen Sink
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="card.html">
+                            <i class="fa fa-credit-card"></i> Card Component
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <div class="component-header">
+            <h1>Button Component</h1>
+            <div>
+                <a href="https://github.com/yourusername/dotbox-components/blob/main/components/button/button.js" class="btn btn-outline-secondary" target="_blank">
+                    <i class="fa fa-code"></i> View Source
+                </a>
+            </div>
+        </div>
+        
+        <p class="lead">The <code>dotbox-button</code> component provides stylish buttons with various options.</p>
+        
+        <h2>Examples</h2>
+        
+        <h3>Basic Usage</h3>
+        <div class="component-group">
+            <dotbox-button variant="primary">Primary Button</dotbox-button>
+            <dotbox-button variant="success">Success Button</dotbox-button>
+            <dotbox-button variant="danger">Danger Button</dotbox-button>
+            <dotbox-button variant="info">Info Button</dotbox-button>
+            <dotbox-button variant="default">Default Button</dotbox-button>
+        </div>
+        <div class="code-example">
+&lt;dotbox-button variant="primary"&gt;Primary Button&lt;/dotbox-button&gt;
+&lt;dotbox-button variant="success"&gt;Success Button&lt;/dotbox-button&gt;
+&lt;dotbox-button variant="danger"&gt;Danger Button&lt;/dotbox-button&gt;
+&lt;dotbox-button variant="info"&gt;Info Button&lt;/dotbox-button&gt;
+&lt;dotbox-button variant="default"&gt;Default Button&lt;/dotbox-button&gt;</div>
+
+        <h3>Button Sizes</h3>
+        <div class="component-group">
+            <dotbox-button variant="primary" size="small">Small Button</dotbox-button>
+            <dotbox-button variant="primary">Default Size</dotbox-button>
+            <dotbox-button variant="primary" size="large">Large Button</dotbox-button>
+        </div>
+        <div class="code-example">
+&lt;dotbox-button variant="primary" size="small"&gt;Small Button&lt;/dotbox-button&gt;
+&lt;dotbox-button variant="primary"&gt;Default Size&lt;/dotbox-button&gt;
+&lt;dotbox-button variant="primary" size="large"&gt;Large Button&lt;/dotbox-button&gt;</div>
+
+        <h3>Icons After Text</h3>
+        <div class="component-group">
+            <dotbox-button variant="primary" icon="fa-arrow-right" iconPosition="after">With Icon</dotbox-button>
+            <dotbox-button variant="success" icon="fa-check" iconPosition="after">Success</dotbox-button>
+            <dotbox-button variant="danger" icon="fa-warning" iconPosition="after">Warning</dotbox-button>
+            <dotbox-button variant="info" icon="fa-info-circle" iconPosition="after">Info</dotbox-button>
+        </div>
+        <div class="code-example">
+&lt;dotbox-button variant="primary" icon="fa-arrow-right" iconPosition="after"&gt;With Icon&lt;/dotbox-button&gt;
+&lt;dotbox-button variant="success" icon="fa-check" iconPosition="after"&gt;Success&lt;/dotbox-button&gt;
+&lt;dotbox-button variant="danger" icon="fa-warning" iconPosition="after"&gt;Warning&lt;/dotbox-button&gt;
+&lt;dotbox-button variant="info" icon="fa-info-circle" iconPosition="after"&gt;Info&lt;/dotbox-button&gt;</div>
+
+        <h3>Icons Before Text</h3>
+        <div class="component-group">
+            <dotbox-button variant="primary" icon="fa-arrow-right" iconPosition="before">With Icon</dotbox-button>
+            <dotbox-button variant="success" icon="fa-check" iconPosition="before">Success</dotbox-button>
+            <dotbox-button variant="danger" icon="fa-warning" iconPosition="before">Warning</dotbox-button>
+            <dotbox-button variant="info" icon="fa-info-circle" iconPosition="before">Info</dotbox-button>
+        </div>
+        <div class="code-example">
+&lt;dotbox-button variant="primary" icon="fa-arrow-right" iconPosition="before"&gt;With Icon&lt;/dotbox-button&gt;
+&lt;dotbox-button variant="success" icon="fa-check" iconPosition="before"&gt;Success&lt;/dotbox-button&gt;
+&lt;dotbox-button variant="danger" icon="fa-warning" iconPosition="before"&gt;Warning&lt;/dotbox-button&gt;
+&lt;dotbox-button variant="info" icon="fa-info-circle" iconPosition="before"&gt;Info&lt;/dotbox-button&gt;</div>
+
+        <h3>Animated Icons</h3>
+        <div class="component-group">
+            <dotbox-button variant="primary" icon="fa-spinner" animated="true" animationType="spin">Loading (Spin)</dotbox-button>
+            <dotbox-button variant="primary" icon="fa-spinner" animated="true" animationType="pulse">Loading (Pulse)</dotbox-button>
+            <dotbox-button variant="primary" icon="fa-refresh" animated="true" iconPosition="before">Refreshing</dotbox-button>
+            <dotbox-button variant="primary" icon="fa-cog" animated="true" iconPosition="before">Processing</dotbox-button>
+        </div>
+        <div class="code-example">
+&lt;dotbox-button variant="primary" icon="fa-spinner" animated="true" animationType="spin"&gt;Loading (Spin)&lt;/dotbox-button&gt;
+&lt;dotbox-button variant="primary" icon="fa-spinner" animated="true" animationType="pulse"&gt;Loading (Pulse)&lt;/dotbox-button&gt;
+&lt;dotbox-button variant="primary" icon="fa-refresh" animated="true" iconPosition="before"&gt;Refreshing&lt;/dotbox-button&gt;
+&lt;dotbox-button variant="primary" icon="fa-cog" animated="true" iconPosition="before"&gt;Processing&lt;/dotbox-button&gt;</div>
+
+        <h3>Disabled Buttons</h3>
+        <div class="component-group">
+            <dotbox-button variant="primary" disabled>Disabled Button</dotbox-button>
+            <dotbox-button variant="danger" disabled icon="fa-ban" iconPosition="before">Disabled with Icon</dotbox-button>
+            <dotbox-button variant="primary" disabled icon="fa-spinner" animated="true">Disabled but Animated</dotbox-button>
+        </div>
+        <div class="code-example">
+&lt;dotbox-button variant="primary" disabled&gt;Disabled Button&lt;/dotbox-button&gt;
+&lt;dotbox-button variant="danger" disabled icon="fa-ban" iconPosition="before"&gt;Disabled with Icon&lt;/dotbox-button&gt;
+&lt;dotbox-button variant="primary" disabled icon="fa-spinner" animated="true"&gt;Disabled but Animated&lt;/dotbox-button&gt;</div>
+
+        <h3>Link Buttons</h3>
+        <div class="component-group">
+            <dotbox-button variant="primary" href="#example">Link Button</dotbox-button>
+            <dotbox-button variant="info" href="#example" icon="fa-link" iconPosition="before">Link with Icon</dotbox-button>
+        </div>
+        <div class="code-example">
+&lt;dotbox-button variant="primary" href="#example"&gt;Link Button&lt;/dotbox-button&gt;
+&lt;dotbox-button variant="info" href="#example" icon="fa-link" iconPosition="before"&gt;Link with Icon&lt;/dotbox-button&gt;</div>
+
+        <h2>API Reference</h2>
+        
+        <h3>Properties</h3>
+        <table class="api-table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th>Default</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>variant</code></td>
+                    <td>String</td>
+                    <td>"primary"</td>
+                    <td>Button variant (primary, success, danger, info, default)</td>
+                </tr>
+                <tr>
+                    <td><code>size</code></td>
+                    <td>String</td>
+                    <td>""</td>
+                    <td>Button size (small, default, large)</td>
+                </tr>
+                <tr>
+                    <td><code>icon</code></td>
+                    <td>String</td>
+                    <td>""</td>
+                    <td>FontAwesome icon name (e.g., 'fa-arrow-right')</td>
+                </tr>
+                <tr>
+                    <td><code>iconPosition</code></td>
+                    <td>String</td>
+                    <td>"after"</td>
+                    <td>Position of the icon (before, after)</td>
+                </tr>
+                <tr>
+                    <td><code>animated</code></td>
+                    <td>Boolean</td>
+                    <td>false</td>
+                    <td>Whether the icon should be animated</td>
+                </tr>
+                <tr>
+                    <td><code>animationType</code></td>
+                    <td>String</td>
+                    <td>"spin"</td>
+                    <td>Type of animation (spin, pulse)</td>
+                </tr>
+                <tr>
+                    <td><code>disabled</code></td>
+                    <td>Boolean</td>
+                    <td>false</td>
+                    <td>Whether the button is disabled</td>
+                </tr>
+                <tr>
+                    <td><code>href</code></td>
+                    <td>String</td>
+                    <td>""</td>
+                    <td>If provided, renders as an anchor tag</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <h3>CSS Parts</h3>
+        <table class="api-table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>button</code></td>
+                    <td>The button element</td>
+                </tr>
+                <tr>
+                    <td><code>icon</code></td>
+                    <td>The icon element</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <h3>Events</h3>
+        <table class="api-table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>click</code></td>
+                    <td>Dispatched when the button is clicked</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p class="mb-0">Dotbox Components - A reusable web component library</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS for navbar toggle -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html> 

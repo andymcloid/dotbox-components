@@ -3,7 +3,8 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const PORT = process.env.PORT || 3000;
 const MIME_TYPES = {
@@ -15,36 +16,53 @@ const MIME_TYPES = {
   '.jpg': 'image/jpg',
   '.gif': 'image/gif',
   '.svg': 'image/svg+xml',
+  '.ico': 'image/x-icon',
+  '.woff': 'font/woff',
+  '.woff2': 'font/woff2',
+  '.ttf': 'font/ttf',
+  '.eot': 'application/vnd.ms-fontobject'
 };
 
 const server = http.createServer((req, res) => {
-  console.log(`${req.method} ${req.url}`);
+  console.log(`${new Date().toISOString()} - ${req.method} ${req.url}`);
   
   // Handle root path
-  let filePath = req.url === '/' 
-    ? path.join(__dirname, 'kitchensink', 'index.html')
-    : path.join(__dirname, req.url);
+  let filePath;
   
-  // Check if path exists
-  if (fs.existsSync(filePath) && fs.statSync(filePath).isDirectory()) {
-    filePath = path.join(filePath, 'index.html');
+  if (req.url === '/') {
+    filePath = path.join(__dirname, 'kitchensink', 'index.html');
+  } 
+  // Special case for partials
+  else if (req.url.startsWith('/partials/')) {
+    const partialPath = req.url.replace('/partials/', '');
+    filePath = path.join(__dirname, 'kitchensink', 'partials', partialPath);
+    console.log(`Loading partial: ${filePath}`);
+  }
+  // All other paths
+  else {
+    filePath = path.join(__dirname, req.url);
   }
   
-  const extname = String(path.extname(filePath)).toLowerCase();
-  const contentType = MIME_TYPES[extname] || 'application/octet-stream';
+  // Get the file extension
+  const extname = path.extname(filePath);
+  let contentType = MIME_TYPES[extname] || 'application/octet-stream';
   
+  // Read the file
   fs.readFile(filePath, (error, content) => {
     if (error) {
       if (error.code === 'ENOENT') {
+        // File not found
         console.error(`File not found: ${filePath}`);
         res.writeHead(404);
         res.end('404 Not Found');
       } else {
+        // Server error
         console.error(`Server error: ${error.code}`);
         res.writeHead(500);
         res.end(`Server Error: ${error.code}`);
       }
     } else {
+      // Success
       res.writeHead(200, { 'Content-Type': contentType });
       res.end(content, 'utf-8');
     }

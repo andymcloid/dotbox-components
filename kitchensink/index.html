@@ -30,26 +30,77 @@
         }
         
         body {
-            padding: 20px;
+            padding-top: 56px;
             background-color: #f5f5f5;
+            min-height: 100vh;
         }
+        
+        .sidebar {
+            position: fixed;
+            top: 56px;
+            bottom: 0;
+            left: 0;
+            z-index: 100;
+            padding: 0;
+            box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+            background-color: #f8f9fa;
+            overflow-y: auto;
+        }
+        
+        .sidebar .nav-link {
+            font-weight: 500;
+            color: #333;
+            padding: 0.75rem 1.5rem;
+            border-left: 3px solid transparent;
+        }
+        
+        .sidebar .nav-link:hover {
+            background-color: #e9ecef;
+        }
+        
+        .sidebar .nav-link.active {
+            color: #007bff;
+            border-left: 3px solid #007bff;
+            background-color: rgba(0, 123, 255, 0.1);
+        }
+        
+        .sidebar .nav-link i {
+            margin-right: 10px;
+        }
+        
+        .main-content {
+            padding-top: 20px;
+        }
+        
+        .component-section {
+            display: none;
+            padding-bottom: 30px;
+        }
+        
+        .component-section.active {
+            display: block;
+        }
+        
         h2 {
             margin-top: 30px;
             margin-bottom: 15px;
             padding-bottom: 10px;
             border-bottom: 1px solid #ddd;
         }
+        
         h3 {
             margin-top: 25px;
             margin-bottom: 15px;
             font-size: 1.2rem;
         }
+        
         .component-group {
             margin-bottom: 20px;
             display: flex;
             flex-wrap: wrap;
             gap: 10px;
         }
+        
         .code-example {
             background-color: #f8f9fa;
             padding: 15px;
@@ -58,18 +109,62 @@
             font-family: monospace;
             white-space: pre-wrap;
         }
+        
         .navbar {
-            margin-bottom: 30px;
+            box-shadow: 0 2px 4px rgba(0,0,0,.1);
         }
+        
         .card-demo {
             max-width: 350px;
             margin-bottom: 20px;
         }
+        
         .card-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 20px;
             margin-bottom: 20px;
+        }
+        
+        .component-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        
+        .component-header h1 {
+            margin-bottom: 0;
+        }
+        
+        .component-header .btn {
+            margin-left: 10px;
+        }
+        
+        .footer {
+            margin-top: 50px;
+            padding: 20px 0;
+            background-color: #343a40;
+            color: white;
+        }
+        
+        .loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 200px;
+            font-size: 1.2rem;
+            color: #6c757d;
+        }
+        
+        .loading i {
+            margin-right: 10px;
+            animation: spin 1s infinite linear;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
     </style>
     <!-- Import our components -->
@@ -85,237 +180,193 @@
                 document.body.classList.remove('no-transitions');
                 console.log('Transitions enabled');
             }, 500);
+            
+            // Setup navigation
+            setupNavigation();
         });
+        
+        function setupNavigation() {
+            // Get all nav links
+            const navLinks = document.querySelectorAll('.sidebar .nav-link');
+            
+            // Add click event to each nav link
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    
+                    // Remove active class from all links
+                    navLinks.forEach(l => l.classList.remove('active'));
+                    
+                    // Add active class to clicked link
+                    link.classList.add('active');
+                    
+                    // Get the target section id
+                    const targetId = link.getAttribute('href').substring(1);
+                    
+                    // Hide all sections
+                    document.querySelectorAll('.component-section').forEach(section => {
+                        section.classList.remove('active');
+                    });
+                    
+                    // Show the target section
+                    const targetSection = document.getElementById(targetId);
+                    targetSection.classList.add('active');
+                    
+                    // Load component content if not already loaded
+                    if (!targetSection.dataset.loaded) {
+                        loadComponentContent(targetId, targetSection);
+                    }
+                    
+                    // Update URL hash
+                    window.location.hash = targetId;
+                    
+                    // Scroll to top
+                    window.scrollTo(0, 0);
+                });
+            });
+            
+            // Check if there's a hash in the URL
+            if (window.location.hash) {
+                const hash = window.location.hash.substring(1);
+                const link = document.querySelector(`.sidebar .nav-link[href="#${hash}"]`);
+                if (link) {
+                    link.click();
+                } else {
+                    // Default to first link
+                    navLinks[0].click();
+                }
+            } else {
+                // Default to first link
+                navLinks[0].click();
+            }
+            
+            // Add click event to component links
+            document.addEventListener('click', (e) => {
+                if (e.target.classList.contains('component-link') || 
+                    e.target.parentElement.classList.contains('component-link')) {
+                    e.preventDefault();
+                    const href = e.target.getAttribute('href') || e.target.parentElement.getAttribute('href');
+                    if (href && href.startsWith('#')) {
+                        const targetId = href.substring(1);
+                        const link = document.querySelector(`.sidebar .nav-link[href="#${targetId}"]`);
+                        if (link) {
+                            link.click();
+                        }
+                    }
+                }
+            });
+        }
+        
+        function loadComponentContent(componentId, targetSection) {
+            // Show loading indicator
+            targetSection.innerHTML = `
+                <div class="loading">
+                    <i class="fa fa-spinner"></i> Loading ${componentId} component...
+                </div>
+            `;
+            
+            // Fetch the component content
+            fetch(`/partials/${componentId}.html`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`Failed to load ${componentId} component`);
+                    }
+                    return response.text();
+                })
+                .then(html => {
+                    // Set the component content
+                    targetSection.innerHTML = html;
+                    targetSection.dataset.loaded = 'true';
+                    
+                    // Re-initialize any component-specific functionality
+                    if (componentId === 'home') {
+                        // Initialize home-specific functionality if needed
+                    }
+                })
+                .catch(error => {
+                    console.error(error);
+                    targetSection.innerHTML = `
+                        <div class="alert alert-danger">
+                            <i class="fa fa-exclamation-triangle"></i> Failed to load ${componentId} component: ${error.message}
+                        </div>
+                    `;
+                });
+        }
     </script>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container-fluid">
             <a class="navbar-brand" href="#">Dotbox Components</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/yourusername/dotbox-components" target="_blank">
+                            <i class="fa fa-github"></i> GitHub
+                        </a>
+                    </li>
+                </ul>
+            </div>
         </div>
     </nav>
 
-    <div class="container">
-        <div class="jumbotron">
-            <h1 class="display-4">Dotbox Components <i class="fa fa-check-circle" style="color: green;"></i></h1>
-            <p class="lead">A reusable web component library with stylish buttons and more.</p>
-            <hr class="my-4">
-            <p>This kitchen sink demonstrates all available components and their variations.</p>
-            <p><strong>FontAwesome Test:</strong> <i class="fa fa-star"></i> <i class="fa fa-heart"></i> <i class="fa fa-user"></i> <i class="fa fa-cog"></i></p>
-        </div>
-
-        <h2>Button Component</h2>
-        <p>The <code>dotbox-button</code> component provides stylish buttons with various options.</p>
-
-        <h3>Basic Usage</h3>
-        <div class="component-group">
-            <dotbox-button variant="primary">Primary Button</dotbox-button>
-            <dotbox-button variant="success">Success Button</dotbox-button>
-            <dotbox-button variant="danger">Danger Button</dotbox-button>
-            <dotbox-button variant="info">Info Button</dotbox-button>
-            <dotbox-button variant="default">Default Button</dotbox-button>
-        </div>
-        <div class="code-example">
-&lt;dotbox-button variant="primary"&gt;Primary Button&lt;/dotbox-button&gt;
-&lt;dotbox-button variant="success"&gt;Success Button&lt;/dotbox-button&gt;
-&lt;dotbox-button variant="danger"&gt;Danger Button&lt;/dotbox-button&gt;
-&lt;dotbox-button variant="info"&gt;Info Button&lt;/dotbox-button&gt;
-&lt;dotbox-button variant="default"&gt;Default Button&lt;/dotbox-button&gt;</div>
-
-        <h3>Button Sizes</h3>
-        <div class="component-group">
-            <dotbox-button variant="primary" size="small">Small Button</dotbox-button>
-            <dotbox-button variant="primary">Default Size</dotbox-button>
-            <dotbox-button variant="primary" size="large">Large Button</dotbox-button>
-        </div>
-        <div class="code-example">
-&lt;dotbox-button variant="primary" size="small"&gt;Small Button&lt;/dotbox-button&gt;
-&lt;dotbox-button variant="primary"&gt;Default Size&lt;/dotbox-button&gt;
-&lt;dotbox-button variant="primary" size="large"&gt;Large Button&lt;/dotbox-button&gt;</div>
-
-        <h3>Icons After Text</h3>
-        <div class="component-group">
-            <dotbox-button variant="primary" icon="fa-arrow-right" iconPosition="after">With Icon</dotbox-button>
-            <dotbox-button variant="success" icon="fa-check" iconPosition="after">Success</dotbox-button>
-            <dotbox-button variant="danger" icon="fa-warning" iconPosition="after">Warning</dotbox-button>
-            <dotbox-button variant="info" icon="fa-info-circle" iconPosition="after">Info</dotbox-button>
-        </div>
-        <div class="code-example">
-&lt;dotbox-button variant="primary" icon="fa-arrow-right" iconPosition="after"&gt;With Icon&lt;/dotbox-button&gt;
-&lt;dotbox-button variant="success" icon="fa-check" iconPosition="after"&gt;Success&lt;/dotbox-button&gt;
-&lt;dotbox-button variant="danger" icon="fa-warning" iconPosition="after"&gt;Warning&lt;/dotbox-button&gt;
-&lt;dotbox-button variant="info" icon="fa-info-circle" iconPosition="after"&gt;Info&lt;/dotbox-button&gt;</div>
-
-        <h3>Icons Before Text</h3>
-        <div class="component-group">
-            <dotbox-button variant="primary" icon="fa-arrow-right" iconPosition="before">With Icon</dotbox-button>
-            <dotbox-button variant="success" icon="fa-check" iconPosition="before">Success</dotbox-button>
-            <dotbox-button variant="danger" icon="fa-warning" iconPosition="before">Warning</dotbox-button>
-            <dotbox-button variant="info" icon="fa-info-circle" iconPosition="before">Info</dotbox-button>
-        </div>
-        <div class="code-example">
-&lt;dotbox-button variant="primary" icon="fa-arrow-right" iconPosition="before"&gt;With Icon&lt;/dotbox-button&gt;
-&lt;dotbox-button variant="success" icon="fa-check" iconPosition="before"&gt;Success&lt;/dotbox-button&gt;
-&lt;dotbox-button variant="danger" icon="fa-warning" iconPosition="before"&gt;Warning&lt;/dotbox-button&gt;
-&lt;dotbox-button variant="info" icon="fa-info-circle" iconPosition="before"&gt;Info&lt;/dotbox-button&gt;</div>
-
-        <h3>Animated Icons</h3>
-        <div class="component-group">
-            <dotbox-button variant="primary" icon="fa-spinner" animated="true" animationType="spin">Loading (Spin)</dotbox-button>
-            <dotbox-button variant="primary" icon="fa-spinner" animated="true" animationType="pulse">Loading (Pulse)</dotbox-button>
-            <dotbox-button variant="primary" icon="fa-refresh" animated="true" iconPosition="before">Refreshing</dotbox-button>
-            <dotbox-button variant="primary" icon="fa-cog" animated="true" iconPosition="before">Processing</dotbox-button>
-        </div>
-        <div class="code-example">
-&lt;dotbox-button variant="primary" icon="fa-spinner" animated="true" animationType="spin"&gt;Loading (Spin)&lt;/dotbox-button&gt;
-&lt;dotbox-button variant="primary" icon="fa-spinner" animated="true" animationType="pulse"&gt;Loading (Pulse)&lt;/dotbox-button&gt;
-&lt;dotbox-button variant="primary" icon="fa-refresh" animated="true" iconPosition="before"&gt;Refreshing&lt;/dotbox-button&gt;
-&lt;dotbox-button variant="primary" icon="fa-cog" animated="true" iconPosition="before"&gt;Processing&lt;/dotbox-button&gt;</div>
-
-        <h3>Disabled Buttons</h3>
-        <div class="component-group">
-            <dotbox-button variant="primary" disabled>Disabled Button</dotbox-button>
-            <dotbox-button variant="danger" disabled icon="fa-ban" iconPosition="before">Disabled with Icon</dotbox-button>
-            <dotbox-button variant="primary" disabled icon="fa-spinner" animated="true">Disabled but Animated</dotbox-button>
-        </div>
-        <div class="code-example">
-&lt;dotbox-button variant="primary" disabled&gt;Disabled Button&lt;/dotbox-button&gt;
-&lt;dotbox-button variant="danger" disabled icon="fa-ban" iconPosition="before"&gt;Disabled with Icon&lt;/dotbox-button&gt;
-&lt;dotbox-button variant="primary" disabled icon="fa-spinner" animated="true"&gt;Disabled but Animated&lt;/dotbox-button&gt;</div>
-
-        <h3>Link Buttons</h3>
-        <div class="component-group">
-            <dotbox-button variant="primary" href="#example">Link Button</dotbox-button>
-            <dotbox-button variant="info" href="#example" icon="fa-link" iconPosition="before">Link with Icon</dotbox-button>
-        </div>
-        <div class="code-example">
-&lt;dotbox-button variant="primary" href="#example"&gt;Link Button&lt;/dotbox-button&gt;
-&lt;dotbox-button variant="info" href="#example" icon="fa-link" iconPosition="before"&gt;Link with Icon&lt;/dotbox-button&gt;</div>
-
-        <h2>Card Component</h2>
-        <p>The <code>dotbox-card</code> component provides stylish cards with various options.</p>
-
-        <h3>Basic Usage</h3>
-        <div class="card-grid">
-            <dotbox-card title="Default Card">
-                This is a basic card with just a title.
-            </dotbox-card>
-            
-            <dotbox-card title="Card with Icon" icon="fa-info-circle">
-                This card has both a title and an icon in the header.
-            </dotbox-card>
-            
-            <dotbox-card>
-                <div slot="header">Custom Header Content</div>
-                This card has custom header content using the header slot.
-            </dotbox-card>
-        </div>
-        <div class="code-example">
-&lt;dotbox-card title="Default Card"&gt;
-    This is a basic card with just a title.
-&lt;/dotbox-card&gt;
-
-&lt;dotbox-card title="Card with Icon" icon="fa-info-circle"&gt;
-    This card has both a title and an icon in the header.
-&lt;/dotbox-card&gt;
-
-&lt;dotbox-card&gt;
-    &lt;div slot="header"&gt;Custom Header Content&lt;/div&gt;
-    This card has custom header content using the header slot.
-&lt;/dotbox-card&gt;</div>
-
-        <h3>Card Variants</h3>
-        <div class="card-grid">
-            <dotbox-card variant="primary" title="Primary Card" icon="fa-star">
-                This is a primary card with a title and icon.
-            </dotbox-card>
-            
-            <dotbox-card variant="success" title="Success Card" icon="fa-check">
-                This is a success card with a title and icon.
-            </dotbox-card>
-            
-            <dotbox-card variant="danger" title="Danger Card" icon="fa-warning">
-                This is a danger card with a title and icon.
-            </dotbox-card>
-            
-            <dotbox-card variant="info" title="Info Card" icon="fa-info-circle">
-                This is an info card with a title and icon.
-            </dotbox-card>
-        </div>
-        <div class="code-example">
-&lt;dotbox-card variant="primary" title="Primary Card" icon="fa-star"&gt;
-    This is a primary card with a title and icon.
-&lt;/dotbox-card&gt;
-
-&lt;dotbox-card variant="success" title="Success Card" icon="fa-check"&gt;
-    This is a success card with a title and icon.
-&lt;/dotbox-card&gt;
-
-&lt;dotbox-card variant="danger" title="Danger Card" icon="fa-warning"&gt;
-    This is a danger card with a title and icon.
-&lt;/dotbox-card&gt;
-
-&lt;dotbox-card variant="info" title="Info Card" icon="fa-info-circle"&gt;
-    This is an info card with a title and icon.
-&lt;/dotbox-card&gt;</div>
-
-        <h3>Card with Hover Effect</h3>
-        <div class="card-grid">
-            <dotbox-card variant="primary" title="Hover Effect Card" icon="fa-star" hoverEffect>
-                This card has the hover effect enabled. Move your mouse over it to see the effect.
-            </dotbox-card>
-            
-            <dotbox-card variant="success" title="Hover Effect Card" icon="fa-check" hoverEffect>
-                This card has the hover effect enabled. Move your mouse over it to see the effect.
-            </dotbox-card>
-        </div>
-        <div class="code-example">
-&lt;dotbox-card variant="primary" title="Hover Effect Card" icon="fa-star" hoverEffect&gt;
-    This card has the hover effect enabled. Move your mouse over it to see the effect.
-&lt;/dotbox-card&gt;
-
-&lt;dotbox-card variant="success" title="Hover Effect Card" icon="fa-check" hoverEffect&gt;
-    This card has the hover effect enabled. Move your mouse over it to see the effect.
-&lt;/dotbox-card&gt;</div>
-
-        <h3>Card with Footer</h3>
-        <div class="card-grid">
-            <dotbox-card title="Card with Footer" icon="fa-credit-card">
-                This card has a footer with buttons.
-                <div slot="footer">
-                    <dotbox-button variant="primary" size="small">Save</dotbox-button>
-                    <dotbox-button variant="danger" size="small">Cancel</dotbox-button>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-md-3 col-lg-2 d-md-block sidebar">
+                <div class="position-sticky">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#home">
+                                <i class="fa fa-home"></i> Home
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#button">
+                                <i class="fa fa-square"></i> Buttons
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#card">
+                                <i class="fa fa-credit-card"></i> Cards
+                            </a>
+                        </li>
+                        <!-- Add more components here as they are developed -->
+                    </ul>
                 </div>
-            </dotbox-card>
-            
-            <dotbox-card variant="info" title="Info Card with Footer" icon="fa-info-circle">
-                This is an info card with a footer.
-                <div slot="footer">
-                    <dotbox-button variant="info" size="small" icon="fa-arrow-right" iconPosition="after">Learn More</dotbox-button>
-                </div>
-            </dotbox-card>
-        </div>
-        <div class="code-example">
-&lt;dotbox-card title="Card with Footer" icon="fa-credit-card"&gt;
-    This card has a footer with buttons.
-    &lt;div slot="footer"&gt;
-        &lt;dotbox-button variant="primary" size="small"&gt;Save&lt;/dotbox-button&gt;
-        &lt;dotbox-button variant="danger" size="small"&gt;Cancel&lt;/dotbox-button&gt;
-    &lt;/div&gt;
-&lt;/dotbox-card&gt;
+            </div>
 
-&lt;dotbox-card variant="info" title="Info Card with Footer" icon="fa-info-circle"&gt;
-    This is an info card with a footer.
-    &lt;div slot="footer"&gt;
-        &lt;dotbox-button variant="info" size="small" icon="fa-arrow-right" iconPosition="after"&gt;Learn More&lt;/dotbox-button&gt;
-    &lt;/div&gt;
-&lt;/dotbox-card&gt;</div>
+            <!-- Main content -->
+            <main class="col-md-9 ml-sm-auto col-lg-10 px-md-4 main-content">
+                <!-- Home Section -->
+                <section id="home" class="component-section">
+                    <!-- Content will be loaded dynamically -->
+                </section>
+
+                <!-- Button Section -->
+                <section id="button" class="component-section">
+                    <!-- Content will be loaded dynamically -->
+                </section>
+
+                <!-- Card Section -->
+                <section id="card" class="component-section">
+                    <!-- Content will be loaded dynamically -->
+                </section>
+            </main>
+        </div>
     </div>
 
-    <footer class="bg-dark text-white mt-5 p-4">
+    <footer class="footer">
         <div class="container">
             <p class="mb-0">Dotbox Components - A reusable web component library</p>
         </div>
     </footer>
+
+    <!-- Bootstrap JS for navbar toggle -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html> 
