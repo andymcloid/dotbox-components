@@ -47,6 +47,13 @@
   border-radius: 0.25rem;
 }
 
+/* Button press effect */
+.btn-press-effect:active:not(.disabled):not([disabled]) {
+  transform: translateY(1px);
+  box-shadow: 0 0 0 rgba(0, 0, 0, 0.1) !important;
+  filter: brightness(0.95);
+}
+
 /* Button variants */
 .btn-primary {
   color: #fff;

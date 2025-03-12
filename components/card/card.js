@@ -7,6 +7,7 @@ import { DotboxBaseComponent } from '../base/base-component.js';
  * @prop {String} variant - Card variant (primary, success, danger, info, default)
  * @prop {String} title - Card title
  * @prop {String} icon - FontAwesome icon name for the card header (e.g., 'fa-info-circle')
+ * @prop {Boolean} hoverEffect - Whether to show a shadow effect on hover
  * 
  * @csspart card - The card element
  * @csspart header - The card header
@@ -22,7 +23,8 @@ export class DotboxCard extends DotboxBaseComponent {
     return {
       variant: { type: String },
       title: { type: String },
-      icon: { type: String }
+      icon: { type: String },
+      hoverEffect: { type: Boolean }
     };
   }
 
@@ -43,6 +45,7 @@ export class DotboxCard extends DotboxBaseComponent {
     this.variant = 'default';
     this.title = '';
     this.icon = '';
+    this.hoverEffect = false; // Hover effect is off by default
   }
 
   connectedCallback() {
@@ -53,7 +56,7 @@ export class DotboxCard extends DotboxBaseComponent {
   }
 
   render() {
-    const cardClasses = `card ${this.variant ? `card-${this.variant}` : ''} ${this._noTransitions ? 'no-transitions' : ''}`;
+    const cardClasses = `card ${this.variant ? `card-${this.variant}` : ''} ${this._noTransitions ? 'no-transitions' : ''} ${this.hoverEffect ? 'hover-effect' : ''}`;
     
     return html`
       <div class="${cardClasses}" part="card">

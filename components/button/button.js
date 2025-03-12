@@ -7,7 +7,7 @@ import { DotboxBaseComponent } from '../base/base-component.js';
  * @prop {String} variant - Button variant (primary, success, danger, info, default)
  * @prop {String} size - Button size (small, default, large)
  * @prop {String} icon - FontAwesome icon name (e.g., 'fa-arrow-right')
- * @prop {String} iconPosition - Position of the icon (before, after)
+ * @prop {String} iconPosition - Position of the icon (before, after). Defaults to "after".
  * @prop {Boolean} animated - Whether the icon should be animated
  * @prop {String} animationType - Type of animation (spin, pulse)
  * @prop {Boolean} disabled - Whether the button is disabled
@@ -116,7 +116,7 @@ export class DotboxButton extends DotboxBaseComponent {
   }
 
   _getButtonClasses() {
-    const classes = ['btn', 'dotbox-interactive'];
+    const classes = ['btn', 'dotbox-interactive', 'btn-press-effect'];
     
     // Add no-transitions class if needed
     if (this._noTransitions) {
