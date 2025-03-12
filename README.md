@@ -9,6 +9,7 @@ A reusable web component library with stylish buttons, cards, and more.
 - Flexible card components with optional hover effects
 - Modal and non-modal dialog components
 - Versatile input components with label positioning, icons, and validation
+- Customizable notification components with stacking behavior and positioning options
 - FontAwesome icon integration
 - Fully customizable via CSS parts and properties
 
@@ -31,6 +32,7 @@ import 'dotbox-components/button';
 import 'dotbox-components/card';
 import 'dotbox-components/dialog';
 import 'dotbox-components/input';
+import 'dotbox-components/notification';
 ```
 
 ### HTML
@@ -69,6 +71,25 @@ import 'dotbox-components/input';
 <dotbox-input label="Password" type="password" icon="fa-lock" placeholder="Enter password"></dotbox-input>
 <dotbox-input label="Description" multiline="true" rows="4" placeholder="Enter description"></dotbox-input>
 
+<!-- Notification examples -->
+<script>
+  // Show a success notification
+  DotboxNotification.show({
+    title: 'Success!',
+    message: 'Operation completed successfully',
+    variant: 'success'
+  });
+  
+  // Show a notification with custom position and stacking
+  DotboxNotification.show({
+    title: 'Information',
+    message: 'This notification appears at the bottom-right',
+    variant: 'info',
+    position: 'bottom-right',
+    stacking: true
+  });
+</script>
+
 <script>
   document.getElementById('open-dialog').addEventListener('click', () => {
     document.getElementById('my-dialog').show();
@@ -100,6 +121,7 @@ For more granular control, you can include CSS for specific components:
 <link rel="stylesheet" href="node_modules/dotbox-components/dist/css/card/card.css">
 <link rel="stylesheet" href="node_modules/dotbox-components/dist/css/dialog/dialog.css">
 <link rel="stylesheet" href="node_modules/dotbox-components/dist/css/input/input.css">
+<link rel="stylesheet" href="node_modules/dotbox-components/dist/css/notification/notification.css">
 ```
 
 ## Development
@@ -138,6 +160,7 @@ dotbox-components/
 │   ├── card/             # Card component
 │   ├── dialog/           # Dialog component
 │   ├── input/            # Input component
+│   ├── notification/     # Notification component
 │   └── index.js          # Main entry point
 ├── dist/                 # Built files
 │   ├── css/              # Individual CSS files
@@ -149,7 +172,8 @@ dotbox-components/
 │   │   ├── button.html   # Button component content
 │   │   ├── card.html     # Card component content
 │   │   ├── dialog.html   # Dialog component content
-│   │   └── input.html    # Input component content
+│   │   ├── input.html    # Input component content
+│   │   └── notification.html # Notification component content
 │   └── index.html        # Main kitchensink page with dynamic loading
 ├── examples/             # Usage examples
 ├── server.js             # Development server

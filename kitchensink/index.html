@@ -191,24 +191,6 @@
                 testDialog.textContent = 'This is a test dialog';
                 document.body.appendChild(testDialog);
                 console.log('Test dialog created:', testDialog);
-                
-                // Create a test button
-                const testButton = document.createElement('dotbox-button');
-                testButton.id = 'test-dialog-button';
-                testButton.textContent = 'Open Test Dialog';
-                testButton.variant = 'primary';
-                testButton.style.position = 'fixed';
-                testButton.style.bottom = '20px';
-                testButton.style.right = '20px';
-                testButton.style.zIndex = '9999';
-                document.body.appendChild(testButton);
-                
-                // Add event listener
-                testButton.addEventListener('click', () => {
-                    console.log('Test button clicked');
-                    testDialog.show();
-                });
-                console.log('Test button created and event listener added');
             }, 500);
             
             // Setup navigation
@@ -317,6 +299,9 @@
                     } else if (componentId === 'input') {
                         // Initialize input event listeners
                         initializeInputListeners();
+                    } else if (componentId === 'notification') {
+                        // Initialize notification event listeners
+                        initializeNotificationListeners();
                     }
                 })
                 .catch(error => {
@@ -499,6 +484,284 @@
                 }
             });
         }
+
+        // Function to initialize notification event listeners
+        function initializeNotificationListeners() {
+            console.log('Initializing notification event listeners');
+            
+            // Basic usage
+            document.getElementById('show-default-notification')?.addEventListener('click', () => {
+                DotboxNotification.show({
+                    title: 'Default Notification',
+                    message: 'This is a default notification',
+                    variant: 'default'
+                }).then(() => {
+                    console.log('Default notification shown');
+                }).catch(error => {
+                    console.error('Error showing default notification:', error);
+                });
+            });
+            
+            document.getElementById('show-success-notification')?.addEventListener('click', () => {
+                DotboxNotification.show({
+                    title: 'Success!',
+                    message: 'Operation completed successfully',
+                    variant: 'success'
+                }).then(() => {
+                    console.log('Success notification shown');
+                }).catch(error => {
+                    console.error('Error showing success notification:', error);
+                });
+            });
+            
+            document.getElementById('show-warning-notification')?.addEventListener('click', () => {
+                DotboxNotification.show({
+                    title: 'Warning',
+                    message: 'Please check your input',
+                    variant: 'warning'
+                }).then(() => {
+                    console.log('Warning notification shown');
+                }).catch(error => {
+                    console.error('Error showing warning notification:', error);
+                });
+            });
+            
+            document.getElementById('show-danger-notification')?.addEventListener('click', () => {
+                DotboxNotification.show({
+                    title: 'Error',
+                    message: 'Something went wrong',
+                    variant: 'danger'
+                }).then(() => {
+                    console.log('Danger notification shown');
+                }).catch(error => {
+                    console.error('Error showing danger notification:', error);
+                });
+            });
+            
+            document.getElementById('show-info-notification')?.addEventListener('click', () => {
+                DotboxNotification.show({
+                    title: 'Information',
+                    message: 'Here is some information',
+                    variant: 'info'
+                }).then(() => {
+                    console.log('Info notification shown');
+                }).catch(error => {
+                    console.error('Error showing info notification:', error);
+                });
+            });
+            
+            // Positions
+            document.getElementById('show-top-right')?.addEventListener('click', () => {
+                DotboxNotification.show({
+                    title: 'Top Right',
+                    message: 'This notification appears at the top-right',
+                    position: 'top-right',
+                    variant: 'info'
+                }).then(() => {
+                    console.log('Top right notification shown');
+                }).catch(error => {
+                    console.error('Error showing top right notification:', error);
+                });
+            });
+            
+            document.getElementById('show-top-left')?.addEventListener('click', () => {
+                DotboxNotification.show({
+                    title: 'Top Left',
+                    message: 'This notification appears at the top-left',
+                    position: 'top-left',
+                    variant: 'info'
+                }).then(() => {
+                    console.log('Top left notification shown');
+                }).catch(error => {
+                    console.error('Error showing top left notification:', error);
+                });
+            });
+            
+            document.getElementById('show-bottom-right')?.addEventListener('click', () => {
+                DotboxNotification.show({
+                    title: 'Bottom Right',
+                    message: 'This notification appears at the bottom-right',
+                    position: 'bottom-right',
+                    variant: 'info'
+                }).then(() => {
+                    console.log('Bottom right notification shown');
+                }).catch(error => {
+                    console.error('Error showing bottom right notification:', error);
+                });
+            });
+            
+            document.getElementById('show-bottom-left')?.addEventListener('click', () => {
+                DotboxNotification.show({
+                    title: 'Bottom Left',
+                    message: 'This notification appears at the bottom-left',
+                    position: 'bottom-left',
+                    variant: 'info'
+                }).then(() => {
+                    console.log('Bottom left notification shown');
+                }).catch(error => {
+                    console.error('Error showing bottom left notification:', error);
+                });
+            });
+            
+            document.getElementById('show-top-center')?.addEventListener('click', () => {
+                DotboxNotification.show({
+                    title: 'Top Center',
+                    message: 'This notification appears at the top-center',
+                    position: 'top-center',
+                    variant: 'info'
+                }).then(() => {
+                    console.log('Top center notification shown');
+                }).catch(error => {
+                    console.error('Error showing top center notification:', error);
+                });
+            });
+            
+            document.getElementById('show-bottom-center')?.addEventListener('click', () => {
+                DotboxNotification.show({
+                    title: 'Bottom Center',
+                    message: 'This notification appears at the bottom-center',
+                    position: 'bottom-center',
+                    variant: 'info'
+                }).then(() => {
+                    console.log('Bottom center notification shown');
+                }).catch(error => {
+                    console.error('Error showing bottom center notification:', error);
+                });
+            });
+            
+            // Stacking behavior
+            document.getElementById('show-stacking')?.addEventListener('click', () => {
+                DotboxNotification.show({
+                    title: 'First Notification',
+                    message: 'This is the first notification',
+                    variant: 'info',
+                    stacking: true
+                }).then(() => {
+                    console.log('First notification shown');
+                }).catch(error => {
+                    console.error('Error showing first notification:', error);
+                });
+                
+                setTimeout(() => {
+                    DotboxNotification.show({
+                        title: 'Second Notification',
+                        message: 'This is the second notification',
+                        variant: 'success',
+                        stacking: true
+                    }).then(() => {
+                        console.log('Second notification shown');
+                    }).catch(error => {
+                        console.error('Error showing second notification:', error);
+                    });
+                }, 500);
+                
+                setTimeout(() => {
+                    DotboxNotification.show({
+                        title: 'Third Notification',
+                        message: 'This is the third notification',
+                        variant: 'warning',
+                        stacking: true
+                    }).then(() => {
+                        console.log('Third notification shown');
+                    }).catch(error => {
+                        console.error('Error showing third notification:', error);
+                    });
+                }, 1000);
+            });
+            
+            document.getElementById('show-non-stacking')?.addEventListener('click', () => {
+                DotboxNotification.show({
+                    title: 'First Notification',
+                    message: 'This will be replaced',
+                    variant: 'info',
+                    stacking: false
+                }).then(() => {
+                    console.log('First notification shown');
+                }).catch(error => {
+                    console.error('Error showing first notification:', error);
+                });
+                
+                setTimeout(() => {
+                    DotboxNotification.show({
+                        title: 'Second Notification',
+                        message: 'This replaces the first one',
+                        variant: 'success',
+                        stacking: false
+                    }).then(() => {
+                        console.log('Second notification shown');
+                    }).catch(error => {
+                        console.error('Error showing second notification:', error);
+                    });
+                }, 1000);
+                
+                setTimeout(() => {
+                    DotboxNotification.show({
+                        title: 'Third Notification',
+                        message: 'This replaces the second one',
+                        variant: 'warning',
+                        stacking: false
+                    }).then(() => {
+                        console.log('Third notification shown');
+                    }).catch(error => {
+                        console.error('Error showing third notification:', error);
+                    });
+                }, 2000);
+            });
+            
+            // Duration
+            document.getElementById('show-auto-close')?.addEventListener('click', () => {
+                DotboxNotification.show({
+                    title: 'Auto-close',
+                    message: 'This notification will close after 5 seconds',
+                    duration: 5000, // 5 seconds
+                    variant: 'info'
+                }).then(() => {
+                    console.log('Auto-close notification shown');
+                }).catch(error => {
+                    console.error('Error showing auto-close notification:', error);
+                });
+            });
+            
+            document.getElementById('show-no-auto-close')?.addEventListener('click', () => {
+                DotboxNotification.show({
+                    title: 'No Auto-close',
+                    message: 'This notification will stay until manually closed',
+                    duration: 0, // No auto-close
+                    variant: 'info'
+                }).then(() => {
+                    console.log('No auto-close notification shown');
+                }).catch(error => {
+                    console.error('Error showing no auto-close notification:', error);
+                });
+            });
+            
+            // Icons
+            document.getElementById('show-custom-icon')?.addEventListener('click', () => {
+                DotboxNotification.show({
+                    title: 'Custom Icon',
+                    message: 'This notification has a custom icon',
+                    icon: 'fa-star',
+                    variant: 'info'
+                }).then(() => {
+                    console.log('Custom icon notification shown');
+                }).catch(error => {
+                    console.error('Error showing custom icon notification:', error);
+                });
+            });
+            
+            document.getElementById('show-no-icon')?.addEventListener('click', () => {
+                DotboxNotification.show({
+                    title: 'No Icon',
+                    message: 'This notification has no icon',
+                    icon: '', // Empty string to override default icon
+                    variant: 'info'
+                }).then(() => {
+                    console.log('No icon notification shown');
+                }).catch(error => {
+                    console.error('Error showing no icon notification:', error);
+                });
+            });
+        }
     </script>
 </head>
 <body>
@@ -551,6 +814,11 @@
                                 <i class="fa fa-keyboard-o"></i> Inputs
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#notification">
+                                <i class="fa fa-bell"></i> Notifications
+                            </a>
+                        </li>
                         <!-- Add more components here as they are developed -->
                     </ul>
                 </div>
@@ -580,6 +848,11 @@
 
                 <!-- Input Section -->
                 <section id="input" class="component-section">
+                    <!-- Content will be loaded dynamically -->
+                </section>
+                
+                <!-- Notification Section -->
+                <section id="notification" class="component-section">
                     <!-- Content will be loaded dynamically -->
                 </section>
             </main>

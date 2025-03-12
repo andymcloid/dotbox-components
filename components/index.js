@@ -73,7 +73,8 @@ export { DotboxButton } from './button/button.js';
 export { DotboxCard } from './card/card.js';
 export { DotboxDialog } from './dialog/dialog.js';
 export { DotboxInput } from './input/input.js';
-console.log('Components exported: DotboxButton, DotboxCard, DotboxDialog, DotboxInput');
+export { DotboxNotification } from './notification/notification.js';
+console.log('Components exported: DotboxButton, DotboxCard, DotboxDialog, DotboxInput, DotboxNotification');
 
 // Export base components for extension
 export { DotboxBaseComponent } from './base/base-component.js';

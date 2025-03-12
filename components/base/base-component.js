@@ -7,6 +7,9 @@ import { LitElement, css } from 'lit';
  * @abstract
  */
 export class DotboxBaseComponent extends LitElement {
+  // Static flag to track if FontAwesome has been loaded
+  static fontAwesomeLoaded = false;
+  
   static get properties() {
     return {
       _noTransitions: { type: Boolean, state: true }
@@ -66,6 +69,12 @@ export class DotboxBaseComponent extends LitElement {
         return;
       }
       
+      // Check if we've already loaded FontAwesome in another component
+      if (DotboxBaseComponent.fontAwesomeLoaded) {
+        console.log('FontAwesome already loaded globally, skipping');
+        return;
+      }
+      
       console.log('Loading FontAwesome directly into shadow DOM');
       const linkElem = document.createElement('link');
       linkElem.rel = 'stylesheet';
@@ -73,6 +82,7 @@ export class DotboxBaseComponent extends LitElement {
       
       linkElem.addEventListener('load', () => {
         console.log('FontAwesome loaded successfully in shadow DOM');
+        DotboxBaseComponent.fontAwesomeLoaded = true;
         
         // Add a test element to verify FontAwesome is working
         const testElem = document.createElement('span');
