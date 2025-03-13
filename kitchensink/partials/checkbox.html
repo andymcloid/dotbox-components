@@ -1,0 +1,495 @@
+<div class="container py-4">
+    <h1>Checkbox Component</h1>
+    <p class="lead">
+        The Checkbox component provides a versatile way to create checkboxes, radio buttons, and toggle switches with consistent styling and behavior.
+    </p>
+
+    <h2 class="mt-5">Basic Usage</h2>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Regular Checkboxes</h5>
+                    <div class="mb-3">
+                        <dotbox-checkbox label="Default checkbox"></dotbox-checkbox>
+                    </div>
+                    <div class="mb-3">
+                        <dotbox-checkbox label="Checked checkbox" checked></dotbox-checkbox>
+                    </div>
+                    <div class="mb-3">
+                        <dotbox-checkbox label="Disabled checkbox" disabled></dotbox-checkbox>
+                    </div>
+                    <div class="mb-3">
+                        <dotbox-checkbox label="Disabled checked checkbox" checked disabled></dotbox-checkbox>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <pre><code class="language-html">&lt;dotbox-checkbox label="Default checkbox"&gt;&lt;/dotbox-checkbox&gt;
+&lt;dotbox-checkbox label="Checked checkbox" checked&gt;&lt;/dotbox-checkbox&gt;
+&lt;dotbox-checkbox label="Disabled checkbox" disabled&gt;&lt;/dotbox-checkbox&gt;
+&lt;dotbox-checkbox label="Disabled checked checkbox" checked disabled&gt;&lt;/dotbox-checkbox&gt;</code></pre>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Radio Buttons</h5>
+                    <div class="mb-3">
+                        <dotbox-checkbox type="radio" name="radio-group" label="Radio option 1" value="option1"></dotbox-checkbox>
+                    </div>
+                    <div class="mb-3">
+                        <dotbox-checkbox type="radio" name="radio-group" label="Radio option 2" value="option2" checked></dotbox-checkbox>
+                    </div>
+                    <div class="mb-3">
+                        <dotbox-checkbox type="radio" name="radio-group" label="Radio option 3" value="option3"></dotbox-checkbox>
+                    </div>
+                    <div class="mb-3">
+                        <dotbox-checkbox type="radio" name="radio-group" label="Disabled radio option" value="option4" disabled></dotbox-checkbox>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <pre><code class="language-html">&lt;dotbox-checkbox type="radio" name="radio-group" label="Radio option 1" value="option1"&gt;&lt;/dotbox-checkbox&gt;
+&lt;dotbox-checkbox type="radio" name="radio-group" label="Radio option 2" value="option2" checked&gt;&lt;/dotbox-checkbox&gt;
+&lt;dotbox-checkbox type="radio" name="radio-group" label="Radio option 3" value="option3"&gt;&lt;/dotbox-checkbox&gt;
+&lt;dotbox-checkbox type="radio" name="radio-group" label="Disabled radio option" value="option4" disabled&gt;&lt;/dotbox-checkbox&gt;</code></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Toggle Switches</h5>
+                    <div class="mb-3">
+                        <dotbox-checkbox type="toggle" label="Default toggle"></dotbox-checkbox>
+                    </div>
+                    <div class="mb-3">
+                        <dotbox-checkbox type="toggle" label="Checked toggle" checked></dotbox-checkbox>
+                    </div>
+                    <div class="mb-3">
+                        <dotbox-checkbox type="toggle" label="Disabled toggle" disabled></dotbox-checkbox>
+                    </div>
+                    <div class="mb-3">
+                        <dotbox-checkbox type="toggle" label="Disabled checked toggle" checked disabled></dotbox-checkbox>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <pre><code class="language-html">&lt;dotbox-checkbox type="toggle" label="Default toggle"&gt;&lt;/dotbox-checkbox&gt;
+&lt;dotbox-checkbox type="toggle" label="Checked toggle" checked&gt;&lt;/dotbox-checkbox&gt;
+&lt;dotbox-checkbox type="toggle" label="Disabled toggle" disabled&gt;&lt;/dotbox-checkbox&gt;
+&lt;dotbox-checkbox type="toggle" label="Disabled checked toggle" checked disabled&gt;&lt;/dotbox-checkbox&gt;</code></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h2 class="mt-5">Variants</h2>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Checkbox Variants</h5>
+                    <div class="mb-3">
+                        <dotbox-checkbox variant="primary" label="Primary" checked></dotbox-checkbox>
+                    </div>
+                    <div class="mb-3">
+                        <dotbox-checkbox variant="success" label="Success" checked></dotbox-checkbox>
+                    </div>
+                    <div class="mb-3">
+                        <dotbox-checkbox variant="danger" label="Danger" checked></dotbox-checkbox>
+                    </div>
+                    <div class="mb-3">
+                        <dotbox-checkbox variant="info" label="Info" checked></dotbox-checkbox>
+                    </div>
+                    <div class="mb-3">
+                        <dotbox-checkbox variant="default" label="Default" checked></dotbox-checkbox>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <pre><code class="language-html">&lt;dotbox-checkbox variant="primary" label="Primary" checked&gt;&lt;/dotbox-checkbox&gt;
+&lt;dotbox-checkbox variant="success" label="Success" checked&gt;&lt;/dotbox-checkbox&gt;
+&lt;dotbox-checkbox variant="danger" label="Danger" checked&gt;&lt;/dotbox-checkbox&gt;
+&lt;dotbox-checkbox variant="info" label="Info" checked&gt;&lt;/dotbox-checkbox&gt;
+&lt;dotbox-checkbox variant="default" label="Default" checked&gt;&lt;/dotbox-checkbox&gt;</code></pre>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Radio Variants</h5>
+                    <div class="mb-3">
+                        <dotbox-checkbox type="radio" name="radio-variant" variant="primary" label="Primary" checked></dotbox-checkbox>
+                    </div>
+                    <div class="mb-3">
+                        <dotbox-checkbox type="radio" name="radio-variant" variant="success" label="Success"></dotbox-checkbox>
+                    </div>
+                    <div class="mb-3">
+                        <dotbox-checkbox type="radio" name="radio-variant" variant="danger" label="Danger"></dotbox-checkbox>
+                    </div>
+                    <div class="mb-3">
+                        <dotbox-checkbox type="radio" name="radio-variant" variant="info" label="Info"></dotbox-checkbox>
+                    </div>
+                    <div class="mb-3">
+                        <dotbox-checkbox type="radio" name="radio-variant" variant="default" label="Default"></dotbox-checkbox>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <pre><code class="language-html">&lt;dotbox-checkbox type="radio" name="radio-variant" variant="primary" label="Primary" checked&gt;&lt;/dotbox-checkbox&gt;
+&lt;dotbox-checkbox type="radio" name="radio-variant" variant="success" label="Success"&gt;&lt;/dotbox-checkbox&gt;
+&lt;dotbox-checkbox type="radio" name="radio-variant" variant="danger" label="Danger"&gt;&lt;/dotbox-checkbox&gt;
+&lt;dotbox-checkbox type="radio" name="radio-variant" variant="info" label="Info"&gt;&lt;/dotbox-checkbox&gt;
+&lt;dotbox-checkbox type="radio" name="radio-variant" variant="default" label="Default"&gt;&lt;/dotbox-checkbox&gt;</code></pre>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Toggle Variants</h5>
+                    <div class="mb-3">
+                        <dotbox-checkbox type="toggle" variant="primary" label="Primary" checked></dotbox-checkbox>
+                    </div>
+                    <div class="mb-3">
+                        <dotbox-checkbox type="toggle" variant="success" label="Success" checked></dotbox-checkbox>
+                    </div>
+                    <div class="mb-3">
+                        <dotbox-checkbox type="toggle" variant="danger" label="Danger" checked></dotbox-checkbox>
+                    </div>
+                    <div class="mb-3">
+                        <dotbox-checkbox type="toggle" variant="info" label="Info" checked></dotbox-checkbox>
+                    </div>
+                    <div class="mb-3">
+                        <dotbox-checkbox type="toggle" variant="default" label="Default" checked></dotbox-checkbox>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <pre><code class="language-html">&lt;dotbox-checkbox type="toggle" variant="primary" label="Primary" checked&gt;&lt;/dotbox-checkbox&gt;
+&lt;dotbox-checkbox type="toggle" variant="success" label="Success" checked&gt;&lt;/dotbox-checkbox&gt;
+&lt;dotbox-checkbox type="toggle" variant="danger" label="Danger" checked&gt;&lt;/dotbox-checkbox&gt;
+&lt;dotbox-checkbox type="toggle" variant="info" label="Info" checked&gt;&lt;/dotbox-checkbox&gt;
+&lt;dotbox-checkbox type="toggle" variant="default" label="Default" checked&gt;&lt;/dotbox-checkbox&gt;</code></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h2 class="mt-5">Sizes</h2>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Checkbox Sizes</h5>
+                    <div class="mb-3">
+                        <dotbox-checkbox size="small" label="Small checkbox" checked></dotbox-checkbox>
+                    </div>
+                    <div class="mb-3">
+                        <dotbox-checkbox label="Default checkbox" checked></dotbox-checkbox>
+                    </div>
+                    <div class="mb-3">
+                        <dotbox-checkbox size="large" label="Large checkbox" checked></dotbox-checkbox>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <pre><code class="language-html">&lt;dotbox-checkbox size="small" label="Small checkbox" checked&gt;&lt;/dotbox-checkbox&gt;
+&lt;dotbox-checkbox label="Default checkbox" checked&gt;&lt;/dotbox-checkbox&gt;
+&lt;dotbox-checkbox size="large" label="Large checkbox" checked&gt;&lt;/dotbox-checkbox&gt;</code></pre>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Radio Sizes</h5>
+                    <div class="mb-3">
+                        <dotbox-checkbox type="radio" name="radio-size" size="small" label="Small radio" checked></dotbox-checkbox>
+                    </div>
+                    <div class="mb-3">
+                        <dotbox-checkbox type="radio" name="radio-size" label="Default radio"></dotbox-checkbox>
+                    </div>
+                    <div class="mb-3">
+                        <dotbox-checkbox type="radio" name="radio-size" size="large" label="Large radio"></dotbox-checkbox>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <pre><code class="language-html">&lt;dotbox-checkbox type="radio" name="radio-size" size="small" label="Small radio" checked&gt;&lt;/dotbox-checkbox&gt;
+&lt;dotbox-checkbox type="radio" name="radio-size" label="Default radio"&gt;&lt;/dotbox-checkbox&gt;
+&lt;dotbox-checkbox type="radio" name="radio-size" size="large" label="Large radio"&gt;&lt;/dotbox-checkbox&gt;</code></pre>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Toggle Sizes</h5>
+                    <div class="mb-3">
+                        <dotbox-checkbox type="toggle" size="small" label="Small toggle" checked></dotbox-checkbox>
+                    </div>
+                    <div class="mb-3">
+                        <dotbox-checkbox type="toggle" label="Default toggle" checked></dotbox-checkbox>
+                    </div>
+                    <div class="mb-3">
+                        <dotbox-checkbox type="toggle" size="large" label="Large toggle" checked></dotbox-checkbox>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <pre><code class="language-html">&lt;dotbox-checkbox type="toggle" size="small" label="Small toggle" checked&gt;&lt;/dotbox-checkbox&gt;
+&lt;dotbox-checkbox type="toggle" label="Default toggle" checked&gt;&lt;/dotbox-checkbox&gt;
+&lt;dotbox-checkbox type="toggle" size="large" label="Large toggle" checked&gt;&lt;/dotbox-checkbox&gt;</code></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h2 class="mt-5">Label Positioning</h2>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Label on Right (Default)</h5>
+                    <div class="mb-3">
+                        <dotbox-checkbox label="Checkbox with label on right"></dotbox-checkbox>
+                    </div>
+                    <div class="mb-3">
+                        <dotbox-checkbox type="radio" name="label-pos-right" label="Radio with label on right"></dotbox-checkbox>
+                    </div>
+                    <div class="mb-3">
+                        <dotbox-checkbox type="toggle" label="Toggle with label on right"></dotbox-checkbox>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <pre><code class="language-html">&lt;dotbox-checkbox label="Checkbox with label on right"&gt;&lt;/dotbox-checkbox&gt;
+&lt;dotbox-checkbox type="radio" name="label-pos-right" label="Radio with label on right"&gt;&lt;/dotbox-checkbox&gt;
+&lt;dotbox-checkbox type="toggle" label="Toggle with label on right"&gt;&lt;/dotbox-checkbox&gt;</code></pre>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Label on Left</h5>
+                    <div class="mb-3">
+                        <dotbox-checkbox labelPosition="left" label="Checkbox with label on left"></dotbox-checkbox>
+                    </div>
+                    <div class="mb-3">
+                        <dotbox-checkbox type="radio" name="label-pos-left" labelPosition="left" label="Radio with label on left"></dotbox-checkbox>
+                    </div>
+                    <div class="mb-3">
+                        <dotbox-checkbox type="toggle" labelPosition="left" label="Toggle with label on left"></dotbox-checkbox>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <pre><code class="language-html">&lt;dotbox-checkbox labelPosition="left" label="Checkbox with label on left"&gt;&lt;/dotbox-checkbox&gt;
+&lt;dotbox-checkbox type="radio" name="label-pos-left" labelPosition="left" label="Radio with label on left"&gt;&lt;/dotbox-checkbox&gt;
+&lt;dotbox-checkbox type="toggle" labelPosition="left" label="Toggle with label on left"&gt;&lt;/dotbox-checkbox&gt;</code></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h2 class="mt-5">Required Inputs</h2>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Required Inputs</h5>
+                    <div class="mb-3">
+                        <dotbox-checkbox required label="Required checkbox"></dotbox-checkbox>
+                    </div>
+                    <div class="mb-3">
+                        <dotbox-checkbox type="radio" name="required-radio" required label="Required radio"></dotbox-checkbox>
+                    </div>
+                    <div class="mb-3">
+                        <dotbox-checkbox type="toggle" required label="Required toggle"></dotbox-checkbox>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <pre><code class="language-html">&lt;dotbox-checkbox required label="Required checkbox"&gt;&lt;/dotbox-checkbox&gt;
+&lt;dotbox-checkbox type="radio" name="required-radio" required label="Required radio"&gt;&lt;/dotbox-checkbox&gt;
+&lt;dotbox-checkbox type="toggle" required label="Required toggle"&gt;&lt;/dotbox-checkbox&gt;</code></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h2 class="mt-5">Event Handling</h2>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Change Event</h5>
+                    <div class="mb-3">
+                        <dotbox-checkbox id="event-demo-checkbox" label="Click me"></dotbox-checkbox>
+                    </div>
+                    <div id="event-demo-output" class="alert alert-info">
+                        Change event will be shown here
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <pre><code class="language-html">&lt;dotbox-checkbox id="event-demo-checkbox" label="Click me"&gt;&lt;/dotbox-checkbox&gt;
+&lt;div id="event-demo-output" class="alert alert-info"&gt;
+    Change event will be shown here
+&lt;/div&gt;
+
+&lt;script&gt;
+    document.getElementById('event-demo-checkbox').addEventListener('change', (e) => {
+        document.getElementById('event-demo-output').textContent = 
+            `Change event: checked = ${e.detail.checked}, value = ${e.detail.value}`;
+    });
+&lt;/script&gt;</code></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h2 class="mt-5">API Reference</h2>
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Properties</h5>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Type</th>
+                        <th>Default</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>type</td>
+                        <td>String</td>
+                        <td>"checkbox"</td>
+                        <td>Type of input: "checkbox", "radio", or "toggle"</td>
+                    </tr>
+                    <tr>
+                        <td>name</td>
+                        <td>String</td>
+                        <td>""</td>
+                        <td>Name attribute for the input</td>
+                    </tr>
+                    <tr>
+                        <td>value</td>
+                        <td>String</td>
+                        <td>""</td>
+                        <td>Value attribute for the input</td>
+                    </tr>
+                    <tr>
+                        <td>checked</td>
+                        <td>Boolean</td>
+                        <td>false</td>
+                        <td>Whether the input is checked</td>
+                    </tr>
+                    <tr>
+                        <td>disabled</td>
+                        <td>Boolean</td>
+                        <td>false</td>
+                        <td>Whether the input is disabled</td>
+                    </tr>
+                    <tr>
+                        <td>variant</td>
+                        <td>String</td>
+                        <td>"primary"</td>
+                        <td>Visual variant: "primary", "success", "danger", "info", "default"</td>
+                    </tr>
+                    <tr>
+                        <td>size</td>
+                        <td>String</td>
+                        <td>""</td>
+                        <td>Size of the input: "small", "", "large"</td>
+                    </tr>
+                    <tr>
+                        <td>label</td>
+                        <td>String</td>
+                        <td>""</td>
+                        <td>Label text for the input</td>
+                    </tr>
+                    <tr>
+                        <td>labelPosition</td>
+                        <td>String</td>
+                        <td>"right"</td>
+                        <td>Position of the label: "left" or "right"</td>
+                    </tr>
+                    <tr>
+                        <td>required</td>
+                        <td>Boolean</td>
+                        <td>false</td>
+                        <td>Whether the input is required</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h5 class="card-title mt-4">Events</h5>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Detail</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>change</td>
+                        <td>{ checked: Boolean, value: String }</td>
+                        <td>Dispatched when the input value changes</td>
+                    </tr>
+                    <tr>
+                        <td>input</td>
+                        <td>{ checked: Boolean, value: String }</td>
+                        <td>Dispatched when the input value is being changed</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h5 class="card-title mt-4">CSS Parts</h5>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>container</td>
+                        <td>The container element</td>
+                    </tr>
+                    <tr>
+                        <td>input</td>
+                        <td>The input element</td>
+                    </tr>
+                    <tr>
+                        <td>label</td>
+                        <td>The label element</td>
+                    </tr>
+                    <tr>
+                        <td>toggle</td>
+                        <td>The toggle switch element (only for toggle type)</td>
+                    </tr>
+                    <tr>
+                        <td>slider</td>
+                        <td>The slider element (only for toggle type)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // Set up event demo
+        const checkbox = document.getElementById('event-demo-checkbox');
+        const output = document.getElementById('event-demo-output');
+        
+        if (checkbox && output) {
+            checkbox.addEventListener('change', (e) => {
+                output.textContent = `Change event: checked = ${e.detail.checked}, value = ${e.detail.value}`;
+            });
+        }
+    });
+</script> 

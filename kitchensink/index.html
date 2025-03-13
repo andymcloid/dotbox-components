@@ -302,6 +302,9 @@
                     } else if (componentId === 'notification') {
                         // Initialize notification event listeners
                         initializeNotificationListeners();
+                    } else if (componentId === 'checkbox') {
+                        // Initialize checkbox event listeners
+                        initializeCheckboxListeners();
                     }
                 })
                 .catch(error => {
@@ -762,6 +765,21 @@
                 });
             });
         }
+
+        // Function to initialize checkbox event listeners
+        function initializeCheckboxListeners() {
+            console.log('Initializing checkbox event listeners');
+            
+            // Event demo checkbox
+            const eventDemoCheckbox = document.getElementById('event-demo-checkbox');
+            const eventDemoOutput = document.getElementById('event-demo-output');
+            
+            if (eventDemoCheckbox && eventDemoOutput) {
+                eventDemoCheckbox.addEventListener('change', (e) => {
+                    eventDemoOutput.textContent = `Change event: checked = ${e.detail.checked}, value = ${e.detail.value}`;
+                });
+            }
+        }
     </script>
 </head>
 <body>
@@ -819,6 +837,11 @@
                                 <i class="fa fa-bell"></i> Notifications
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#checkbox">
+                                <i class="fa fa-check-square-o"></i> Checkboxes
+                            </a>
+                        </li>
                         <!-- Add more components here as they are developed -->
                     </ul>
                 </div>
@@ -853,6 +876,11 @@
                 
                 <!-- Notification Section -->
                 <section id="notification" class="component-section">
+                    <!-- Content will be loaded dynamically -->
+                </section>
+                
+                <!-- Checkbox Section -->
+                <section id="checkbox" class="component-section">
                     <!-- Content will be loaded dynamically -->
                 </section>
             </main>

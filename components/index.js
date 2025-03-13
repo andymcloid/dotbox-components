@@ -82,7 +82,8 @@ const preloadComponentStyles = () => {
     '/components/card/card.css',
     '/components/dialog/dialog.css',
     '/components/input/input.css',
-    '/components/notification/notification.css'
+    '/components/notification/notification.css',
+    '/components/checkbox/checkbox.css'
   ];
   
   // Load each CSS file as a link element
@@ -133,7 +134,8 @@ export { DotboxCard } from './card/card.js';
 export { DotboxDialog } from './dialog/dialog.js';
 export { DotboxInput } from './input/input.js';
 export { DotboxNotification } from './notification/notification.js';
-console.log('Components exported: DotboxButton, DotboxCard, DotboxDialog, DotboxInput, DotboxNotification');
+export { DotboxCheckbox } from './checkbox/checkbox.js';
+console.log('Components exported: DotboxButton, DotboxCard, DotboxDialog, DotboxInput, DotboxNotification, DotboxCheckbox');
 
 // Export base components for extension
 export { DotboxBaseComponent } from './base/base-component.js';
