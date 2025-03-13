@@ -1,0 +1,207 @@
+{
+  "name": "dotbox-dropdown",
+  "description": "A versatile dropdown/select component with support for single and multiple selection, searchable options, custom tags, and more.",
+  "properties": [
+    {
+      "name": "label",
+      "type": "String",
+      "description": "Dropdown label text",
+      "default": ""
+    },
+    {
+      "name": "labelPosition",
+      "type": "String",
+      "description": "Position of the label (before, above)",
+      "default": "above",
+      "options": ["before", "above"]
+    },
+    {
+      "name": "disabled",
+      "type": "Boolean",
+      "description": "Whether the dropdown is disabled",
+      "default": false
+    },
+    {
+      "name": "placeholder",
+      "type": "String",
+      "description": "Placeholder text when no option is selected",
+      "default": "Select an option"
+    },
+    {
+      "name": "options",
+      "type": "Array",
+      "description": "Array of options to display in the dropdown. Can be an array of strings or objects with value and label properties",
+      "default": []
+    },
+    {
+      "name": "value",
+      "type": "String|Array",
+      "description": "Selected value(s). For multiple selection, this will be an array",
+      "default": ""
+    },
+    {
+      "name": "required",
+      "type": "Boolean",
+      "description": "Whether selection is required",
+      "default": false
+    },
+    {
+      "name": "multiple",
+      "type": "Boolean",
+      "description": "Whether multiple selection is allowed",
+      "default": false
+    },
+    {
+      "name": "searchable",
+      "type": "Boolean",
+      "description": "Whether the dropdown allows typing to search/filter options",
+      "default": false
+    },
+    {
+      "name": "creatable",
+      "type": "Boolean",
+      "description": "Whether new options can be created by typing",
+      "default": false
+    },
+    {
+      "name": "useCheckboxes",
+      "type": "Boolean",
+      "description": "Whether to show checkboxes for multiple selection",
+      "default": false
+    },
+    {
+      "name": "useTags",
+      "type": "Boolean",
+      "description": "Whether to show selected items as tags/chips",
+      "default": false
+    },
+    {
+      "name": "errorMessage",
+      "type": "String",
+      "description": "Custom error message for validation",
+      "default": ""
+    }
+  ],
+  "cssparts": [
+    {
+      "name": "container",
+      "description": "The container element"
+    },
+    {
+      "name": "label",
+      "description": "The label element"
+    },
+    {
+      "name": "dropdown-wrapper",
+      "description": "The wrapper around the dropdown"
+    },
+    {
+      "name": "dropdown-input",
+      "description": "The input element for the dropdown"
+    },
+    {
+      "name": "dropdown-menu",
+      "description": "The dropdown menu"
+    },
+    {
+      "name": "dropdown-item",
+      "description": "The dropdown item"
+    },
+    {
+      "name": "dropdown-checkbox",
+      "description": "The checkbox for multiple selection"
+    },
+    {
+      "name": "dropdown-tag",
+      "description": "The tag/chip for selected items"
+    },
+    {
+      "name": "error",
+      "description": "The error message element"
+    }
+  ],
+  "slots": [],
+  "events": [
+    {
+      "name": "change",
+      "description": "Dispatched when the selection changes",
+      "detail": {
+        "value": "The new selected value(s)"
+      }
+    },
+    {
+      "name": "input",
+      "description": "Dispatched when the input value changes (for searchable dropdowns)",
+      "detail": {
+        "value": "The current input value"
+      }
+    },
+    {
+      "name": "focus",
+      "description": "Dispatched when the dropdown gains focus"
+    },
+    {
+      "name": "blur",
+      "description": "Dispatched when the dropdown loses focus"
+    },
+    {
+      "name": "tag-removed",
+      "description": "Dispatched when a tag is removed",
+      "detail": {
+        "value": "The value of the removed tag"
+      }
+    }
+  ],
+  "examples": [
+    {
+      "name": "Basic Dropdown",
+      "description": "A simple dropdown with string options",
+      "code": "<dotbox-dropdown label=\"Select a fruit\" options='[\"Apple\", \"Banana\", \"Orange\", \"Mango\"]'></dotbox-dropdown>"
+    },
+    {
+      "name": "Dropdown with Object Options",
+      "description": "A dropdown with object options containing value and label",
+      "code": "<dotbox-dropdown label=\"Select a country\" options='[{\"value\": \"us\", \"label\": \"United States\"}, {\"value\": \"ca\", \"label\": \"Canada\"}, {\"value\": \"mx\", \"label\": \"Mexico\"}]'></dotbox-dropdown>"
+    },
+    {
+      "name": "Required Dropdown",
+      "description": "A dropdown with required validation",
+      "code": "<dotbox-dropdown label=\"Required field\" required options='[\"Option 1\", \"Option 2\", \"Option 3\"]' errorMessage=\"Please select an option\"></dotbox-dropdown>"
+    },
+    {
+      "name": "Searchable Dropdown",
+      "description": "A dropdown that allows searching/filtering options",
+      "code": "<dotbox-dropdown label=\"Search countries\" searchable options='[\"United States\", \"Canada\", \"Mexico\", \"United Kingdom\", \"France\", \"Germany\", \"Italy\", \"Spain\", \"Portugal\", \"Brazil\", \"Argentina\", \"Chile\", \"Australia\", \"New Zealand\", \"Japan\", \"China\", \"India\"]'></dotbox-dropdown>"
+    },
+    {
+      "name": "Multiple Selection",
+      "description": "A dropdown that allows selecting multiple options",
+      "code": "<dotbox-dropdown label=\"Select multiple fruits\" multiple options='[\"Apple\", \"Banana\", \"Orange\", \"Mango\", \"Pineapple\", \"Strawberry\", \"Blueberry\"]'></dotbox-dropdown>"
+    },
+    {
+      "name": "Multiple Selection with Checkboxes",
+      "description": "A dropdown with multiple selection using checkboxes",
+      "code": "<dotbox-dropdown label=\"Select multiple items\" multiple useCheckboxes options='[\"Item 1\", \"Item 2\", \"Item 3\", \"Item 4\", \"Item 5\"]'></dotbox-dropdown>"
+    },
+    {
+      "name": "Multiple Selection with Tags",
+      "description": "A dropdown with multiple selection showing selected items as tags",
+      "code": "<dotbox-dropdown label=\"Select tags\" multiple useTags options='[\"JavaScript\", \"HTML\", \"CSS\", \"React\", \"Vue\", \"Angular\", \"Node.js\", \"Python\", \"Java\", \"C#\"]'></dotbox-dropdown>"
+    },
+    {
+      "name": "Creatable Dropdown",
+      "description": "A dropdown that allows creating new options",
+      "code": "<dotbox-dropdown label=\"Add skills\" searchable creatable options='[\"JavaScript\", \"HTML\", \"CSS\", \"React\", \"Vue\", \"Angular\"]'></dotbox-dropdown>"
+    },
+    {
+      "name": "Disabled Dropdown",
+      "description": "A disabled dropdown",
+      "code": "<dotbox-dropdown label=\"Disabled dropdown\" disabled options='[\"Option 1\", \"Option 2\", \"Option 3\"]'></dotbox-dropdown>"
+    },
+    {
+      "name": "Label Position",
+      "description": "A dropdown with label positioned before the input",
+      "code": "<dotbox-dropdown label=\"Country\" labelPosition=\"before\" options='[\"United States\", \"Canada\", \"Mexico\"]'></dotbox-dropdown>"
+    }
+  ]
+} 

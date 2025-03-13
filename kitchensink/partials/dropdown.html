@@ -1,0 +1,250 @@
+<kitchensink-component-header title="Dropdown Component" component="dropdown"></kitchensink-component-header>
+
+<p class="lead">The <code>dotbox-dropdown</code> component provides a versatile dropdown/select with support for single and multiple selection, searchable options, custom tags, and more.</p>
+
+<h2>Examples</h2>
+
+<h3>Basic Usage</h3>
+<div class="component-group">
+    <dotbox-dropdown 
+        label="Select a fruit" 
+        options='["Apple", "Banana", "Orange", "Mango"]'>
+    </dotbox-dropdown>
+    
+    <dotbox-dropdown 
+        label="Select a country" 
+        options='[{"value": "us", "label": "United States"}, {"value": "ca", "label": "Canada"}, {"value": "mx", "label": "Mexico"}]'>
+    </dotbox-dropdown>
+</div>
+
+<kitchensink-code-block language="HTML">
+&lt;dotbox-dropdown 
+    label="Select a fruit" 
+    options='["Apple", "Banana", "Orange", "Mango"]'&gt;
+&lt;/dotbox-dropdown&gt;
+
+&lt;dotbox-dropdown 
+    label="Select a country" 
+    options='[{"value": "us", "label": "United States"}, {"value": "ca", "label": "Canada"}, {"value": "mx", "label": "Mexico"}]'&gt;
+&lt;/dotbox-dropdown&gt;
+</kitchensink-code-block>
+
+<h3>Label Positions</h3>
+<div class="component-group">
+    <dotbox-dropdown 
+        label="Label Above" 
+        labelPosition="above" 
+        options='["Option 1", "Option 2", "Option 3"]' 
+        style="width: 300px;">
+    </dotbox-dropdown>
+    
+    <dotbox-dropdown 
+        label="Label Before" 
+        labelPosition="before" 
+        options='["Option 1", "Option 2", "Option 3"]' 
+        style="width: 300px;">
+    </dotbox-dropdown>
+    
+    <div style="width: 100%; margin-top: 10px;">
+        <dotbox-dropdown 
+            label="A longer label before the dropdown" 
+            labelPosition="before" 
+            options='["Option 1", "Option 2", "Option 3"]' 
+            style="width: 100%;">
+        </dotbox-dropdown>
+    </div>
+</div>
+
+<kitchensink-code-block language="HTML">
+&lt;dotbox-dropdown 
+    label="Label Above" 
+    labelPosition="above" 
+    options='["Option 1", "Option 2", "Option 3"]'&gt;
+&lt;/dotbox-dropdown&gt;
+
+&lt;dotbox-dropdown 
+    label="Label Before" 
+    labelPosition="before" 
+    options='["Option 1", "Option 2", "Option 3"]'&gt;
+&lt;/dotbox-dropdown&gt;
+
+&lt;dotbox-dropdown 
+    label="A longer label before the dropdown" 
+    labelPosition="before" 
+    options='["Option 1", "Option 2", "Option 3"]'&gt;
+&lt;/dotbox-dropdown&gt;
+</kitchensink-code-block>
+
+<h3>Searchable Dropdown</h3>
+<div class="component-group">
+    <dotbox-dropdown 
+        label="Search countries" 
+        searchable 
+        options='["United States", "Canada", "Mexico", "United Kingdom", "France", "Germany", "Italy", "Spain", "Portugal", "Brazil", "Argentina", "Chile", "Australia", "New Zealand", "Japan", "China", "India"]'>
+    </dotbox-dropdown>
+</div>
+
+<kitchensink-code-block language="HTML">
+&lt;dotbox-dropdown 
+    label="Search countries" 
+    searchable 
+    options='["United States", "Canada", "Mexico", "United Kingdom", "France", "Germany", "Italy", "Spain", "Portugal", "Brazil", "Argentina", "Chile", "Australia", "New Zealand", "Japan", "China", "India"]'&gt;
+&lt;/dotbox-dropdown&gt;
+</kitchensink-code-block>
+
+<h3>Multiple Selection</h3>
+<div class="component-group">
+    <dotbox-dropdown 
+        label="Select multiple fruits" 
+        multiple 
+        options='["Apple", "Banana", "Orange", "Mango", "Pineapple", "Strawberry", "Blueberry"]'>
+    </dotbox-dropdown>
+</div>
+
+<kitchensink-code-block language="HTML">
+&lt;dotbox-dropdown 
+    label="Select multiple fruits" 
+    multiple 
+    options='["Apple", "Banana", "Orange", "Mango", "Pineapple", "Strawberry", "Blueberry"]'&gt;
+&lt;/dotbox-dropdown&gt;
+</kitchensink-code-block>
+
+<h3>Multiple Selection with Checkboxes</h3>
+<div class="component-group">
+    <dotbox-dropdown 
+        label="Select multiple items" 
+        multiple 
+        useCheckboxes 
+        options='["Item 1", "Item 2", "Item 3", "Item 4", "Item 5"]'>
+    </dotbox-dropdown>
+</div>
+
+<kitchensink-code-block language="HTML">
+&lt;dotbox-dropdown 
+    label="Select multiple items" 
+    multiple 
+    useCheckboxes 
+    options='["Item 1", "Item 2", "Item 3", "Item 4", "Item 5"]'&gt;
+&lt;/dotbox-dropdown&gt;
+</kitchensink-code-block>
+
+<h3>Multiple Selection with Tags</h3>
+<div class="component-group">
+    <dotbox-dropdown 
+        label="Select tags" 
+        multiple 
+        useTags 
+        options='["JavaScript", "HTML", "CSS", "React", "Vue", "Angular", "Node.js", "Python", "Java", "C#"]'>
+    </dotbox-dropdown>
+</div>
+
+<kitchensink-code-block language="HTML">
+&lt;dotbox-dropdown 
+    label="Select tags" 
+    multiple 
+    useTags 
+    options='["JavaScript", "HTML", "CSS", "React", "Vue", "Angular", "Node.js", "Python", "Java", "C#"]'&gt;
+&lt;/dotbox-dropdown&gt;
+</kitchensink-code-block>
+
+<h3>Searchable Multiple Selection with Tags</h3>
+<div class="component-group">
+    <dotbox-dropdown 
+        label="Search and select multiple tags" 
+        multiple 
+        searchable 
+        useTags 
+        options='["JavaScript", "HTML", "CSS", "React", "Vue", "Angular", "Node.js", "Python", "Java", "C#", "PHP", "Ruby", "Swift", "Kotlin", "Go", "Rust", "TypeScript", "Scala", "Perl", "Haskell"]'>
+    </dotbox-dropdown>
+</div>
+
+<kitchensink-code-block language="HTML">
+&lt;dotbox-dropdown 
+    label="Search and select multiple tags" 
+    multiple 
+    searchable 
+    useTags 
+    options='["JavaScript", "HTML", "CSS", "React", "Vue", "Angular", "Node.js", "Python", "Java", "C#", "PHP", "Ruby", "Swift", "Kotlin", "Go", "Rust", "TypeScript", "Scala", "Perl", "Haskell"]'&gt;
+&lt;/dotbox-dropdown&gt;
+</kitchensink-code-block>
+
+<h3>Creatable Dropdown</h3>
+<div class="component-group">
+    <dotbox-dropdown 
+        label="Add skills (type to create new)" 
+        searchable 
+        creatable 
+        options='["JavaScript", "HTML", "CSS", "React", "Vue", "Angular"]'>
+    </dotbox-dropdown>
+</div>
+
+<kitchensink-code-block language="HTML">
+&lt;dotbox-dropdown 
+    label="Add skills (type to create new)" 
+    searchable 
+    creatable 
+    options='["JavaScript", "HTML", "CSS", "React", "Vue", "Angular"]'&gt;
+&lt;/dotbox-dropdown&gt;
+</kitchensink-code-block>
+
+<h3>Creatable Multiple Selection with Tags</h3>
+<div class="component-group">
+    <dotbox-dropdown 
+        label="Add multiple skills (type to create new)" 
+        multiple 
+        searchable 
+        creatable 
+        useTags 
+        options='["JavaScript", "HTML", "CSS", "React", "Vue", "Angular"]'>
+    </dotbox-dropdown>
+</div>
+
+<kitchensink-code-block language="HTML">
+&lt;dotbox-dropdown 
+    label="Add multiple skills (type to create new)" 
+    multiple 
+    searchable 
+    creatable 
+    useTags 
+    options='["JavaScript", "HTML", "CSS", "React", "Vue", "Angular"]'&gt;
+&lt;/dotbox-dropdown&gt;
+</kitchensink-code-block>
+
+<h3>Required Validation</h3>
+<div class="component-group">
+    <dotbox-dropdown 
+        label="Required field" 
+        required 
+        options='["Option 1", "Option 2", "Option 3"]' 
+        errorMessage="Please select an option">
+    </dotbox-dropdown>
+</div>
+
+<kitchensink-code-block language="HTML">
+&lt;dotbox-dropdown 
+    label="Required field" 
+    required 
+    options='["Option 1", "Option 2", "Option 3"]' 
+    errorMessage="Please select an option"&gt;
+&lt;/dotbox-dropdown&gt;
+</kitchensink-code-block>
+
+<h3>Disabled Dropdown</h3>
+<div class="component-group">
+    <dotbox-dropdown 
+        label="Disabled dropdown" 
+        disabled 
+        options='["Option 1", "Option 2", "Option 3"]'>
+    </dotbox-dropdown>
+</div>
+
+<kitchensink-code-block language="HTML">
+&lt;dotbox-dropdown 
+    label="Disabled dropdown" 
+    disabled 
+    options='["Option 1", "Option 2", "Option 3"]'&gt;
+&lt;/dotbox-dropdown&gt;
+</kitchensink-code-block>
+
+<h2>API Documentation</h2>
+<kitchensink-component-docs component="dropdown"></kitchensink-component-docs> 

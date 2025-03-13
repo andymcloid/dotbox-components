@@ -5,7 +5,8 @@ import {
   initializeDialogListeners,
   initializeInputListeners,
   initializeNotificationListeners,
-  initializeCheckboxListeners
+  initializeCheckboxListeners,
+  initializeDropdownListeners
 } from './component-event-handlers.js';
 
 /**
@@ -134,6 +135,9 @@ export class KitchensinkComponentsSections extends LitElement {
     } else if (componentId === 'checkbox') {
       // Initialize checkbox event listeners
       initializeCheckboxListeners();
+    } else if (componentId === 'dropdown') {
+      // Initialize dropdown event listeners
+      initializeDropdownListeners();
     }
   }
   

@@ -83,7 +83,8 @@ const preloadComponentStyles = () => {
     '/components/dialog/dialog.css',
     '/components/input/input.css',
     '/components/notification/notification.css',
-    '/components/checkbox/checkbox.css'
+    '/components/checkbox/checkbox.css',
+    '/components/dropdown/dropdown.css'
   ];
   
   // Load each CSS file as a link element
@@ -129,13 +130,25 @@ export const getComponentStyles = (componentName) => {
 loadDependencies();
 
 // Export all components
-export { DotboxButton } from './button/button.js';
-export { DotboxCard } from './card/card.js';
-export { DotboxDialog } from './dialog/dialog.js';
-export { DotboxInput } from './input/input.js';
-export { DotboxNotification } from './notification/notification.js';
-export { DotboxCheckbox } from './checkbox/checkbox.js';
-console.log('Components exported: DotboxButton, DotboxCard, DotboxDialog, DotboxInput, DotboxNotification, DotboxCheckbox');
+import { DotboxButton } from './button/button.js';
+import { DotboxCard } from './card/card.js';
+import { DotboxDialog } from './dialog/dialog.js';
+import { DotboxInput } from './input/input.js';
+import { DotboxNotification } from './notification/notification.js';
+import { DotboxCheckbox } from './checkbox/checkbox.js';
+import { DotboxDropdown } from './dropdown/dropdown.js';
+
+export {
+  DotboxButton,
+  DotboxCard,
+  DotboxDialog,
+  DotboxInput,
+  DotboxNotification,
+  DotboxCheckbox,
+  DotboxDropdown
+};
+
+console.log('Components exported: DotboxButton, DotboxCard, DotboxDialog, DotboxInput, DotboxNotification, DotboxCheckbox, DotboxDropdown');
 
 // Export base components for extension
 export { DotboxBaseComponent } from './base/base-component.js';

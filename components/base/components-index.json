@@ -47,6 +47,14 @@
       "description": "Versatile checkbox, radio button, and toggle switch components",
       "path": "components/checkbox/checkbox.js",
       "docPath": "components/checkbox/checkbox.json"
+    },
+    {
+      "name": "dropdown",
+      "displayName": "Dropdowns",
+      "icon": "fa-caret-square-o-down",
+      "description": "Versatile dropdown/select component with support for single and multiple selection, searchable options, and tags",
+      "path": "components/dropdown/dropdown.js",
+      "docPath": "components/dropdown/dropdown.json"
     }
   ]
 } 

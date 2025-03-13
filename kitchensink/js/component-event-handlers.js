@@ -469,10 +469,39 @@ function initializeCheckboxListeners() {
     }
 }
 
+/**
+ * Initialize dropdown event listeners
+ */
+function initializeDropdownListeners() {
+  console.log('Initializing dropdown event listeners');
+  
+  // Get all dropdown examples
+  const dropdowns = document.querySelectorAll('dotbox-dropdown');
+  
+  // Add event listeners to each dropdown
+  dropdowns.forEach(dropdown => {
+    // Listen for change events
+    dropdown.addEventListener('change', (e) => {
+      console.log('Dropdown change event:', e.detail);
+    });
+    
+    // Listen for input events (for searchable dropdowns)
+    dropdown.addEventListener('input', (e) => {
+      console.log('Dropdown input event:', e.detail);
+    });
+    
+    // Listen for tag-removed events
+    dropdown.addEventListener('tag-removed', (e) => {
+      console.log('Dropdown tag removed event:', e.detail);
+    });
+  });
+}
+
 // Export the functions
 export {
     initializeDialogListeners,
     initializeInputListeners,
     initializeNotificationListeners,
-    initializeCheckboxListeners
+    initializeCheckboxListeners,
+    initializeDropdownListeners
 }; 
