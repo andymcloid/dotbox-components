@@ -86,14 +86,80 @@ export class KitchensinkCodeBlock extends LitElement {
         background-color: #5a6377;
       }
       
-      /* Syntax highlighting colors */
-      .tag { color: #e06c75; }
-      .attr { color: #d19a66; }
-      .string { color: #98c379; }
-      .comment { color: #7f848e; font-style: italic; }
-      .keyword { color: #c678dd; }
-      .function { color: #61afef; }
-      .number { color: #d19a66; }
+      /* Syntax highlighting colors - One Dark theme */
+      .token.comment,
+      .token.prolog,
+      .token.doctype,
+      .token.cdata {
+        color: #7f848e;
+        font-style: italic;
+      }
+      
+      .token.punctuation {
+        color: #abb2bf;
+      }
+      
+      .token.selector,
+      .token.tag {
+        color: #e06c75;
+      }
+      
+      .token.property,
+      .token.boolean,
+      .token.number,
+      .token.constant,
+      .token.symbol {
+        color: #d19a66;
+      }
+      
+      .token.attr-name {
+        color: #d19a66;
+      }
+      
+      .token.string,
+      .token.char,
+      .token.attr-value {
+        color: #98c379;
+      }
+      
+      .token.operator {
+        color: #56b6c2;
+      }
+      
+      .token.entity,
+      .token.url,
+      .language-css .token.string,
+      .style .token.string {
+        color: #56b6c2;
+      }
+      
+      .token.atrule,
+      .token.keyword {
+        color: #c678dd;
+      }
+      
+      .token.function {
+        color: #61afef;
+      }
+      
+      .token.regex,
+      .token.important,
+      .token.variable {
+        color: #c678dd;
+      }
+      
+      .token.important,
+      .token.bold {
+        font-weight: bold;
+      }
+      
+      .token.italic {
+        font-style: italic;
+      }
+      
+      .token.entity {
+        cursor: help;
+      }
     `;
   }
 
@@ -103,6 +169,37 @@ export class KitchensinkCodeBlock extends LitElement {
     this.copyable = true;
     this._content = '';
     this.inline = false;
+    
+    // Load Prism.js dynamically
+    this._loadPrismJS();
+  }
+  
+  _loadPrismJS() {
+    // Check if Prism is already loaded
+    if (window.Prism) return;
+    
+    // Create script element for Prism core
+    const script = document.createElement('script');
+    script.src = 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js';
+    script.async = true;
+    
+    // Create link element for Prism CSS
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css';
+    
+    // Add elements to document head
+    document.head.appendChild(script);
+    document.head.appendChild(link);
+    
+    // Load additional language support
+    const languages = ['markup', 'css', 'javascript', 'bash'];
+    languages.forEach(lang => {
+      const langScript = document.createElement('script');
+      langScript.src = `https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-${lang}.min.js`;
+      langScript.async = true;
+      document.head.appendChild(langScript);
+    });
   }
 
   connectedCallback() {
@@ -189,6 +286,18 @@ export class KitchensinkCodeBlock extends LitElement {
     }
     return this.language.toUpperCase();
   }
+  
+  _getPrismLanguage(language) {
+    // Map our language codes to Prism's language identifiers
+    const languageMap = {
+      'HTML': 'markup',
+      'CSS': 'css',
+      'JS': 'javascript',
+      'SHELL': 'bash'
+    };
+    
+    return languageMap[language] || 'markup';
+  }
 
   _copyCode() {
     navigator.clipboard.writeText(this._content)
@@ -207,6 +316,30 @@ export class KitchensinkCodeBlock extends LitElement {
           copyBtn.textContent = 'Copy';
         }, 2000);
       });
+  }
+  
+  updated() {
+    // Apply syntax highlighting after the component has updated
+    if (window.Prism && this._content) {
+      const codeElement = this.shadowRoot.querySelector('.code-content');
+      if (codeElement) {
+        const language = this._detectLanguage(this._content);
+        const prismLanguage = this._getPrismLanguage(language);
+        
+        // Create a temporary pre and code elements for Prism to highlight
+        const tempPre = document.createElement('pre');
+        const tempCode = document.createElement('code');
+        tempCode.className = `language-${prismLanguage}`;
+        tempCode.textContent = this._content;
+        tempPre.appendChild(tempCode);
+        
+        // Let Prism do its magic
+        Prism.highlightElement(tempCode);
+        
+        // Replace the content with the highlighted HTML
+        codeElement.innerHTML = tempCode.innerHTML;
+      }
+    }
   }
 
   render() {
