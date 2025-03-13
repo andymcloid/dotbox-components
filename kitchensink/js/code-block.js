@@ -14,7 +14,8 @@ export class KitchensinkCodeBlock extends LitElement {
     return {
       language: { type: String },
       copyable: { type: Boolean },
-      _content: { type: String, state: true }
+      _content: { type: String, state: true },
+      inline: { type: Boolean, reflect: true }
     };
   }
 
@@ -28,15 +29,14 @@ export class KitchensinkCodeBlock extends LitElement {
       .code-block {
         position: relative;
         background-color: #282c34;
-        padding: 15px;
+        padding: 10px;
         padding-top: 25px;
         border-radius: 6px;
         font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
-        white-space: pre-wrap;
         color: #e6e6e6;
         font-size: 0.9rem;
         overflow-x: auto;
-        line-height: 1.5;
+        line-height: 1.4;
         box-shadow: 0 3px 6px rgba(0,0,0,0.16);
         border: 1px solid #1e2127;
       }
@@ -44,6 +44,13 @@ export class KitchensinkCodeBlock extends LitElement {
       .code-content {
         margin: 0;
         padding: 0;
+        white-space: pre-wrap;
+        display: block;
+      }
+      
+      :host([inline]) .code-content {
+        display: inline;
+        white-space: normal;
       }
       
       .code-label {
@@ -95,6 +102,7 @@ export class KitchensinkCodeBlock extends LitElement {
     this.language = 'HTML';
     this.copyable = true;
     this._content = '';
+    this.inline = false;
   }
 
   connectedCallback() {
@@ -111,7 +119,17 @@ export class KitchensinkCodeBlock extends LitElement {
     
     if (!rawContent) return;
     
-    // Process the content to remove excessive whitespace
+    // Check if this is likely an inline code block (no newlines)
+    this.inline = !rawContent.includes('\n');
+    
+    if (this.inline) {
+      // For inline content, just trim whitespace
+      this._content = rawContent.trim();
+      this.requestUpdate();
+      return;
+    }
+    
+    // Process the content to remove excessive whitespace for multi-line blocks
     // 1. Split by lines
     const lines = rawContent.split('\n');
     
