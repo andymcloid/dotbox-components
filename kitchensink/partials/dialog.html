@@ -40,7 +40,7 @@
     </div>
 </dotbox-dialog>
 
-<div class="code-example">
+<kitchensink-code-block language="HTML">
 &lt;dotbox-button variant="primary" id="open-dialog"&gt;Open Dialog&lt;/dotbox-button&gt;
 
 &lt;dotbox-dialog id="my-dialog" title="Dialog Title"&gt;
@@ -58,7 +58,8 @@
     document.getElementById('close-dialog').addEventListener('click', () => {
         document.getElementById('my-dialog').close();
     });
-&lt;/script&gt;</div>
+&lt;/script&gt;
+</kitchensink-code-block>
 
 <h3>Dialog Sizes</h3>
 <div class="component-group">
@@ -88,7 +89,7 @@
     </div>
 </dotbox-dialog>
 
-<div class="code-example">
+<kitchensink-code-block language="HTML">
 &lt;dotbox-dialog id="small-dialog" title="Small Dialog" size="small"&gt;
     This is a small dialog.
 &lt;/dotbox-dialog&gt;
@@ -99,7 +100,8 @@
 
 &lt;dotbox-dialog id="large-dialog" title="Large Dialog" size="large"&gt;
     This is a large dialog.
-&lt;/dotbox-dialog&gt;</div>
+&lt;/dotbox-dialog&gt;
+</kitchensink-code-block>
 
 <h3>Modal vs Non-Modal</h3>
 <div class="component-group">
@@ -121,14 +123,15 @@
     </div>
 </dotbox-dialog>
 
-<div class="code-example">
+<kitchensink-code-block language="HTML">
 &lt;dotbox-dialog id="modal-dialog" title="Modal Dialog" modal="true"&gt;
     This is a modal dialog. It has an overlay that prevents interaction with the background.
 &lt;/dotbox-dialog&gt;
 
 &lt;dotbox-dialog id="non-modal-dialog" title="Non-Modal Dialog" modal="false"&gt;
     This is a non-modal dialog. It doesn't have an overlay, allowing interaction with the background.
-&lt;/dotbox-dialog&gt;</div>
+&lt;/dotbox-dialog&gt;
+</kitchensink-code-block>
 
 <h3>Custom Header</h3>
 <div class="component-group">
@@ -147,7 +150,7 @@
     </div>
 </dotbox-dialog>
 
-<div class="code-example">
+<kitchensink-code-block language="HTML">
 &lt;dotbox-dialog id="custom-header-dialog"&gt;
     &lt;div slot="header" style="display: flex; align-items: center; width: 100%;"&gt;
         &lt;i class="fa fa-cog" style="margin-right: 10px;"&gt;&lt;/i&gt;
@@ -155,7 +158,8 @@
         &lt;dotbox-button variant="primary" size="small"&gt;Action&lt;/dotbox-button&gt;
     &lt;/div&gt;
     This dialog has a custom header with a button.
-&lt;/dotbox-dialog&gt;</div>
+&lt;/dotbox-dialog&gt;
+</kitchensink-code-block>
 
 <!-- Use the documentation renderer component -->
 <kitchensink-documentation-renderer component="dialog"></kitchensink-documentation-renderer> 

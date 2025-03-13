@@ -13,7 +13,7 @@
     <dotbox-button id="show-info-notification" variant="info">Info Notification</dotbox-button>
 </div>
 
-<div class="code-example">
+<kitchensink-code-block language="HTML">
 &lt;script&gt;
   // Show a default notification
   DotboxNotification.show({
@@ -49,7 +49,8 @@
     message: 'Here is some information',
     variant: 'info'
   });
-&lt;/script&gt;</div>
+&lt;/script&gt;
+</kitchensink-code-block>
 
 <h3>Positions</h3>
 <div class="component-group">
@@ -61,7 +62,7 @@
     <dotbox-button id="show-bottom-center">Bottom Center</dotbox-button>
 </div>
 
-<div class="code-example">
+<kitchensink-code-block language="HTML">
 &lt;script&gt;
   // Show notification at top-right (default)
   DotboxNotification.show({
@@ -104,7 +105,8 @@
     message: 'This notification appears at the bottom-center',
     position: 'bottom-center'
   });
-&lt;/script&gt;</div>
+&lt;/script&gt;
+</kitchensink-code-block>
 
 <h3>Stacking Behavior</h3>
 <div class="component-group">
@@ -112,7 +114,7 @@
     <dotbox-button id="show-non-stacking">Show Non-Stacking Notifications</dotbox-button>
 </div>
 
-<div class="code-example">
+<kitchensink-code-block language="HTML">
 &lt;script&gt;
   // Show stacking notifications
   function showStackingNotifications() {
@@ -169,7 +171,8 @@
       });
     }, 2000);
   }
-&lt;/script&gt;</div>
+&lt;/script&gt;
+</kitchensink-code-block>
 
 <h3>Duration</h3>
 <div class="component-group">
@@ -177,7 +180,7 @@
     <dotbox-button id="show-no-auto-close">No Auto-close</dotbox-button>
 </div>
 
-<div class="code-example">
+<kitchensink-code-block language="HTML">
 &lt;script&gt;
   // Show notification with auto-close
   DotboxNotification.show({
@@ -192,7 +195,8 @@
     message: 'This notification will stay until manually closed',
     duration: 0 // No auto-close
   });
-&lt;/script&gt;</div>
+&lt;/script&gt;
+</kitchensink-code-block>
 
 <h3>With Icons</h3>
 <div class="component-group">
@@ -200,7 +204,7 @@
     <dotbox-button id="show-no-icon">No Icon</dotbox-button>
 </div>
 
-<div class="code-example">
+<kitchensink-code-block language="HTML">
 &lt;script&gt;
   // Show notification with custom icon
   DotboxNotification.show({
@@ -215,7 +219,8 @@
     message: 'This notification has no icon',
     icon: '' // Empty string to override default icon
   });
-&lt;/script&gt;</div>
+&lt;/script&gt;
+</kitchensink-code-block>
 
 <!-- Use the documentation renderer component -->
 <kitchensink-documentation-renderer component="notification"></kitchensink-documentation-renderer>

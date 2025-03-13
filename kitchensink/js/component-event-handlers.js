@@ -5,72 +5,6 @@
  * These functions are called by the components-sections.js component after loading component content.
  */
 
-// Function to enhance code blocks with copy buttons and fix formatting
-function enhanceCodeBlocks() {
-    console.log('Enhancing code blocks');
-    
-    const codeBlocks = document.querySelectorAll('.code-example');
-    codeBlocks.forEach(block => {
-        // Fix the empty line at the beginning if it exists
-        if (block.innerHTML.startsWith('\n')) {
-            block.innerHTML = block.innerHTML.substring(1);
-        }
-        
-        // Add copy button
-        const copyBtn = document.createElement('button');
-        copyBtn.className = 'copy-btn';
-        copyBtn.textContent = 'Copy';
-        copyBtn.addEventListener('click', () => {
-            // Get text content without the button
-            const tempDiv = document.createElement('div');
-            tempDiv.innerHTML = block.innerHTML;
-            const copyBtn = tempDiv.querySelector('.copy-btn');
-            if (copyBtn) copyBtn.remove();
-            
-            // Get clean text content
-            const textToCopy = tempDiv.textContent.trim();
-            
-            navigator.clipboard.writeText(textToCopy)
-                .then(() => {
-                    copyBtn.textContent = 'Copied!';
-                    setTimeout(() => {
-                        copyBtn.textContent = 'Copy';
-                    }, 2000);
-                })
-                .catch(err => {
-                    console.error('Failed to copy: ', err);
-                    copyBtn.textContent = 'Failed';
-                    setTimeout(() => {
-                        copyBtn.textContent = 'Copy';
-                    }, 2000);
-                });
-        });
-        
-        block.appendChild(copyBtn);
-        
-        // Set language label based on content
-        let language = "HTML";
-        if (block.textContent.includes('import ') || 
-            block.textContent.includes('function ') || 
-            block.textContent.includes('const ') ||
-            block.textContent.includes('let ')) {
-            language = "JS";
-        } else if (block.textContent.includes('npm install')) {
-            language = "SHELL";
-        } else if (block.textContent.includes('{') && 
-                  block.textContent.includes('}') && 
-                  !block.textContent.includes('<')) {
-            language = "CSS";
-        }
-        
-        // Add language label
-        const label = document.createElement('span');
-        label.className = 'code-label';
-        label.textContent = language;
-        block.appendChild(label);
-    });
-}
-
 // Function to initialize dialog event listeners
 function initializeDialogListeners() {
     console.log('Initializing dialog event listeners');
@@ -537,7 +471,6 @@ function initializeCheckboxListeners() {
 
 // Export the functions
 export {
-    enhanceCodeBlocks,
     initializeDialogListeners,
     initializeInputListeners,
     initializeNotificationListeners,
