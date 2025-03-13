@@ -63,9 +63,6 @@ export class DotboxCheckbox extends DotboxBaseComponent {
     this.label = '';
     this.labelPosition = 'right';
     this.required = false;
-    
-    // Bound methods
-    this._handleRadioGroupChange = this._handleRadioGroupChange.bind(this);
   }
 
   connectedCallback() {
@@ -74,55 +71,28 @@ export class DotboxCheckbox extends DotboxBaseComponent {
     // Load component-specific CSS
     this.loadComponentStyles('checkbox');
     
-    // For radio buttons, add event listener to document for radio group changes
-    if (this.type === 'radio' && this.name) {
-      document.addEventListener('dotbox-radio-change', this._handleRadioGroupChange);
-    }
-    
-    // If this is a radio button and it's checked, notify other radio buttons
+    // If this is a radio button and it's checked, uncheck other radio buttons in the same group
     if (this.type === 'radio' && this.checked && this.name) {
-      this._notifyRadioGroupChange();
-    }
-  }
-  
-  disconnectedCallback() {
-    super.disconnectedCallback && super.disconnectedCallback();
-    
-    // Remove event listener when component is removed
-    if (this.type === 'radio') {
-      document.removeEventListener('dotbox-radio-change', this._handleRadioGroupChange);
+      this._uncheckOtherRadioButtons();
     }
   }
 
   updated(changedProperties) {
     super.updated && super.updated(changedProperties);
     
-    // If type changed to radio, add event listener
-    if (changedProperties.has('type')) {
-      if (this.type === 'radio') {
-        document.addEventListener('dotbox-radio-change', this._handleRadioGroupChange);
-        
-        // If it's also checked, notify other radio buttons
-        if (this.checked && this.name) {
-          this._notifyRadioGroupChange();
-        }
-      } else if (changedProperties.get('type') === 'radio') {
-        // If type changed from radio, remove event listener
-        document.removeEventListener('dotbox-radio-change', this._handleRadioGroupChange);
-      }
+    // If type changed to radio and it's checked, uncheck other radio buttons in the same group
+    if (changedProperties.has('type') && this.type === 'radio' && this.checked && this.name) {
+      this._uncheckOtherRadioButtons();
     }
     
-    // If name changed and it's a radio button
-    if (changedProperties.has('name') && this.type === 'radio') {
-      // If it's checked, notify other radio buttons with the new name
-      if (this.checked && this.name) {
-        this._notifyRadioGroupChange();
-      }
+    // If name changed and it's a radio button and it's checked, uncheck other radio buttons in the same group
+    if (changedProperties.has('name') && this.type === 'radio' && this.checked && this.name) {
+      this._uncheckOtherRadioButtons();
     }
     
-    // If checked changed to true for a radio button, notify other radio buttons
+    // If checked changed to true for a radio button, uncheck other radio buttons in the same group
     if (changedProperties.has('checked') && this.checked && this.type === 'radio' && this.name) {
-      this._notifyRadioGroupChange();
+      this._uncheckOtherRadioButtons();
     }
   }
 
@@ -252,14 +222,15 @@ export class DotboxCheckbox extends DotboxBaseComponent {
   }
 
   _handleChange(e) {
-    const wasChecked = this.checked;
+    // Update the checked state
     this.checked = e.target.checked;
     
-    // For radio buttons, notify other radio buttons in the same group
-    if (this.type === 'radio' && this.checked && !wasChecked && this.name) {
-      this._notifyRadioGroupChange();
+    // For radio buttons, uncheck other radio buttons in the same group
+    if (this.type === 'radio' && this.checked && this.name) {
+      this._uncheckOtherRadioButtons();
     }
     
+    // Dispatch a change event
     this.dispatchEvent(new CustomEvent('change', {
       detail: {
         checked: this.checked,
@@ -282,51 +253,28 @@ export class DotboxCheckbox extends DotboxBaseComponent {
   }
   
   /**
-   * Notify other radio buttons in the same group that this one is checked
+   * Uncheck all other radio buttons with the same name
    * @private
    */
-  _notifyRadioGroupChange() {
-    if (!this.name) return;
+  _uncheckOtherRadioButtons() {
+    if (!this.name || this.type !== 'radio') return;
     
-    // Create and dispatch a custom event
-    const event = new CustomEvent('dotbox-radio-change', {
-      bubbles: true,
-      composed: true,
-      detail: {
-        name: this.name,
-        value: this.value,
-        source: this
+    // Find all radio buttons with the same name
+    const radioButtons = document.querySelectorAll(`dotbox-checkbox[type="radio"][name="${this.name}"]`);
+    
+    // Uncheck all except this one
+    radioButtons.forEach(radio => {
+      if (radio !== this && radio.checked) {
+        // Set checked to false directly on the element
+        radio.checked = false;
+        
+        // Also update the internal input element if it exists
+        const inputElement = radio.shadowRoot?.querySelector('input[type="radio"]');
+        if (inputElement) {
+          inputElement.checked = false;
+        }
       }
     });
-    
-    document.dispatchEvent(event);
-  }
-  
-  /**
-   * Handle radio group change events
-   * @param {CustomEvent} e - The radio change event
-   * @private
-   */
-  _handleRadioGroupChange(e) {
-    // Only handle events for the same name
-    if (e.detail.name !== this.name || e.detail.source === this) {
-      return;
-    }
-    
-    // If this is not the source of the event and has the same name, uncheck it
-    if (this.checked) {
-      this.checked = false;
-      
-      // Dispatch a change event
-      this.dispatchEvent(new CustomEvent('change', {
-        detail: {
-          checked: false,
-          value: this.value
-        },
-        bubbles: true,
-        composed: true
-      }));
-    }
   }
 }
 

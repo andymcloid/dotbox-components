@@ -20,6 +20,7 @@
   position: absolute;
   margin-top: 0.2rem;
   margin-left: -1.5rem;
+  cursor: pointer;
 }
 
 .form-check-inline .form-check-input {
