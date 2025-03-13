@@ -284,14 +284,14 @@
 
 /* Focus styles */
 .form-check-input:focus {
-  border-color: #80bdff;
-  outline: 0;
+  outline: none;
   box-shadow: none;
+  border-color: #adb5bd;
 }
 
 /* Hover styles */
 .form-check-input:not(:disabled):hover {
-  border-color: #80bdff;
+  border-color: #adb5bd;
 }
 
 .toggle-slider:hover {
@@ -305,6 +305,7 @@
 /* Remove focus outline from toggle switch */
 .toggle-input:focus + .toggle-slider {
   box-shadow: none;
+  outline: none;
 }
 
 /* Animation for toggle switch */
