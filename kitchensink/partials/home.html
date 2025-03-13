@@ -4,8 +4,6 @@
     <h1 class="display-4">Dotbox Components <i class="fa fa-check-circle" style="color: green;"></i></h1>
     <p class="lead">A reusable web component library with stylish buttons and cards.</p>
     <hr class="my-4">
-    <p>This kitchen sink demonstrates all available components and their variations.</p>
-    <p><strong>FontAwesome Test:</strong> <i class="fa fa-star"></i> <i class="fa fa-heart"></i> <i class="fa fa-user"></i> <i class="fa fa-cog"></i></p>
     <p class="mt-4">
         <a class="btn btn-primary btn-lg component-link" href="#button" role="button">
             <i class="fa fa-arrow-right"></i> Explore Components
@@ -16,22 +14,31 @@
 <div class="row">
     <div class="col-md-6">
         <div class="card mb-4">
-            <div class="card-header">
+            <div class="card-header bg-primary text-white">
                 <i class="fa fa-info-circle"></i> Getting Started
             </div>
             <div class="card-body">
                 <p>To use Dotbox Components in your project:</p>
                 <ol>
-                    <li>Install the package: <code>npm install dotbox-components</code></li>
-                    <li>Import the components: <code>import 'dotbox-components';</code></li>
-                    <li>Use the components in your HTML: <code>&lt;dotbox-button&gt;Click Me&lt;/dotbox-button&gt;</code></li>
+                    <li>Install the package: 
+                        <div class="code-example">npm install dotbox-components</div>
+                    </li>
+                    <li>Import the components: 
+                        <div class="code-example">import 'dotbox-components';</div>
+                    </li>
+                    <li>Use the components in your HTML: 
+                        <div class="code-example">&lt;dotbox-button variant="primary"&gt;Click Me&lt;/dotbox-button&gt;</div>
+                    </li>
                 </ol>
+                <div class="alert alert-info mt-3">
+                    <i class="fa fa-lightbulb-o"></i> Tip: Check out the individual component pages for detailed usage examples.
+                </div>
             </div>
         </div>
     </div>
     <div class="col-md-6">
         <div class="card mb-4">
-            <div class="card-header">
+            <div class="card-header bg-success text-white">
                 <i class="fa fa-code"></i> Available Components
             </div>
             <div class="card-body">
@@ -44,19 +51,29 @@
 <div class="row mt-4">
     <div class="col-md-12">
         <div class="card">
-            <div class="card-header">
+            <div class="card-header bg-info text-white">
                 <i class="fa fa-lightbulb-o"></i> CSS Bundling for Production
             </div>
             <div class="card-body">
-                <p>For production use, you can include the bundled CSS file:</p>
-                <div class="code-example">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h5>Option 1: Include the bundled CSS file</h5>
+                        <p>For production use, you can include the bundled CSS file:</p>
+                        <div class="code-example">
 &lt;link rel="stylesheet" href="node_modules/dotbox-components/dist/dotbox-components.bundled.css"&gt;</div>
-                
-                <p>Or for more granular control, include CSS for specific components:</p>
-                <div class="code-example">
+                    </div>
+                    <div class="col-md-6">
+                        <h5>Option 2: Include CSS for specific components</h5>
+                        <p>For more granular control, include CSS for specific components:</p>
+                        <div class="code-example">
 &lt;link rel="stylesheet" href="node_modules/dotbox-components/dist/css/base/base-styles.css"&gt;
 &lt;link rel="stylesheet" href="node_modules/dotbox-components/dist/css/button/button.css"&gt;
 &lt;link rel="stylesheet" href="node_modules/dotbox-components/dist/css/card/card.css"&gt;</div>
+                    </div>
+                </div>
+                <div class="alert alert-warning mt-3">
+                    <i class="fa fa-exclamation-triangle"></i> Note: Make sure to include the base-styles.css file when using individual component CSS files.
+                </div>
             </div>
         </div>
     </div>

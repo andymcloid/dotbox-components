@@ -84,18 +84,60 @@ h3 {
 
 /* Code Examples */
 .code-example {
-    background-color: #f8f9fa;
+    position: relative;
+    background-color: #282c34;
     padding: 15px;
-    border-radius: 4px;
+    padding-top: 25px;
+    border-radius: 6px;
     margin-bottom: 20px;
-    font-family: monospace;
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
     white-space: pre-wrap;
-    border: 1px solid #e9ecef;
-    color: #212529;
+    color: #e6e6e6;
     font-size: 0.9rem;
     overflow-x: auto;
     line-height: 1.5;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16);
+    border: 1px solid #1e2127;
 }
+
+.code-example .code-label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #3d4350;
+    color: #e6e6e6;
+    padding: 2px 8px;
+    font-size: 0.7rem;
+    border-radius: 0 0 4px 0;
+}
+
+.code-example .copy-btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: #3d4350;
+    color: #e6e6e6;
+    border: none;
+    border-radius: 0 0 0 4px;
+    padding: 2px 8px;
+    font-size: 0.7rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.code-example .copy-btn:hover {
+    background-color: #4d5466;
+}
+
+.code-example .copy-btn:active {
+    background-color: #5a6377;
+}
+
+/* Syntax highlighting colors */
+.code-example .tag { color: #e06c75; }
+.code-example .attr { color: #d19a66; }
+.code-example .string { color: #98c379; }
+.code-example .comment { color: #7f848e; font-style: italic; }
 
 /* Navbar */
 .navbar {
@@ -137,6 +179,36 @@ h3 {
     padding: 20px 0;
     background-color: #343a40;
     color: white;
+    width: 100%;
+    text-align: center;
+    position: relative;
+    z-index: 100;
+}
+
+.footer .container {
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+@media (min-width: 768px) {
+    .footer .container {
+        max-width: 720px;
+    }
+}
+
+@media (min-width: 992px) {
+    .footer .container {
+        max-width: 960px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .footer .container {
+        max-width: 1140px;
+    }
 }
 
 /* Loading Indicator */
@@ -170,6 +242,9 @@ h3 {
 
 /* FontAwesome icons for kitchensink navigation */
 .fa-home:before { content: "\f015"; }
+.code-example::before {
+    content: none;
+}
 .fa-square:before { content: "\f0c8"; }
 .fa-credit-card:before { content: "\f09d"; }
 .fa-window-maximize:before { content: "\f2d0"; }

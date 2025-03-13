@@ -2,6 +2,7 @@ import { LitElement, html, css } from 'lit';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import { getAllComponents } from './components-registry.js';
 import {
+  enhanceCodeBlocks,
   initializeDialogListeners,
   initializeInputListeners,
   initializeNotificationListeners,
@@ -121,6 +122,9 @@ export class KitchensinkComponentsSections extends LitElement {
   }
   
   _initializeComponentListeners(componentId) {
+    // Enhance code blocks for all components
+    enhanceCodeBlocks();
+    
     // This would be called after the component content is loaded and rendered
     if (componentId === 'dialog') {
       // Initialize dialog event listeners
