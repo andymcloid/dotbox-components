@@ -130,7 +130,7 @@ For more granular control, you can include CSS for specific components:
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/dotbox-components.git
+git clone https://github.com/andymcloid/dotbox-components.git
 cd dotbox-components
 
 # Install dependencies
