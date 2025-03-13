@@ -1,0 +1,114 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Component Documentation Schema",
+  "description": "Schema for Dotbox component documentation files",
+  "type": "object",
+  "required": ["name", "description", "properties"],
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The name of the component (e.g., 'dotbox-button')"
+    },
+    "description": {
+      "type": "string",
+      "description": "A brief description of the component"
+    },
+    "properties": {
+      "type": "array",
+      "description": "List of component properties",
+      "items": {
+        "type": "object",
+        "required": ["name", "type", "description"],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The name of the property"
+          },
+          "type": {
+            "type": "string",
+            "description": "The type of the property (e.g., 'String', 'Boolean', 'Number')"
+          },
+          "default": {
+            "description": "The default value of the property"
+          },
+          "description": {
+            "type": "string",
+            "description": "A description of the property"
+          }
+        }
+      }
+    },
+    "cssParts": {
+      "type": "array",
+      "description": "List of CSS parts",
+      "items": {
+        "type": "object",
+        "required": ["name", "description"],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The name of the CSS part"
+          },
+          "description": {
+            "type": "string",
+            "description": "A description of the CSS part"
+          }
+        }
+      }
+    },
+    "slots": {
+      "type": "array",
+      "description": "List of slots",
+      "items": {
+        "type": "object",
+        "required": ["name", "description"],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The name of the slot (use 'default' for the default slot)"
+          },
+          "description": {
+            "type": "string",
+            "description": "A description of the slot"
+          }
+        }
+      }
+    },
+    "events": {
+      "type": "array",
+      "description": "List of events",
+      "items": {
+        "type": "object",
+        "required": ["name", "description"],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The name of the event"
+          },
+          "description": {
+            "type": "string",
+            "description": "A description of the event"
+          }
+        }
+      }
+    },
+    "examples": {
+      "type": "array",
+      "description": "List of examples",
+      "items": {
+        "type": "object",
+        "required": ["title", "code"],
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "The title of the example"
+          },
+          "code": {
+            "type": "string",
+            "description": "The code for the example"
+          }
+        }
+      }
+    }
+  }
+} 

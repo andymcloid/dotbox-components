@@ -9,22 +9,28 @@ dotbox-components/
 ├── components/           # Source components
 │   ├── base/             # Base component and styles
 │   │   ├── base-component.js  # Base component class
-│   │   └── base-styles.css    # Base styles
+│   │   ├── base-styles.css    # Base styles
+│   │   └── component-documentation-schema.json # Documentation schema
 │   ├── button/           # Button component
 │   │   ├── button.js     # Button component class
-│   │   └── button.css    # Button-specific styles
+│   │   ├── button.css    # Button-specific styles
+│   │   └── button.json   # Button documentation
 │   ├── card/             # Card component
 │   │   ├── card.js       # Card component class
-│   │   └── card.css      # Card-specific styles
+│   │   ├── card.css      # Card-specific styles
+│   │   └── card.json     # Card documentation
 │   ├── dialog/           # Dialog component
 │   │   ├── dialog.js     # Dialog component class
-│   │   └── dialog.css    # Dialog-specific styles
+│   │   ├── dialog.css    # Dialog-specific styles
+│   │   └── dialog.json   # Dialog documentation
 │   ├── input/            # Input component
 │   │   ├── input.js      # Input component class
-│   │   └── input.css     # Input-specific styles
+│   │   ├── input.css     # Input-specific styles
+│   │   └── input.json    # Input documentation
 │   ├── notification/     # Notification component
 │   │   ├── notification.js  # Notification component class
-│   │   └── notification.css # Notification-specific styles
+│   │   ├── notification.css # Notification-specific styles
+│   │   └── notification.json # Notification documentation
 │   └── index.js          # Main entry point
 ├── kitchensink/          # Component showcase
 │   ├── partials/         # Component partial HTML files
@@ -46,6 +52,7 @@ Every component must extend DotboxBaseComponent
 Each component must be in its own directory with matching JS and CSS files
 Component naming convention: Dotbox[ComponentName] for class, dotbox-[component-name] for HTML tag
 Component files must be named after the component: button.js, button.css, etc.
+Each component must have a JSON documentation file (component-name.json) in its directory
 
 2. CSS Loading
 Global CSS dependencies (Bootstrap, FontAwesome) are loaded in components/index.js
@@ -68,7 +75,7 @@ All components must be registered with customElements.define()
 
 5. Kitchensink Development
 Each component must have a corresponding partial in kitchensink/partials/
-Partials must include: description, examples, API reference, and code samples
+Partials must include: description, examples, and use the documentation renderer component
 When adding a new component:
 Add it to the sidebar in kitchensink/index.html
 Create a new partial in kitchensink/partials/
@@ -77,7 +84,10 @@ Export it in components/index.js
 6. Documentation
 README.md must be kept up-to-date with all components
 Each component must be documented in the README with basic usage examples
-API changes must be reflected in both the JSDoc comments and README
+API changes must be reflected in both the JSDoc comments and component JSON documentation
+Each component must have a JSON documentation file following the schema in components/base/component-documentation-schema.json
+Documentation must include name, description, properties, CSS parts, slots, events, and examples
+The documentation generator (kitchensink/js/generate-documentation.js) can help create initial documentation
 
 # Component-Specific Guidelines
 Base Component
@@ -121,8 +131,9 @@ Manages notification positioning and auto-closing
 Create component directory and files:
 components/new-component/
    ├── new-component.js
-   └── new-component.css
-   
+   ├── new-component.css
+   └── new-component.json   # Component documentation
+
 Implement component class:
    import { html, css } from 'lit';
    import { DotboxBaseComponent } from '../base/base-component.js';
@@ -181,17 +192,63 @@ Add component CSS file:
    :host {
      /* Component-specific styles */
    }
+
+Create component documentation JSON file:
+   {
+     "name": "dotbox-new-component",
+     "description": "Brief description of the component",
+     "properties": [
+       {
+         "name": "prop1",
+         "type": "String",
+         "default": "\"default\"",
+         "description": "Description of the property"
+       }
+     ],
+     "cssParts": [
+       {
+         "name": "container",
+         "description": "The main container element"
+       }
+     ],
+     "slots": [
+       {
+         "name": "default",
+         "description": "Default slot for content"
+       }
+     ],
+     "events": [
+       {
+         "name": "event1",
+         "description": "Description of the event"
+       }
+     ],
+     "examples": [
+       {
+         "title": "Basic Usage",
+         "code": "<dotbox-new-component prop1=\"value\">Content</dotbox-new-component>"
+       }
+     ]
+   }
    
 Create kitchensink partial:
    <!-- kitchensink/partials/new-component.html -->
-   <h1>New Component</h1>
+   <div class="component-header">
+     <h1>New Component</h1>
+     <div>
+       <a href="https://github.com/yourusername/dotbox-components/blob/main/components/new-component/new-component.js" class="btn btn-outline-secondary" target="_blank">
+         <i class="fa fa-code"></i> View Source
+       </a>
+     </div>
+   </div>
+
    <p class="lead">Description of the new component.</p>
 
    <h2>Examples</h2>
    <!-- Examples go here -->
 
-   <h2>API Reference</h2>
-   <!-- API reference goes here -->
+   <!-- Use the documentation renderer component -->
+   <kitchensink-documentation-renderer component="new-component"></kitchensink-documentation-renderer>
    
 Update kitchensink/index.html to include the new component in the sidebar
 Update README.md with documentation for the new component
@@ -203,4 +260,6 @@ Don't use direct DOM manipulation outside of Lit's rendering system
 Don't forget to call super.connectedCallback() in component's connectedCallback()
 Don't add inline styles for core component styling
 Don't forget to update documentation when adding or modifying components
+Don't create component documentation JSON files manually - use the documentation generator as a starting point
+Keep documentation in sync with implementation - update JSON docs when changing component APIs
 And most important of all, when designing new features or new components, try to reuse and inherit as much as possible from existing components. If a component needs some kind of notification then use the notification component inside the library. Always keep in line with our style that is basicly set by the buttons then propagated to all other components.

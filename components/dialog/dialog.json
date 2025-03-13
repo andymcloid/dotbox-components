@@ -1,0 +1,120 @@
+{
+  "name": "dotbox-dialog",
+  "description": "A versatile dialog component that provides modal and non-modal popup dialogs with various styling options.",
+  "properties": [
+    {
+      "name": "variant",
+      "type": "String",
+      "default": "\"default\"",
+      "description": "Dialog variant (primary, success, danger, info, default)"
+    },
+    {
+      "name": "title",
+      "type": "String",
+      "default": "\"\"",
+      "description": "Dialog title"
+    },
+    {
+      "name": "icon",
+      "type": "String",
+      "default": "\"\"",
+      "description": "FontAwesome icon name for the dialog header (e.g., 'fa-info-circle')"
+    },
+    {
+      "name": "open",
+      "type": "Boolean",
+      "default": "false",
+      "description": "Whether the dialog is open"
+    },
+    {
+      "name": "modal",
+      "type": "Boolean",
+      "default": "true",
+      "description": "Whether the dialog is modal (shows overlay and prevents background interaction)"
+    },
+    {
+      "name": "size",
+      "type": "String",
+      "default": "\"medium\"",
+      "description": "Dialog size (small, medium, large)"
+    }
+  ],
+  "cssParts": [
+    {
+      "name": "dialog",
+      "description": "The dialog element"
+    },
+    {
+      "name": "overlay",
+      "description": "The overlay element (when modal)"
+    },
+    {
+      "name": "header",
+      "description": "The dialog header"
+    },
+    {
+      "name": "body",
+      "description": "The dialog body"
+    },
+    {
+      "name": "footer",
+      "description": "The dialog footer"
+    },
+    {
+      "name": "close-button",
+      "description": "The close button"
+    }
+  ],
+  "slots": [
+    {
+      "name": "default",
+      "description": "Default slot for dialog content"
+    },
+    {
+      "name": "header",
+      "description": "Slot for custom header content"
+    },
+    {
+      "name": "footer",
+      "description": "Slot for footer content"
+    }
+  ],
+  "events": [
+    {
+      "name": "open",
+      "description": "Fired when the dialog opens"
+    },
+    {
+      "name": "close",
+      "description": "Fired when the dialog closes"
+    }
+  ],
+  "methods": [
+    {
+      "name": "show()",
+      "description": "Opens the dialog"
+    },
+    {
+      "name": "close()",
+      "description": "Closes the dialog"
+    },
+    {
+      "name": "toggle()",
+      "description": "Toggles the dialog between open and closed states"
+    }
+  ],
+  "examples": [
+    {
+      "title": "Basic Dialog",
+      "code": "<dotbox-dialog id=\"my-dialog\" title=\"Dialog Title\">\n  Dialog content goes here.\n  <div slot=\"footer\">\n    <dotbox-button variant=\"primary\" size=\"small\">Close</dotbox-button>\n  </div>\n</dotbox-dialog>\n\n<script>\n  document.getElementById('my-dialog').show();\n</script>"
+    },
+    {
+      "title": "Variant Dialog",
+      "code": "<dotbox-dialog id=\"success-dialog\" variant=\"success\" title=\"Success Dialog\" icon=\"fa-check\">\n  This is a success dialog with a title and icon.\n  <div slot=\"footer\">\n    <dotbox-button variant=\"success\" size=\"small\">Close</dotbox-button>\n  </div>\n</dotbox-dialog>"
+    },
+    {
+      "title": "Custom Header Dialog",
+      "code": "<dotbox-dialog id=\"custom-header-dialog\">\n  <div slot=\"header\" style=\"display: flex; align-items: center; width: 100%;\">\n    <i class=\"fa fa-cog\" style=\"margin-right: 10px;\"></i>\n    <span style=\"flex-grow: 1;\">Custom Header</span>\n    <dotbox-button variant=\"primary\" size=\"small\">Action</dotbox-button>\n  </div>\n  This dialog has a custom header with a button.\n</dotbox-dialog>"
+    }
+  ]
+} 

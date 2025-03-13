@@ -1,0 +1,125 @@
+{
+  "name": "dotbox-checkbox",
+  "description": "The checkbox component provides customizable checkboxes, radio buttons, and toggle switches with various styling options.",
+  "properties": [
+    {
+      "name": "type",
+      "type": "String",
+      "default": "checkbox",
+      "description": "Type of input (checkbox, radio, toggle)"
+    },
+    {
+      "name": "name",
+      "type": "String",
+      "default": "",
+      "description": "Name attribute for the input"
+    },
+    {
+      "name": "value",
+      "type": "String",
+      "default": "",
+      "description": "Value attribute for the input"
+    },
+    {
+      "name": "checked",
+      "type": "Boolean",
+      "default": false,
+      "description": "Whether the input is checked"
+    },
+    {
+      "name": "disabled",
+      "type": "Boolean",
+      "default": false,
+      "description": "Whether the input is disabled"
+    },
+    {
+      "name": "variant",
+      "type": "String",
+      "default": "primary",
+      "description": "Visual variant (primary, success, danger, info, default)"
+    },
+    {
+      "name": "size",
+      "type": "String",
+      "default": "",
+      "description": "Size of the input (small, default, large)"
+    },
+    {
+      "name": "label",
+      "type": "String",
+      "default": "",
+      "description": "Label text for the input"
+    },
+    {
+      "name": "labelPosition",
+      "type": "String",
+      "default": "right",
+      "description": "Position of the label (left, right)"
+    },
+    {
+      "name": "required",
+      "type": "Boolean",
+      "default": false,
+      "description": "Whether the input is required"
+    }
+  ],
+  "cssParts": [
+    {
+      "name": "container",
+      "description": "The container element"
+    },
+    {
+      "name": "input",
+      "description": "The input element"
+    },
+    {
+      "name": "label",
+      "description": "The label element"
+    },
+    {
+      "name": "toggle",
+      "description": "The toggle switch element (only for toggle type)"
+    },
+    {
+      "name": "slider",
+      "description": "The slider element (only for toggle type)"
+    }
+  ],
+  "slots": [],
+  "events": [
+    {
+      "name": "change",
+      "description": "Dispatched when the input value changes"
+    },
+    {
+      "name": "input",
+      "description": "Dispatched when the input value is being changed"
+    }
+  ],
+  "examples": [
+    {
+      "title": "Checkboxes",
+      "code": "<dotbox-checkbox label=\"Default Checkbox\"></dotbox-checkbox>\n<dotbox-checkbox variant=\"success\" label=\"Success Checkbox\" checked></dotbox-checkbox>\n<dotbox-checkbox variant=\"danger\" label=\"Danger Checkbox\" disabled></dotbox-checkbox>"
+    },
+    {
+      "title": "Radio Buttons",
+      "code": "<dotbox-checkbox type=\"radio\" name=\"radio-group\" variant=\"primary\" label=\"Option 1\" checked></dotbox-checkbox>\n<dotbox-checkbox type=\"radio\" name=\"radio-group\" variant=\"primary\" label=\"Option 2\"></dotbox-checkbox>\n<dotbox-checkbox type=\"radio\" name=\"radio-group\" variant=\"primary\" label=\"Option 3\"></dotbox-checkbox>"
+    },
+    {
+      "title": "Toggle Switches",
+      "code": "<dotbox-checkbox type=\"toggle\" label=\"Default Toggle\"></dotbox-checkbox>\n<dotbox-checkbox type=\"toggle\" variant=\"success\" label=\"Success Toggle\" checked></dotbox-checkbox>\n<dotbox-checkbox type=\"toggle\" variant=\"danger\" label=\"Danger Toggle\" disabled></dotbox-checkbox>"
+    },
+    {
+      "title": "Size Variations",
+      "code": "<dotbox-checkbox size=\"small\" label=\"Small Checkbox\"></dotbox-checkbox>\n<dotbox-checkbox label=\"Default Checkbox\"></dotbox-checkbox>\n<dotbox-checkbox size=\"large\" label=\"Large Checkbox\"></dotbox-checkbox>"
+    },
+    {
+      "title": "Label Positioning",
+      "code": "<dotbox-checkbox label=\"Right Label (Default)\" labelPosition=\"right\"></dotbox-checkbox>\n<dotbox-checkbox label=\"Left Label\" labelPosition=\"left\"></dotbox-checkbox>"
+    },
+    {
+      "title": "Required Inputs",
+      "code": "<dotbox-checkbox label=\"Required Checkbox\" required></dotbox-checkbox>\n<dotbox-checkbox type=\"radio\" name=\"required-radio\" label=\"Required Radio\" required></dotbox-checkbox>\n<dotbox-checkbox type=\"toggle\" label=\"Required Toggle\" required></dotbox-checkbox>"
+    }
+  ]
+} 

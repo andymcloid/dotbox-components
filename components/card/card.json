@@ -1,0 +1,80 @@
+{
+  "name": "dotbox-card",
+  "description": "A stylish card component with various options for displaying content with headers, footers, and visual variants.",
+  "properties": [
+    {
+      "name": "variant",
+      "type": "String",
+      "default": "\"default\"",
+      "description": "Card variant (primary, success, danger, info, default)"
+    },
+    {
+      "name": "title",
+      "type": "String",
+      "default": "\"\"",
+      "description": "Card title"
+    },
+    {
+      "name": "icon",
+      "type": "String",
+      "default": "\"\"",
+      "description": "FontAwesome icon name for the card header (e.g., 'fa-info-circle')"
+    },
+    {
+      "name": "hoverEffect",
+      "type": "Boolean",
+      "default": "false",
+      "description": "Whether to show a shadow effect on hover"
+    }
+  ],
+  "cssParts": [
+    {
+      "name": "card",
+      "description": "The card element"
+    },
+    {
+      "name": "header",
+      "description": "The card header"
+    },
+    {
+      "name": "body",
+      "description": "The card body"
+    },
+    {
+      "name": "footer",
+      "description": "The card footer"
+    }
+  ],
+  "slots": [
+    {
+      "name": "default",
+      "description": "Default slot for card content"
+    },
+    {
+      "name": "header",
+      "description": "Slot for custom header content"
+    },
+    {
+      "name": "footer",
+      "description": "Slot for footer content"
+    }
+  ],
+  "examples": [
+    {
+      "title": "Basic Card",
+      "code": "<dotbox-card title=\"Default Card\">\n  This is a basic card with just a title.\n</dotbox-card>"
+    },
+    {
+      "title": "Card with Icon",
+      "code": "<dotbox-card title=\"Card with Icon\" icon=\"fa-info-circle\">\n  This card has both a title and an icon in the header.\n</dotbox-card>"
+    },
+    {
+      "title": "Card with Variant",
+      "code": "<dotbox-card variant=\"primary\" title=\"Primary Card\" icon=\"fa-star\">\n  This is a primary card with a title and icon.\n</dotbox-card>"
+    },
+    {
+      "title": "Card with Footer",
+      "code": "<dotbox-card title=\"Card with Footer\" icon=\"fa-credit-card\">\n  This card has a footer with buttons.\n  <div slot=\"footer\">\n    <dotbox-button variant=\"primary\" size=\"small\">Save</dotbox-button>\n    <dotbox-button variant=\"danger\" size=\"small\">Cancel</dotbox-button>\n  </div>\n</dotbox-card>"
+    }
+  ]
+} 

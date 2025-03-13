@@ -1,0 +1,184 @@
+{
+  "name": "dotbox-input",
+  "description": "A versatile input component that provides flexible input fields with various options for labels, icons, and validation.",
+  "properties": [
+    {
+      "name": "label",
+      "type": "String",
+      "default": "\"\"",
+      "description": "Input label text"
+    },
+    {
+      "name": "labelPosition",
+      "type": "String",
+      "default": "\"above\"",
+      "description": "Position of the label (before, above)"
+    },
+    {
+      "name": "disabled",
+      "type": "Boolean",
+      "default": "false",
+      "description": "Whether the input is disabled"
+    },
+    {
+      "name": "multiline",
+      "type": "Boolean",
+      "default": "false",
+      "description": "Whether the input should be a textarea"
+    },
+    {
+      "name": "type",
+      "type": "String",
+      "default": "\"text\"",
+      "description": "Input type (text, number, password, email, tel, url, search, date)"
+    },
+    {
+      "name": "icon",
+      "type": "String",
+      "default": "\"\"",
+      "description": "FontAwesome icon name (e.g., 'fa-user', 'fa-key')"
+    },
+    {
+      "name": "iconPosition",
+      "type": "String",
+      "default": "\"before\"",
+      "description": "Position of the icon (before, after)"
+    },
+    {
+      "name": "placeholder",
+      "type": "String",
+      "default": "\"\"",
+      "description": "Placeholder text"
+    },
+    {
+      "name": "value",
+      "type": "String",
+      "default": "\"\"",
+      "description": "Input value"
+    },
+    {
+      "name": "required",
+      "type": "Boolean",
+      "default": "false",
+      "description": "Whether the input is required"
+    },
+    {
+      "name": "pattern",
+      "type": "String",
+      "default": "\"\"",
+      "description": "Validation pattern (regex)"
+    },
+    {
+      "name": "errorMessage",
+      "type": "String",
+      "default": "\"\"",
+      "description": "Custom error message for validation"
+    },
+    {
+      "name": "rows",
+      "type": "Number",
+      "default": "3",
+      "description": "Number of rows for textarea (only applies when multiline is true)"
+    },
+    {
+      "name": "minLength",
+      "type": "Number",
+      "default": "null",
+      "description": "Minimum length of input"
+    },
+    {
+      "name": "maxLength",
+      "type": "Number",
+      "default": "null",
+      "description": "Maximum length of input"
+    }
+  ],
+  "cssParts": [
+    {
+      "name": "container",
+      "description": "The container element"
+    },
+    {
+      "name": "label",
+      "description": "The label element"
+    },
+    {
+      "name": "input-wrapper",
+      "description": "The wrapper around the input"
+    },
+    {
+      "name": "input",
+      "description": "The input element"
+    },
+    {
+      "name": "icon",
+      "description": "The icon element"
+    },
+    {
+      "name": "error",
+      "description": "The error message element"
+    }
+  ],
+  "events": [
+    {
+      "name": "input",
+      "description": "Dispatched when the input value changes"
+    },
+    {
+      "name": "change",
+      "description": "Dispatched when the input loses focus and the value has changed"
+    },
+    {
+      "name": "focus",
+      "description": "Dispatched when the input gains focus"
+    },
+    {
+      "name": "blur",
+      "description": "Dispatched when the input loses focus"
+    }
+  ],
+  "methods": [
+    {
+      "name": "checkValidity()",
+      "description": "Checks if the input is valid"
+    },
+    {
+      "name": "focus()",
+      "description": "Focuses the input element"
+    },
+    {
+      "name": "reset()",
+      "description": "Resets the input to its initial value"
+    },
+    {
+      "name": "setValid()",
+      "description": "Manually sets the input as valid"
+    },
+    {
+      "name": "setInvalid(message)",
+      "description": "Manually sets the input as invalid with an optional custom error message"
+    },
+    {
+      "name": "validate()",
+      "description": "Manually triggers validation and returns whether the input is valid"
+    }
+  ],
+  "examples": [
+    {
+      "title": "Basic Input",
+      "code": "<dotbox-input label=\"Username\" placeholder=\"Enter username\"></dotbox-input>"
+    },
+    {
+      "title": "Input with Icon",
+      "code": "<dotbox-input label=\"Email\" icon=\"fa-envelope\" type=\"email\" placeholder=\"Enter email\"></dotbox-input>"
+    },
+    {
+      "title": "Required Input with Validation",
+      "code": "<dotbox-input label=\"Password\" type=\"password\" icon=\"fa-lock\" required minLength=\"8\" placeholder=\"Enter password (min 8 chars)\"></dotbox-input>"
+    },
+    {
+      "title": "Multiline Input",
+      "code": "<dotbox-input label=\"Description\" multiline=\"true\" placeholder=\"Enter description\" rows=\"4\"></dotbox-input>"
+    }
+  ]
+} 

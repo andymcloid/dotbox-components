@@ -1,0 +1,58 @@
+# Component Documentation
+
+Each component must have a corresponding JSON documentation file in its directory:
+
+```
+components/component-name/component-name.json
+```
+
+The JSON file should follow this structure:
+
+```json
+{
+  "name": "dotbox-component-name",
+  "description": "Brief description of the component",
+  "properties": [
+    {
+      "name": "propertyName",
+      "type": "String|Boolean|Number|Array|Object",
+      "default": "defaultValue",
+      "description": "Description of the property"
+    }
+  ],
+  "cssParts": [
+    {
+      "name": "part-name",
+      "description": "Description of the CSS part"
+    }
+  ],
+  "slots": [
+    {
+      "name": "default",
+      "description": "Description of the default slot"
+    },
+    {
+      "name": "named-slot",
+      "description": "Description of a named slot"
+    }
+  ],
+  "events": [
+    {
+      "name": "event-name",
+      "description": "Description of the event"
+    }
+  ],
+  "examples": [
+    {
+      "title": "Example Title",
+      "code": "<dotbox-component-name>Example code</dotbox-component-name>"
+    }
+  ]
+}
+```
+
+This JSON file is used by the kitchensink documentation renderer to generate the API reference section for each component. When adding or modifying a component, make sure to update its JSON documentation file accordingly.
+
+The documentation renderer component is located in `kitchensink/js/documentation-renderer.js` and is used in each component's kitchensink partial to display the API reference.
+
+# Common Pitfalls to Avoid 

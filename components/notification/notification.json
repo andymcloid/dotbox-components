@@ -1,0 +1,114 @@
+{
+  "name": "dotbox-notification",
+  "description": "A versatile notification component that provides stylish notifications with various options for variants, positions, and stacking behavior.",
+  "properties": [
+    {
+      "name": "variant",
+      "type": "String",
+      "default": "\"default\"",
+      "description": "Notification variant (default, success, warning, info, danger)"
+    },
+    {
+      "name": "title",
+      "type": "String",
+      "default": "\"\"",
+      "description": "Notification title"
+    },
+    {
+      "name": "message",
+      "type": "String",
+      "default": "\"\"",
+      "description": "Notification message"
+    },
+    {
+      "name": "stacking",
+      "type": "Boolean",
+      "default": "true",
+      "description": "Whether notifications should stack or replace previous ones"
+    },
+    {
+      "name": "duration",
+      "type": "Number",
+      "default": "5000",
+      "description": "Duration in milliseconds before auto-closing (0 for no auto-close)"
+    },
+    {
+      "name": "position",
+      "type": "String",
+      "default": "\"bottom-right\"",
+      "description": "Position of the notification (top-right, top-left, bottom-right, bottom-left, top-center, bottom-center)"
+    },
+    {
+      "name": "closable",
+      "type": "Boolean",
+      "default": "true",
+      "description": "Whether the notification can be closed by the user"
+    },
+    {
+      "name": "icon",
+      "type": "String",
+      "default": "\"\"",
+      "description": "FontAwesome icon name (e.g., 'fa-check', 'fa-warning'). If not provided, a default icon based on variant will be used"
+    }
+  ],
+  "cssParts": [
+    {
+      "name": "container",
+      "description": "The notification container"
+    },
+    {
+      "name": "header",
+      "description": "The notification header"
+    },
+    {
+      "name": "title",
+      "description": "The notification title"
+    },
+    {
+      "name": "close-button",
+      "description": "The close button"
+    },
+    {
+      "name": "content",
+      "description": "The notification content"
+    },
+    {
+      "name": "icon",
+      "description": "The notification icon"
+    }
+  ],
+  "events": [
+    {
+      "name": "close",
+      "description": "Dispatched when the notification is closed"
+    }
+  ],
+  "methods": [
+    {
+      "name": "close()",
+      "description": "Closes the notification"
+    },
+    {
+      "name": "DotboxNotification.show(options)",
+      "description": "Static method to create and show a notification. Options object can contain any of the component properties."
+    }
+  ],
+  "examples": [
+    {
+      "title": "Basic Notification",
+      "code": "DotboxNotification.show({\n  title: 'Default Notification',\n  message: 'This is a default notification',\n  variant: 'default'\n});"
+    },
+    {
+      "title": "Success Notification",
+      "code": "DotboxNotification.show({\n  title: 'Success!',\n  message: 'Operation completed successfully',\n  variant: 'success'\n});"
+    },
+    {
+      "title": "Custom Position",
+      "code": "DotboxNotification.show({\n  title: 'Top Center',\n  message: 'This notification appears at the top-center',\n  position: 'top-center',\n  variant: 'info'\n});"
+    },
+    {
+      "title": "No Auto-close",
+      "code": "DotboxNotification.show({\n  title: 'No Auto-close',\n  message: 'This notification will stay until manually closed',\n  duration: 0,\n  variant: 'warning'\n});"
+    }
+  ]
+} 

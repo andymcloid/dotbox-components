@@ -1,0 +1,102 @@
+{
+  "name": "dotbox-button",
+  "description": "The button component provides stylish buttons with various options including variants, sizes, and icons.",
+  "properties": [
+    {
+      "name": "variant",
+      "type": "String",
+      "default": "primary",
+      "description": "Button variant (primary, success, danger, info, default)"
+    },
+    {
+      "name": "size",
+      "type": "String",
+      "default": "",
+      "description": "Button size (small, default, large)"
+    },
+    {
+      "name": "icon",
+      "type": "String",
+      "default": "",
+      "description": "FontAwesome icon name (e.g., 'fa-arrow-right')"
+    },
+    {
+      "name": "iconPosition",
+      "type": "String",
+      "default": "after",
+      "description": "Position of the icon (before, after)"
+    },
+    {
+      "name": "animated",
+      "type": "Boolean",
+      "default": false,
+      "description": "Whether the icon should be animated"
+    },
+    {
+      "name": "animationType",
+      "type": "String",
+      "default": "spin",
+      "description": "Type of animation (spin, pulse)"
+    },
+    {
+      "name": "disabled",
+      "type": "Boolean",
+      "default": false,
+      "description": "Whether the button is disabled"
+    },
+    {
+      "name": "href",
+      "type": "String",
+      "default": "",
+      "description": "If provided, renders as an anchor tag"
+    }
+  ],
+  "cssParts": [
+    {
+      "name": "button",
+      "description": "The button element"
+    },
+    {
+      "name": "icon",
+      "description": "The icon element"
+    }
+  ],
+  "slots": [
+    {
+      "name": "default",
+      "description": "Default slot for button content"
+    }
+  ],
+  "events": [
+    {
+      "name": "click",
+      "description": "Dispatched when the button is clicked"
+    }
+  ],
+  "examples": [
+    {
+      "title": "Basic Usage",
+      "code": "<dotbox-button variant=\"primary\">Primary Button</dotbox-button>\n<dotbox-button variant=\"success\">Success Button</dotbox-button>\n<dotbox-button variant=\"danger\">Danger Button</dotbox-button>\n<dotbox-button variant=\"info\">Info Button</dotbox-button>\n<dotbox-button variant=\"default\">Default Button</dotbox-button>"
+    },
+    {
+      "title": "Button Sizes",
+      "code": "<dotbox-button variant=\"primary\" size=\"small\">Small Button</dotbox-button>\n<dotbox-button variant=\"primary\">Default Button</dotbox-button>\n<dotbox-button variant=\"primary\" size=\"large\">Large Button</dotbox-button>"
+    },
+    {
+      "title": "Buttons with Icons",
+      "code": "<dotbox-button variant=\"primary\" icon=\"fa-arrow-right\" iconPosition=\"after\">Next</dotbox-button>\n<dotbox-button variant=\"success\" icon=\"fa-check\" iconPosition=\"before\">Confirm</dotbox-button>"
+    },
+    {
+      "title": "Animated Icons",
+      "code": "<dotbox-button variant=\"primary\" icon=\"fa-spinner\" animated>Loading</dotbox-button>\n<dotbox-button variant=\"info\" icon=\"fa-cog\" animated animationType=\"pulse\">Processing</dotbox-button>"
+    },
+    {
+      "title": "Disabled Buttons",
+      "code": "<dotbox-button variant=\"primary\" disabled>Disabled Button</dotbox-button>\n<dotbox-button variant=\"success\" icon=\"fa-check\" disabled>Disabled with Icon</dotbox-button>"
+    },
+    {
+      "title": "Link Buttons",
+      "code": "<dotbox-button variant=\"primary\" href=\"#\">Link Button</dotbox-button>\n<dotbox-button variant=\"info\" href=\"#\" icon=\"fa-info-circle\">More Info</dotbox-button>"
+    }
+  ]
+} 
