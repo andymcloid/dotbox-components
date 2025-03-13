@@ -21,152 +21,8 @@
     <!-- Directly include FontAwesome and Bootstrap -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <!-- Add a test icon to verify FontAwesome is working -->
-    <style>
-        /* Prevent initial animations globally */
-        .no-transitions, .no-transitions * {
-            transition: none !important;
-            animation: none !important;
-        }
-        
-        body {
-            padding-top: 56px;
-            background-color: #f5f5f5;
-            min-height: 100vh;
-        }
-        
-        .sidebar {
-            position: fixed;
-            top: 56px;
-            bottom: 0;
-            left: 0;
-            z-index: 100;
-            padding: 0;
-            box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
-            background-color: #f8f9fa;
-            overflow-y: auto;
-        }
-        
-        .sidebar .nav-link {
-            font-weight: 500;
-            color: #333;
-            padding: 0.75rem 1.5rem;
-            border-left: 3px solid transparent;
-        }
-        
-        .sidebar .nav-link:hover {
-            background-color: #e9ecef;
-        }
-        
-        .sidebar .nav-link.active {
-            color: #007bff;
-            border-left: 3px solid #007bff;
-            background-color: rgba(0, 123, 255, 0.1);
-        }
-        
-        .sidebar .nav-link i {
-            margin-right: 10px;
-        }
-        
-        .main-content {
-            padding-top: 20px;
-        }
-        
-        .component-section {
-            display: none;
-            padding-bottom: 30px;
-        }
-        
-        .component-section.active {
-            display: block;
-        }
-        
-        h2 {
-            margin-top: 30px;
-            margin-bottom: 15px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid #ddd;
-        }
-        
-        h3 {
-            margin-top: 25px;
-            margin-bottom: 15px;
-            font-size: 1.2rem;
-        }
-        
-        .component-group {
-            margin-bottom: 20px;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-        
-        .code-example {
-            background-color: #f8f9fa;
-            padding: 15px;
-            border-radius: 4px;
-            margin-bottom: 20px;
-            font-family: monospace;
-            white-space: pre-wrap;
-        }
-        
-        .navbar {
-            box-shadow: 0 2px 4px rgba(0,0,0,.1);
-        }
-        
-        .card-demo {
-            max-width: 350px;
-            margin-bottom: 20px;
-        }
-        
-        .card-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
-            margin-bottom: 20px;
-        }
-        
-        .component-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 20px;
-        }
-        
-        .component-header h1 {
-            margin-bottom: 0;
-        }
-        
-        .component-header .btn {
-            margin-left: 10px;
-        }
-        
-        .footer {
-            margin-top: 50px;
-            padding: 20px 0;
-            background-color: #343a40;
-            color: white;
-        }
-        
-        .loading {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 200px;
-            font-size: 1.2rem;
-            color: #6c757d;
-        }
-        
-        .loading i {
-            margin-right: 10px;
-            animation: spin 1s infinite linear;
-        }
-        
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-    </style>
+    <!-- Include kitchensink CSS -->
+    <link rel="stylesheet" href="/kitchensink/css/kitchensink.css">
     <!-- Import our components -->
     <script type="module">
         import '../components/index.js';
@@ -198,587 +54,61 @@
         });
         
         function setupNavigation() {
-            // Get all nav links
-            const navLinks = document.querySelectorAll('.sidebar .nav-link');
-            
-            // Add click event to each nav link
-            navLinks.forEach(link => {
-                link.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    
-                    // Remove active class from all links
-                    navLinks.forEach(l => l.classList.remove('active'));
-                    
-                    // Add active class to clicked link
-                    link.classList.add('active');
-                    
-                    // Get the target section id
-                    const targetId = link.getAttribute('href').substring(1);
-                    
-                    // Hide all sections
-                    document.querySelectorAll('.component-section').forEach(section => {
-                        section.classList.remove('active');
-                    });
-                    
-                    // Show the target section
-                    const targetSection = document.getElementById(targetId);
+            // Listen for navigation events from the components-nav component
+            document.addEventListener('kitchensink-navigate', (e) => {
+                const targetId = e.detail.targetId;
+                console.log('Navigation event received for:', targetId);
+                
+                // Hide all sections
+                document.querySelectorAll('.component-section').forEach(section => {
+                    section.classList.remove('active');
+                });
+                
+                // Show the target section
+                const targetSection = document.getElementById(targetId);
+                if (targetSection) {
                     targetSection.classList.add('active');
-                    
-                    // Load component content if not already loaded
-                    if (!targetSection.dataset.loaded) {
-                        loadComponentContent(targetId, targetSection);
-                    }
                     
                     // Update URL hash
                     window.location.hash = targetId;
                     
                     // Scroll to top
                     window.scrollTo(0, 0);
-                });
+                }
             });
             
             // Check if there's a hash in the URL
             if (window.location.hash) {
                 const hash = window.location.hash.substring(1);
-                const link = document.querySelector(`.sidebar .nav-link[href="#${hash}"]`);
-                if (link) {
-                    link.click();
-                } else {
-                    // Default to first link
-                    navLinks[0].click();
-                }
+                // Dispatch navigation event
+                setTimeout(() => {
+                    document.dispatchEvent(new CustomEvent('kitchensink-navigate', { 
+                        detail: { targetId: hash } 
+                    }));
+                }, 100);
             } else {
-                // Default to first link
-                navLinks[0].click();
+                // Default to home
+                setTimeout(() => {
+                    document.dispatchEvent(new CustomEvent('kitchensink-navigate', { 
+                        detail: { targetId: 'home' } 
+                    }));
+                }, 100);
             }
             
-            // Add click event to component links
+            // Add click event to component links in the main content
             document.addEventListener('click', (e) => {
-                if (e.target.classList.contains('component-link') || 
-                    e.target.parentElement.classList.contains('component-link')) {
+                const componentLink = e.target.closest('.component-link');
+                if (componentLink) {
                     e.preventDefault();
-                    const href = e.target.getAttribute('href') || e.target.parentElement.getAttribute('href');
+                    const href = componentLink.getAttribute('href');
                     if (href && href.startsWith('#')) {
                         const targetId = href.substring(1);
-                        const link = document.querySelector(`.sidebar .nav-link[href="#${targetId}"]`);
-                        if (link) {
-                            link.click();
-                        }
+                        document.dispatchEvent(new CustomEvent('kitchensink-navigate', { 
+                            detail: { targetId: targetId } 
+                        }));
                     }
                 }
             });
-        }
-        
-        function loadComponentContent(componentId, targetSection) {
-            // Show loading indicator
-            targetSection.innerHTML = `
-                <div class="loading">
-                    <i class="fa fa-spinner"></i> Loading ${componentId} component...
-                </div>
-            `;
-            
-            // Fetch the component content
-            fetch(`/partials/${componentId}.html`)
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error(`Failed to load ${componentId} component`);
-                    }
-                    return response.text();
-                })
-                .then(html => {
-                    // Set the component content
-                    targetSection.innerHTML = html;
-                    targetSection.dataset.loaded = 'true';
-                    
-                    // Re-initialize any component-specific functionality
-                    if (componentId === 'home') {
-                        // Initialize home-specific functionality if needed
-                    } else if (componentId === 'dialog') {
-                        // Initialize dialog event listeners
-                        initializeDialogListeners();
-                    } else if (componentId === 'input') {
-                        // Initialize input event listeners
-                        initializeInputListeners();
-                    } else if (componentId === 'notification') {
-                        // Initialize notification event listeners
-                        initializeNotificationListeners();
-                    } else if (componentId === 'checkbox') {
-                        // Initialize checkbox event listeners
-                        initializeCheckboxListeners();
-                    }
-                })
-                .catch(error => {
-                    console.error(error);
-                    targetSection.innerHTML = `
-                        <div class="alert alert-danger">
-                            <i class="fa fa-exclamation-triangle"></i> Failed to load ${componentId} component: ${error.message}
-                        </div>
-                    `;
-                });
-        }
-
-        // Function to initialize dialog event listeners
-        function initializeDialogListeners() {
-            console.log('Initializing dialog event listeners');
-            
-            // Check if elements exist
-            const basicDialogBtn = document.getElementById('open-basic-dialog');
-            console.log('Found open-basic-dialog button:', !!basicDialogBtn);
-            
-            const basicDialog = document.getElementById('basic-dialog');
-            console.log('Found basic-dialog element:', !!basicDialog);
-            
-            // Basic dialogs
-            document.getElementById('open-basic-dialog')?.addEventListener('click', () => {
-                console.log('Open basic dialog button clicked');
-                document.getElementById('basic-dialog').show();
-            });
-            document.getElementById('close-basic-dialog')?.addEventListener('click', () => {
-                document.getElementById('basic-dialog').close();
-            });
-            
-            document.getElementById('open-success-dialog')?.addEventListener('click', () => {
-                document.getElementById('success-dialog').show();
-            });
-            document.getElementById('close-success-dialog')?.addEventListener('click', () => {
-                document.getElementById('success-dialog').close();
-            });
-            
-            document.getElementById('open-danger-dialog')?.addEventListener('click', () => {
-                document.getElementById('danger-dialog').show();
-            });
-            document.getElementById('close-danger-dialog')?.addEventListener('click', () => {
-                document.getElementById('danger-dialog').close();
-            });
-            
-            document.getElementById('open-info-dialog')?.addEventListener('click', () => {
-                document.getElementById('info-dialog').show();
-            });
-            document.getElementById('close-info-dialog')?.addEventListener('click', () => {
-                document.getElementById('info-dialog').close();
-            });
-            
-            // Size dialogs
-            document.getElementById('open-small-dialog')?.addEventListener('click', () => {
-                document.getElementById('small-dialog').show();
-            });
-            document.getElementById('close-small-dialog')?.addEventListener('click', () => {
-                document.getElementById('small-dialog').close();
-            });
-            
-            document.getElementById('open-medium-dialog')?.addEventListener('click', () => {
-                document.getElementById('medium-dialog').show();
-            });
-            document.getElementById('close-medium-dialog')?.addEventListener('click', () => {
-                document.getElementById('medium-dialog').close();
-            });
-            
-            document.getElementById('open-large-dialog')?.addEventListener('click', () => {
-                document.getElementById('large-dialog').show();
-            });
-            document.getElementById('close-large-dialog')?.addEventListener('click', () => {
-                document.getElementById('large-dialog').close();
-            });
-            
-            // Modal dialogs
-            document.getElementById('open-modal-dialog')?.addEventListener('click', () => {
-                document.getElementById('modal-dialog').show();
-            });
-            document.getElementById('close-modal-dialog')?.addEventListener('click', () => {
-                document.getElementById('modal-dialog').close();
-            });
-            
-            document.getElementById('open-non-modal-dialog')?.addEventListener('click', () => {
-                document.getElementById('non-modal-dialog').show();
-            });
-            document.getElementById('close-non-modal-dialog')?.addEventListener('click', () => {
-                document.getElementById('non-modal-dialog').close();
-            });
-            
-            // Custom header dialog
-            document.getElementById('open-custom-header-dialog')?.addEventListener('click', () => {
-                document.getElementById('custom-header-dialog').show();
-            });
-            document.getElementById('close-custom-header-dialog')?.addEventListener('click', () => {
-                document.getElementById('custom-header-dialog').close();
-            });
-        }
-
-        // Function to initialize input event listeners
-        function initializeInputListeners() {
-            console.log('Initializing input event listeners');
-            
-            const inputs = document.querySelectorAll('dotbox-input');
-            console.log('Found input elements:', inputs.length);
-            
-            inputs.forEach(input => {
-                // Add event listeners
-                input.addEventListener('input', (e) => {
-                    console.log('Input event:', e.detail);
-                });
-                
-                input.addEventListener('change', (e) => {
-                    console.log('Change event:', e.detail);
-                });
-                
-                input.addEventListener('focus', (e) => {
-                    console.log('Focus event on:', e.target.label || 'unlabeled input');
-                });
-                
-                input.addEventListener('blur', (e) => {
-                    console.log('Blur event on:', e.target.label || 'unlabeled input');
-                });
-            });
-            
-            // Manual validation example buttons
-            document.getElementById('set-valid-btn')?.addEventListener('click', () => {
-                const input = document.getElementById('manual-validation-input');
-                if (input) {
-                    input.setValid();
-                    console.log('Set input as valid');
-                }
-            });
-
-            document.getElementById('set-invalid-btn')?.addEventListener('click', () => {
-                const input = document.getElementById('manual-validation-input');
-                if (input) {
-                    input.setInvalid('This field has been manually marked as invalid');
-                    console.log('Set input as invalid');
-                }
-            });
-            
-            // Form validation example
-            document.getElementById('form-submit')?.addEventListener('click', (e) => {
-                e.preventDefault();
-                
-                // Get all inputs
-                const nameInput = document.getElementById('form-name');
-                const emailInput = document.getElementById('form-email');
-                const passwordInput = document.getElementById('form-password');
-                const resultDiv = document.getElementById('form-result');
-                
-                if (!nameInput || !emailInput || !passwordInput || !resultDiv) {
-                    console.log('Form elements not found');
-                    return;
-                }
-                
-                // Validate all inputs
-                const nameValid = nameInput.validate();
-                const emailValid = emailInput.validate();
-                const passwordValid = passwordInput.validate();
-                
-                // Check if all inputs are valid
-                if (nameValid && emailValid && passwordValid) {
-                    // Form is valid
-                    resultDiv.innerHTML = `
-                        <div class="alert alert-success">
-                            <i class="fa fa-check-circle"></i> Form is valid!
-                        </div>
-                    `;
-                    console.log('Form is valid!');
-                } else {
-                    // Form is invalid
-                    resultDiv.innerHTML = `
-                        <div class="alert alert-danger">
-                            <i class="fa fa-exclamation-circle"></i> Please fix the errors in the form.
-                        </div>
-                    `;
-                    console.log('Form is invalid!');
-                }
-            });
-        }
-
-        // Function to initialize notification event listeners
-        function initializeNotificationListeners() {
-            console.log('Initializing notification event listeners');
-            
-            // Basic usage
-            document.getElementById('show-default-notification')?.addEventListener('click', () => {
-                DotboxNotification.show({
-                    title: 'Default Notification',
-                    message: 'This is a default notification',
-                    variant: 'default'
-                }).then(() => {
-                    console.log('Default notification shown');
-                }).catch(error => {
-                    console.error('Error showing default notification:', error);
-                });
-            });
-            
-            document.getElementById('show-success-notification')?.addEventListener('click', () => {
-                DotboxNotification.show({
-                    title: 'Success!',
-                    message: 'Operation completed successfully',
-                    variant: 'success'
-                }).then(() => {
-                    console.log('Success notification shown');
-                }).catch(error => {
-                    console.error('Error showing success notification:', error);
-                });
-            });
-            
-            document.getElementById('show-warning-notification')?.addEventListener('click', () => {
-                DotboxNotification.show({
-                    title: 'Warning',
-                    message: 'Please check your input',
-                    variant: 'warning'
-                }).then(() => {
-                    console.log('Warning notification shown');
-                }).catch(error => {
-                    console.error('Error showing warning notification:', error);
-                });
-            });
-            
-            document.getElementById('show-danger-notification')?.addEventListener('click', () => {
-                DotboxNotification.show({
-                    title: 'Error',
-                    message: 'Something went wrong',
-                    variant: 'danger'
-                }).then(() => {
-                    console.log('Danger notification shown');
-                }).catch(error => {
-                    console.error('Error showing danger notification:', error);
-                });
-            });
-            
-            document.getElementById('show-info-notification')?.addEventListener('click', () => {
-                DotboxNotification.show({
-                    title: 'Information',
-                    message: 'Here is some information',
-                    variant: 'info'
-                }).then(() => {
-                    console.log('Info notification shown');
-                }).catch(error => {
-                    console.error('Error showing info notification:', error);
-                });
-            });
-            
-            // Positions
-            document.getElementById('show-top-right')?.addEventListener('click', () => {
-                DotboxNotification.show({
-                    title: 'Top Right',
-                    message: 'This notification appears at the top-right',
-                    position: 'top-right',
-                    variant: 'info'
-                }).then(() => {
-                    console.log('Top right notification shown');
-                }).catch(error => {
-                    console.error('Error showing top right notification:', error);
-                });
-            });
-            
-            document.getElementById('show-top-left')?.addEventListener('click', () => {
-                DotboxNotification.show({
-                    title: 'Top Left',
-                    message: 'This notification appears at the top-left',
-                    position: 'top-left',
-                    variant: 'info'
-                }).then(() => {
-                    console.log('Top left notification shown');
-                }).catch(error => {
-                    console.error('Error showing top left notification:', error);
-                });
-            });
-            
-            document.getElementById('show-bottom-right')?.addEventListener('click', () => {
-                DotboxNotification.show({
-                    title: 'Bottom Right',
-                    message: 'This notification appears at the bottom-right',
-                    position: 'bottom-right',
-                    variant: 'info'
-                }).then(() => {
-                    console.log('Bottom right notification shown');
-                }).catch(error => {
-                    console.error('Error showing bottom right notification:', error);
-                });
-            });
-            
-            document.getElementById('show-bottom-left')?.addEventListener('click', () => {
-                DotboxNotification.show({
-                    title: 'Bottom Left',
-                    message: 'This notification appears at the bottom-left',
-                    position: 'bottom-left',
-                    variant: 'info'
-                }).then(() => {
-                    console.log('Bottom left notification shown');
-                }).catch(error => {
-                    console.error('Error showing bottom left notification:', error);
-                });
-            });
-            
-            document.getElementById('show-top-center')?.addEventListener('click', () => {
-                DotboxNotification.show({
-                    title: 'Top Center',
-                    message: 'This notification appears at the top-center',
-                    position: 'top-center',
-                    variant: 'info'
-                }).then(() => {
-                    console.log('Top center notification shown');
-                }).catch(error => {
-                    console.error('Error showing top center notification:', error);
-                });
-            });
-            
-            document.getElementById('show-bottom-center')?.addEventListener('click', () => {
-                DotboxNotification.show({
-                    title: 'Bottom Center',
-                    message: 'This notification appears at the bottom-center',
-                    position: 'bottom-center',
-                    variant: 'info'
-                }).then(() => {
-                    console.log('Bottom center notification shown');
-                }).catch(error => {
-                    console.error('Error showing bottom center notification:', error);
-                });
-            });
-            
-            // Stacking behavior
-            document.getElementById('show-stacking')?.addEventListener('click', () => {
-                DotboxNotification.show({
-                    title: 'First Notification',
-                    message: 'This is the first notification',
-                    variant: 'info',
-                    stacking: true
-                }).then(() => {
-                    console.log('First notification shown');
-                }).catch(error => {
-                    console.error('Error showing first notification:', error);
-                });
-                
-                setTimeout(() => {
-                    DotboxNotification.show({
-                        title: 'Second Notification',
-                        message: 'This is the second notification',
-                        variant: 'success',
-                        stacking: true
-                    }).then(() => {
-                        console.log('Second notification shown');
-                    }).catch(error => {
-                        console.error('Error showing second notification:', error);
-                    });
-                }, 500);
-                
-                setTimeout(() => {
-                    DotboxNotification.show({
-                        title: 'Third Notification',
-                        message: 'This is the third notification',
-                        variant: 'warning',
-                        stacking: true
-                    }).then(() => {
-                        console.log('Third notification shown');
-                    }).catch(error => {
-                        console.error('Error showing third notification:', error);
-                    });
-                }, 1000);
-            });
-            
-            document.getElementById('show-non-stacking')?.addEventListener('click', () => {
-                DotboxNotification.show({
-                    title: 'First Notification',
-                    message: 'This will be replaced',
-                    variant: 'info',
-                    stacking: false
-                }).then(() => {
-                    console.log('First notification shown');
-                }).catch(error => {
-                    console.error('Error showing first notification:', error);
-                });
-                
-                setTimeout(() => {
-                    DotboxNotification.show({
-                        title: 'Second Notification',
-                        message: 'This replaces the first one',
-                        variant: 'success',
-                        stacking: false
-                    }).then(() => {
-                        console.log('Second notification shown');
-                    }).catch(error => {
-                        console.error('Error showing second notification:', error);
-                    });
-                }, 1000);
-                
-                setTimeout(() => {
-                    DotboxNotification.show({
-                        title: 'Third Notification',
-                        message: 'This replaces the second one',
-                        variant: 'warning',
-                        stacking: false
-                    }).then(() => {
-                        console.log('Third notification shown');
-                    }).catch(error => {
-                        console.error('Error showing third notification:', error);
-                    });
-                }, 2000);
-            });
-            
-            // Duration
-            document.getElementById('show-auto-close')?.addEventListener('click', () => {
-                DotboxNotification.show({
-                    title: 'Auto-close',
-                    message: 'This notification will close after 5 seconds',
-                    duration: 5000, // 5 seconds
-                    variant: 'info'
-                }).then(() => {
-                    console.log('Auto-close notification shown');
-                }).catch(error => {
-                    console.error('Error showing auto-close notification:', error);
-                });
-            });
-            
-            document.getElementById('show-no-auto-close')?.addEventListener('click', () => {
-                DotboxNotification.show({
-                    title: 'No Auto-close',
-                    message: 'This notification will stay until manually closed',
-                    duration: 0, // No auto-close
-                    variant: 'info'
-                }).then(() => {
-                    console.log('No auto-close notification shown');
-                }).catch(error => {
-                    console.error('Error showing no auto-close notification:', error);
-                });
-            });
-            
-            // Icons
-            document.getElementById('show-custom-icon')?.addEventListener('click', () => {
-                DotboxNotification.show({
-                    title: 'Custom Icon',
-                    message: 'This notification has a custom icon',
-                    icon: 'fa-star',
-                    variant: 'info'
-                }).then(() => {
-                    console.log('Custom icon notification shown');
-                }).catch(error => {
-                    console.error('Error showing custom icon notification:', error);
-                });
-            });
-            
-            document.getElementById('show-no-icon')?.addEventListener('click', () => {
-                DotboxNotification.show({
-                    title: 'No Icon',
-                    message: 'This notification has no icon',
-                    icon: '', // Empty string to override default icon
-                    variant: 'info'
-                }).then(() => {
-                    console.log('No icon notification shown');
-                }).catch(error => {
-                    console.error('Error showing no icon notification:', error);
-                });
-            });
-        }
-
-        // Function to initialize checkbox event listeners
-        function initializeCheckboxListeners() {
-            console.log('Initializing checkbox event listeners');
-            
-            // Event demo checkbox
-            const eventDemoCheckbox = document.getElementById('event-demo-checkbox');
-            const eventDemoOutput = document.getElementById('event-demo-output');
-            
-            if (eventDemoCheckbox && eventDemoOutput) {
-                eventDemoCheckbox.addEventListener('change', (e) => {
-                    eventDemoOutput.textContent = `Change event: checked = ${e.detail.checked}, value = ${e.detail.value}`;
-                });
-            }
         }
     </script>
     <!-- Import documentation renderer -->
@@ -787,6 +117,12 @@
     <script type="module" src="/kitchensink/js/generate-documentation.js"></script>
     <!-- Import component header -->
     <script type="module" src="/kitchensink/js/component-header.js"></script>
+    <!-- Import components registry and related components -->
+    <script type="module" src="/kitchensink/js/components-registry.js"></script>
+    <script type="module" src="/kitchensink/js/components-nav.js"></script>
+    <script type="module" src="/kitchensink/js/components-list.js"></script>
+    <script type="module" src="/kitchensink/js/components-sections.js"></script>
+    <script type="module" src="/kitchensink/js/component-event-handlers.js"></script>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
@@ -812,83 +148,13 @@
             <!-- Sidebar -->
             <div class="col-md-3 col-lg-2 d-md-block sidebar">
                 <div class="position-sticky">
-                    <ul class="nav flex-column">
-                        <li class="nav-item">
-                            <a class="nav-link" href="#home">
-                                <i class="fa fa-home"></i> Home
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#button">
-                                <i class="fa fa-square"></i> Buttons
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#card">
-                                <i class="fa fa-credit-card"></i> Cards
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#dialog">
-                                <i class="fa fa-window-maximize"></i> Dialogs
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#input">
-                                <i class="fa fa-keyboard-o"></i> Inputs
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#notification">
-                                <i class="fa fa-bell"></i> Notifications
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#checkbox">
-                                <i class="fa fa-check-square-o"></i> Checkboxes
-                            </a>
-                        </li>
-                        <!-- Add more components here as they are developed -->
-                    </ul>
+                    <kitchensink-components-nav></kitchensink-components-nav>
                 </div>
             </div>
 
             <!-- Main content -->
             <main class="col-md-9 ml-sm-auto col-lg-10 px-md-4 main-content">
-                <!-- Home Section -->
-                <section id="home" class="component-section">
-                    <!-- Content will be loaded dynamically -->
-                </section>
-
-                <!-- Button Section -->
-                <section id="button" class="component-section">
-                    <!-- Content will be loaded dynamically -->
-                </section>
-
-                <!-- Card Section -->
-                <section id="card" class="component-section">
-                    <!-- Content will be loaded dynamically -->
-                </section>
-
-                <!-- Dialog Section -->
-                <section id="dialog" class="component-section">
-                    <!-- Content will be loaded dynamically -->
-                </section>
-
-                <!-- Input Section -->
-                <section id="input" class="component-section">
-                    <!-- Content will be loaded dynamically -->
-                </section>
-                
-                <!-- Notification Section -->
-                <section id="notification" class="component-section">
-                    <!-- Content will be loaded dynamically -->
-                </section>
-                
-                <!-- Checkbox Section -->
-                <section id="checkbox" class="component-section">
-                    <!-- Content will be loaded dynamically -->
-                </section>
+                <kitchensink-components-sections></kitchensink-components-sections>
             </main>
         </div>
     </div>

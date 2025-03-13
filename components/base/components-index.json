@@ -1,0 +1,52 @@
+{
+  "components": [
+    {
+      "name": "button",
+      "displayName": "Buttons",
+      "icon": "fa-square",
+      "description": "Stylish buttons with various options for variants, sizes, icons, and animations",
+      "path": "components/button/button.js",
+      "docPath": "components/button/button.json"
+    },
+    {
+      "name": "card",
+      "displayName": "Cards",
+      "icon": "fa-credit-card",
+      "description": "Versatile cards with headers, footers, and hover effects",
+      "path": "components/card/card.js",
+      "docPath": "components/card/card.json"
+    },
+    {
+      "name": "dialog",
+      "displayName": "Dialogs",
+      "icon": "fa-window-maximize",
+      "description": "Modal and non-modal dialog components with various options",
+      "path": "components/dialog/dialog.js",
+      "docPath": "components/dialog/dialog.json"
+    },
+    {
+      "name": "input",
+      "displayName": "Inputs",
+      "icon": "fa-keyboard-o",
+      "description": "Flexible input fields with labels, icons, and validation",
+      "path": "components/input/input.js",
+      "docPath": "components/input/input.json"
+    },
+    {
+      "name": "notification",
+      "displayName": "Notifications",
+      "icon": "fa-bell",
+      "description": "Stylish notifications with various positions and stacking behavior",
+      "path": "components/notification/notification.js",
+      "docPath": "components/notification/notification.json"
+    },
+    {
+      "name": "checkbox",
+      "displayName": "Checkboxes",
+      "icon": "fa-check-square-o",
+      "description": "Versatile checkbox, radio button, and toggle switch components",
+      "path": "components/checkbox/checkbox.js",
+      "docPath": "components/checkbox/checkbox.json"
+    }
+  ]
+} 
